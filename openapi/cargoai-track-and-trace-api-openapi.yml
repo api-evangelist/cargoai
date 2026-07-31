@@ -1,0 +1,275 @@
+openapi: 3.1.0
+info:
+  title: Solutions
+  version: '1.0'
+x-cargoai-api-family: Track & Trace
+x-provenance:
+  harvestedFrom: CargoAi CargoCONNECT developer portal (ReadMe) — per-operation oasDefinition embedded
+    in each reference page
+  fetchDate: '2026-07-30'
+  httpStatus: 200
+  sourceInfoTitle: Solutions
+  sourceInfoVersion: '1.0'
+  note: Operations reproduced verbatim from the provider-published OpenAPI 3.1 definition. No operation,
+    path, parameter, schema or server was authored by API Evangelist.
+  operations:
+  - sourceURL: https://cargoai.readme.io/reference/tracking-subscription-endpoint-post
+    httpStatus: 200
+    operation: POST /track/subscribe
+  - sourceURL: https://cargoai.readme.io/reference/tracking-unsubscription-endpoint-post
+    httpStatus: 200
+    operation: POST /track/unsubscribe
+servers:
+- url: https://api.cargoai.co/solutions
+security:
+- sec0: []
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: x-api-key
+      in: header
+paths:
+  /track/subscribe:
+    post:
+      summary: Tracking Subscription
+      description: This endpoint facilitates retrieving tracking events and milestones by subscribing
+        to our Track & Trace updates.
+      operationId: tracking-subscription-endpoint-post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - awb
+              properties:
+                awb:
+                  type: string
+                  description: Booking AWB prefix and number
+                url:
+                  type: string
+                  description: callback URL — required to subscribe to updates via HTTP POST
+                emails:
+                  type: array
+                  description: list of email addresses — required to subscribe to updates via email
+                  items:
+                    type: string
+                airlineCode:
+                  type: string
+                  description: IATA 2-letter airline code in case of interline shipments
+            examples:
+              E-Mail Subscription Only:
+                value:
+                  awb: 000-11223343
+                  emails:
+                  - tests@test.com
+              URL Subscription Only:
+                value:
+                  url: https:://www.callback-url.to
+                  awb: 000-11223343
+              URL and E-mail Subscription:
+                value:
+                  url: https:://www.callback-url.to
+                  awb: 000-11223343
+                  emails:
+                  - tests@test.com
+              Interline AWB Subscription:
+                value:
+                  awb: 000-12345675
+                  airlineCode: XX
+                  url: https://test-url.com
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Subscription Successful:
+                  value: "{\n    \"status\": 200,\n    \"message\": \"successfully subscribed\"\n}"
+                Subscription Successful (Limited Updates):
+                  value: "{\n    \"status\": 200,\n    \"message\": \"successfully subscribed - This airline\
+                    \ is not fully supported, so updates may be limited.\"\n}"
+              schema:
+                oneOf:
+                - title: Subscription Successful
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    message:
+                      type: string
+                      example: successfully subscribed
+                - title: Subscription Successful (Limited Updates)
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    message:
+                      type: string
+                      example: successfully subscribed - This airline is not fully supported, so updates
+                        may be limited.
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Bad Request:
+                  value: "{\n    \"status\": 400,\n    \"error\": \"invalid body\"\n}"
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 400
+                    default: 0
+                  error:
+                    type: string
+                    example: invalid body
+      deprecated: false
+  /track/unsubscribe:
+    post:
+      summary: Tracking Unsubscription
+      description: This endpoint facilitates unsubscribing to our Track & Trace updates.
+      operationId: tracking-unsubscription-endpoint-post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - awb
+              properties:
+                awb:
+                  type: string
+                  description: Booking AWB prefix and number
+                url:
+                  type: string
+                  description: callback URL — required to unsubscribe from updates via HTTP POST
+                email:
+                  type: string
+                  description: email address — required to unsubscribe from updates via email [to be deprecated]
+                emails:
+                  type: array
+                  description: email addresses — required to unsubscribe from updates via email
+                  items:
+                    type: string
+            examples:
+              Unsubscribe from URL and E-Mail Subscription:
+                value:
+                  awb: 000-11223343
+                  url: https://www.test-url.to
+                  email: tests@tests.com
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Successfully unsubscribed:
+                  value: "{\n    \"status\": 200,\n    \"message\": \"successfully unsubscribed\"\n}"
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  message:
+                    type: string
+                    example: successfully unsubscribed
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Bad Request:
+                  value: "{\n\t\"status\": 400,\n\t\"error\": \"invalid body\"\n}"
+                Invalid URL Format:
+                  value: "{\n    \"status\": 400,\n    \"error\": \"invalid url format\"\n}"
+                Not Subscribed:
+                  value: "{\n    \"status\": 400,\n    \"error\": \"not subscribed\"\n}"
+              schema:
+                oneOf:
+                - title: Bad Request
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 400
+                      default: 0
+                    error:
+                      type: string
+                      example: invalid body
+                - title: Invalid URL Format
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 400
+                      default: 0
+                    error:
+                      type: string
+                      example: invalid url format
+                - title: Not Subscribed
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 400
+                      default: 0
+                    error:
+                      type: string
+                      example: not subscribed
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                no active subscription found:
+                  value: "{\n    \"status\": 404,\n    \"error\": \"No active subscription found for the\
+                    \ given AWB/target\"\n}"
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                    default: 0
+                  error:
+                    type: string
+                    example: No active subscription found for the given AWB/target
+        '500':
+          description: '500'
+          content:
+            application/json:
+              examples:
+                Internal Server Error:
+                  value: "{\n    \"status\": 500,\n    \"error\": \"internal server error\"\n}"
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 500
+                    default: 0
+                  error:
+                    type: string
+                    example: internal server error
+      deprecated: false

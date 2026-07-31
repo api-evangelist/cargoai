@@ -1,0 +1,1113 @@
+openapi: 3.1.0
+info:
+  title: Solutions
+  version: '1.0'
+x-cargoai-api-family: FWB & FHL (eAWB)
+x-provenance:
+  harvestedFrom: CargoAi CargoCONNECT developer portal (ReadMe) — per-operation oasDefinition embedded
+    in each reference page
+  fetchDate: '2026-07-30'
+  httpStatus: 200
+  sourceInfoTitle: Solutions
+  sourceInfoVersion: '1.0'
+  note: Operations reproduced verbatim from the provider-published OpenAPI 3.1 definition. No operation,
+    path, parameter, schema or server was authored by API Evangelist.
+  operations:
+  - sourceURL: https://cargoai.readme.io/reference/eawb-endpoint-post
+    httpStatus: 200
+    operation: POST /eawb
+servers:
+- url: https://api.cargoai.co/solutions
+security:
+- sec0: []
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: x-api-key
+      in: header
+paths:
+  /eawb:
+    post:
+      summary: FWB&FHL Sending
+      description: This document outlines the process of sending FWB&FHL to airlines
+      operationId: eawb-endpoint-post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - awb_number
+              - awb_status
+              - userEmail
+              - userCompanyName
+              - shipper
+              - consignee
+              - routingDetails
+              properties:
+                awb_number:
+                  type: string
+                  description: Master AWB number of your booking
+                awb_status:
+                  type: string
+                  description: Status of your booking at the time when eAWB is sent (can only be PENDING_DELIVERY)
+                userEmail:
+                  type: string
+                  description: Email address of the user sending the eAWB - used a channel to send airline's
+                    response
+                userCompanyName:
+                  type: string
+                  description: Company name of the user sending the eAWB
+                isFhlOnly:
+                  type: boolean
+                  description: Flag to indicate if the request is for FHL sending only
+                  default: false
+                hawbs:
+                  type: array
+                  description: Details of the house awbs linked to your master awb
+                  items:
+                    properties:
+                      mawbNumber:
+                        type: string
+                        description: master AWB number
+                      slac:
+                        type: integer
+                        description: number of loose items or pieces in a ULD
+                        format: int32
+                      hawb_number:
+                        type: string
+                        description: house AWB number
+                      number_of_pieces:
+                        type: integer
+                        description: number of pieces linked to the house AWB
+                        format: int32
+                      gross_weight:
+                        type: object
+                        description: gross weight of the house AWB
+                        required:
+                        - value
+                        - uom
+                        properties:
+                          value:
+                            type: number
+                            description: weight or volume value
+                            format: float
+                          uom:
+                            type: string
+                            description: unit of measure of the weight (K for kg, L for lbs) or volume
+                              (MC for cubic meter, CF for cubic feet)
+                            enum:
+                            - '"K"'
+                            - '"L"'
+                            - '"MC"'
+                            - '"CF"'
+                      locations:
+                        type: object
+                        description: Origin and Destination airports of house AWB
+                        properties:
+                          port_of_origin:
+                            type: object
+                            description: Origin airport of the house AWB
+                            required:
+                            - code
+                            properties:
+                              code:
+                                type: string
+                                description: 3 letters code following IATA standards
+                          port_of_destination:
+                            type: object
+                            description: Destination airport of the house AWB
+                            required:
+                            - code
+                            properties:
+                              code:
+                                type: string
+                                description: 3 letters code following IATA standards
+                      commodity:
+                        type: string
+                        description: description of goods inside house AWB
+                      currency_code:
+                        type: string
+                        description: 3 letters currency code (ISO 4217)
+                      charge_code:
+                        type: string
+                        description: code describing the payment method of charges
+                        enum:
+                        - '"CC"'
+                        - '"CZ"'
+                        - '"CG"'
+                        - '"PP"'
+                        - '"PX"'
+                        - '"PZ"'
+                        - '"PG"'
+                        - '"CP"'
+                        - '"CX"'
+                        - '"CM"'
+                        - '"NC"'
+                        - '"NT"'
+                        - '"NZ"'
+                        - '"NG"'
+                        - '"NP"'
+                        - '"NX"'
+                        - '"CA"'
+                        - '"CB"'
+                        - '"CE"'
+                        - '"CH"'
+                        - '"PC"'
+                        - '"PD"'
+                        - '"PE"'
+                        - '"PH"'
+                        - '"PF"'
+                      other:
+                        type: string
+                        description: Indicates wether the payment will be made at origin (prepaid 'P'),  or
+                          at destination (collect 'C')
+                        enum:
+                        - '"P"'
+                        - '"C"'
+                      values_for_carriage:
+                        type: number
+                        description: value declared for the house AWB for carriage purposes
+                        format: float
+                      values_for_custom:
+                        type: number
+                        description: value declared for the house AWB for customs purposes
+                        format: float
+                      values_for_insurance:
+                        type: string
+                        description: value declared for the house AWB for insurances purposes
+                    required:
+                    - hawb_number
+                    - number_of_pieces
+                    type: object
+                handling:
+                  type: object
+                  description: Additional handling information for your shipment to provide in the FWB
+                  properties:
+                    specialServiceInformation:
+                      type: string
+                      description: Special handling details to be mentioned in FWB
+                    otherServiceInformation:
+                      type: string
+                      description: Other handling details to be mentioned in FWB
+                    specialHandling:
+                      type: array
+                      description: Code indicating thatshipment may need use of special handling processes
+                      items:
+                        properties:
+                          code:
+                            type: string
+                            description: 3 letters code following IATA standards
+                        required:
+                        - code
+                        type: object
+                senderReference:
+                  type: object
+                  description: References of the agent sending the shipment
+                  properties:
+                    senderAirport:
+                      type: string
+                      description: airport linked to the agent sending the shipment
+                    senderOfficeDesignator:
+                      type: string
+                      description: office designator of the agent sending the shipment
+                      enum:
+                      - '"FF"'
+                      - '"FR"'
+                      - '"FM"'
+                shipper:
+                  type: object
+                  description: Details related to the shipper
+                  required:
+                  - name
+                  properties:
+                    name:
+                      type: string
+                      description: name of the shipper or consignee
+                    account_number:
+                      type: string
+                      description: account number in airline system of shipper or consignee
+                    phone:
+                      type: string
+                      description: phone number of shipper or consignee
+                    fax:
+                      type: string
+                      description: fax number of shipper or consignee
+                    email:
+                      type: string
+                      description: email address of shipper or consignee
+                    address:
+                      type: object
+                      description: address of the shipper or consignee
+                      required:
+                      - line1
+                      properties:
+                        line1:
+                          type: string
+                          description: address line1 of shipper or consignee
+                        line2:
+                          type: string
+                          description: address line2 of shipper or consignee
+                        place:
+                          type: string
+                          description: Mandatory if city code not provided. Place or location of the shipper
+                            or consignee
+                        city:
+                          type: object
+                          description: city (code) mandatory if place not provided. City of the shipper
+                            or consignee
+                          required:
+                          - code
+                          properties:
+                            code:
+                              type: string
+                              description: 3 letters code for city, 2 letters code for country
+                            name:
+                              type: string
+                              description: name of the city or country
+                        postal_code:
+                          type: string
+                          description: postal code of the place/city
+                        state_province:
+                          type: string
+                          description: state or province of the place/city
+                        country:
+                          type: object
+                          description: country of the place/city
+                          required:
+                          - code
+                          properties:
+                            code:
+                              type: string
+                              description: 3 letters code for city, 2 letters code for country
+                            name:
+                              type: string
+                              description: name of the city or country
+                consignee:
+                  type: object
+                  description: Details related to the consignee
+                  required:
+                  - name
+                  properties:
+                    name:
+                      type: string
+                      description: name of the shipper or consignee
+                    account_number:
+                      type: string
+                      description: account number in airline system of shipper or consignee
+                    phone:
+                      type: string
+                      description: phone number of shipper or consignee
+                    fax:
+                      type: string
+                      description: fax number of shipper or consignee
+                    email:
+                      type: string
+                      description: email address of shipper or consignee
+                    address:
+                      type: object
+                      description: address of the shipper or consignee
+                      required:
+                      - line1
+                      properties:
+                        line1:
+                          type: string
+                          description: address line1 of shipper or consignee
+                        line2:
+                          type: string
+                          description: address line2 of shipper or consignee
+                        place:
+                          type: string
+                          description: Mandatory if city code not provided. Place or location of the shipper
+                            or consignee
+                        city:
+                          type: object
+                          description: city (code) mandatory if place not provided. City of the shipper
+                            or consignee
+                          required:
+                          - code
+                          properties:
+                            code:
+                              type: string
+                              description: 3 letters code for city, 2 letters code for country
+                            name:
+                              type: string
+                              description: name of the city or country
+                        postal_code:
+                          type: string
+                          description: postal code of the place/city
+                        state_province:
+                          type: string
+                          description: state or province of the place/city
+                        country:
+                          type: object
+                          description: country of the place/city
+                          required:
+                          - code
+                          properties:
+                            code:
+                              type: string
+                              description: 3 letters code for city, 2 letters code for country
+                            name:
+                              type: string
+                              description: name of the city or country
+                notify:
+                  type: object
+                  description: Details related to the person to notify regarding shipment's delivery
+                  required:
+                  - name
+                  properties:
+                    name:
+                      type: string
+                      description: name of the shipper or consignee
+                    account_number:
+                      type: string
+                      description: account number in airline system of shipper or consignee
+                    phone:
+                      type: string
+                      description: phone number of shipper or consignee
+                    fax:
+                      type: string
+                      description: fax number of shipper or consignee
+                    email:
+                      type: string
+                      description: email address of shipper or consignee
+                    address:
+                      type: object
+                      description: address of the shipper or consignee
+                      required:
+                      - line1
+                      properties:
+                        line1:
+                          type: string
+                          description: address line1 of shipper or consignee
+                        line2:
+                          type: string
+                          description: address line2 of shipper or consignee
+                        place:
+                          type: string
+                          description: Mandatory if city code not provided. Place or location of the shipper
+                            or consignee
+                        city:
+                          type: object
+                          description: city (code) mandatory if place not provided. City of the shipper
+                            or consignee
+                          required:
+                          - code
+                          properties:
+                            code:
+                              type: string
+                              description: 3 letters code for city, 2 letters code for country
+                            name:
+                              type: string
+                              description: name of the city or country
+                        postal_code:
+                          type: string
+                          description: postal code of the place/city
+                        state_province:
+                          type: string
+                          description: state or province of the place/city
+                        country:
+                          type: object
+                          description: country of the place/city
+                          required:
+                          - code
+                          properties:
+                            code:
+                              type: string
+                              description: 3 letters code for city, 2 letters code for country
+                            name:
+                              type: string
+                              description: name of the city or country
+                routingDetails:
+                  type: array
+                  description: Only first leg is mandatory. 3 iterations max. Details of the shipment
+                    routing for first origin to last destination
+                  items:
+                    properties:
+                      from_airport_code:
+                        type: string
+                        description: Origin of the flight
+                      to_airport_code:
+                        type: string
+                        description: Destination of the flight
+                      carrier_code:
+                        type: string
+                        description: Carrier code of the airline operating the flight
+                      flight_number:
+                        type: string
+                        description: Flight identification number
+                    required:
+                    - from_airport_code
+                    - to_airport_code
+                    - carrier_code
+                    type: object
+                chargesDeclaration:
+                  type: object
+                  description: Mandatory only for FWB. Details related to the payment of shipment charges
+                  required:
+                  - currency_code
+                  - charge_code
+                  properties:
+                    currency_code:
+                      type: string
+                      description: 3 letters currency code (ISO 4217)
+                    charge_code:
+                      type: string
+                      description: code describing the payment method of charges
+                      enum:
+                      - CC
+                      - CZ
+                      - CG
+                      - PP
+                      - PX
+                      - PZ
+                      - PG
+                      - CP
+                      - CX
+                      - CM
+                      - NC
+                      - NT
+                      - NZ
+                      - NG
+                      - NP
+                      - NX
+                      - CA
+                      - CB
+                      - CE
+                      - CH
+                      - PC
+                      - PD
+                      - PE
+                      - PH
+                      - PF
+                    weight_or_valuation:
+                      type: string
+                      description: Indicates wether the payment will be made at origin (prepaid 'P'),  or
+                        at destination (collect 'C')
+                      enum:
+                      - P
+                      - C
+                    values_for_carriage:
+                      type: string
+                      description: value declared for the house AWB for carriage purposes
+                    values_for_custom:
+                      type: string
+                      description: value declared for the house AWB for customs purposes
+                    values_for_insurance:
+                      type: string
+                      description: value declared for the house AWB for insurances purposes
+                rates:
+                  type: array
+                  description: Mandatory only for FWB. Details related to the rate and commodities of
+                    the shipment
+                  items:
+                    properties:
+                      number_of_pieces:
+                        type: integer
+                        description: number of pieces/ULDs accepted for carriage
+                        format: int32
+                      gross_weight:
+                        type: object
+                        description: gross weight of the shipment
+                        required:
+                        - value
+                        - uom
+                        properties:
+                          value:
+                            type: number
+                            description: weight or volume value
+                            format: float
+                          uom:
+                            type: string
+                            description: unit of measure of the weight (K for kg, L for lbs) or volume
+                              (MC for cubic meter, CF for cubic feet)
+                            enum:
+                            - '"K"'
+                            - '"L"'
+                            - '"MC"'
+                            - '"CF"'
+                      volume:
+                        type: object
+                        description: volume of the shipment
+                        required:
+                        - value
+                        - uom
+                        properties:
+                          value:
+                            type: number
+                            description: weight or volume value
+                            format: float
+                          uom:
+                            type: string
+                            description: unit of measure of the weight (K for kg, L for lbs) or volume
+                              (MC for cubic meter, CF for cubic feet)
+                            enum:
+                            - '"K"'
+                            - '"L"'
+                            - '"MC"'
+                            - '"CF"'
+                      slac:
+                        type: integer
+                        description: number of loose items or pieces in the shipment
+                        format: int32
+                      rate_class_code:
+                        type: string
+                        description: description of a specific rate category
+                        enum:
+                        - '"B"'
+                        - '"R"'
+                        - '"S"'
+                        - '"P"'
+                        - '"M"'
+                        - '"N"'
+                        - '"Q"'
+                        - '"K"'
+                        - '"C"'
+                        - '"X"'
+                        - '"E"'
+                        - '"U"'
+                        - '"Y"'
+                      commodity_item_number:
+                        type: string
+                        description: IATA standard number to identify commodity
+                      chargeable_weight:
+                        type: number
+                        description: chargeable weight of the shipment
+                        format: float
+                      rate_or_charge:
+                        type: number
+                        description: represents the rate or charge of the shipment
+                        format: float
+                      charge_amount:
+                        type: number
+                        description: total charge of the shipment
+                        format: float
+                      nature_and_quantity_of_goods:
+                        type: string
+                        description: description of the goods relative to the shipment
+                      hsc:
+                        type: array
+                        description: HScodes of the goods relative to the shipment
+                        default: []
+                        items:
+                          type: integer
+                          format: int32
+                      dims:
+                        type: array
+                        description: represents the different dimensions of the packages of the shipment
+                        items:
+                          properties:
+                            pcs:
+                              type: integer
+                              description: number of pieces of the piece group
+                              format: int32
+                            length:
+                              type: integer
+                              description: length of the piece group
+                              format: int32
+                            width:
+                              type: integer
+                              description: width of the piece group
+                              format: int32
+                            height:
+                              type: integer
+                              description: height of the piece group
+                              format: int32
+                            uom:
+                              type: string
+                              description: unit of measure of the piece group
+                              enum:
+                              - '"CMT"'
+                              - '"INH"'
+                            weight:
+                              type: number
+                              description: total weight of the piece group
+                              format: float
+                            volume:
+                              type: number
+                              description: total volume of the piece group
+                              format: float
+                          required:
+                          - pcs
+                          - length
+                          - width
+                          - height
+                          - uom
+                          type: object
+                      uld:
+                        type: array
+                        description: provides shipment ULD numbers
+                        items:
+                          properties:
+                            number:
+                              type: string
+                              description: ULD number
+                          required:
+                          - number
+                          type: object
+                    required:
+                    - number_of_pieces
+                    - rate_class_code
+                    - charge_amount
+                    type: object
+                execution:
+                  type: object
+                  description: Mandatory only for FWB. Details about the AWB execution
+                  required:
+                  - date
+                  - place
+                  - shipper_signature
+                  - carrier_signature
+                  properties:
+                    date:
+                      type: string
+                      description: date when the AWB is executed
+                    place:
+                      type: string
+                      description: place where the AWB is executed
+                    shipper_signature:
+                      type: string
+                      description: signature of the shipper executing the AWB
+                    carrier_signature:
+                      type: string
+                      description: signature of the carrier executing the AWB
+                oci:
+                  type: object
+                  description: Other customs, security and regulatory control information
+                  required:
+                  - origin_country_code
+                  properties:
+                    origin_country_code:
+                      type: string
+                      description: shipment origin country code for customs, regulatory control
+                agent:
+                  type: object
+                  description: Details related to the agent
+                  required:
+                  - iata
+                  - place
+                  - name
+                  properties:
+                    accountNumber:
+                      type: string
+                      description: agent account number in airline system
+                    iata:
+                      type: string
+                      description: agent IATA code
+                    cass:
+                      type: string
+                      description: agent Cass code
+                    place:
+                      type: string
+                      description: agent location place (city)
+                    name:
+                      type: string
+                      description: Agent's name
+                otherCharges:
+                  type: array
+                  description: Additional charge information
+                  items:
+                    properties:
+                      pc_indicator:
+                        type: string
+                        description: Prepaid/Collect Indicator (P or C)
+                      charge_code:
+                        type: string
+                        description: Charge code
+                      entitlement_code:
+                        type: string
+                        description: Entitlement Code
+                      charge_amount:
+                        type: number
+                        description: Charge Amount
+                        format: float
+                    required:
+                    - pc_indicator
+                    - charge_code
+                    - entitlement_code
+                    - charge_amount
+                    type: object
+            examples:
+              FWB&FHL:
+                value:
+                  awb_number: 000-12345675
+                  awb_status: PENDING_DELIVERY
+                  userEmail: tests@cargoai.co
+                  userCompanyName: CargoAi Test
+                  shipper:
+                    account_number: null
+                    name: TEST CARGO INC.
+                    phone: (33) 12 18 15 46 50
+                    fax: (33) 12 18 15 46 51
+                    email: null
+                    address:
+                      line1: TEST Street
+                      place: null
+                      city:
+                        code: PAR
+                        name: Paris
+                      postal_code: null
+                      state_province: null
+                      country:
+                        code: FR
+                        name: France
+                  consignee:
+                    account_number: null
+                    name: TEST CARGO S.R.L
+                    phone: (33) 12 18 15 46 50
+                    fax: (33) 12 18 15 46 51
+                    email: ' tests@tests.com'
+                    address:
+                      line1: TEST Street
+                      place: null
+                      city:
+                        code: PAR
+                        name: Paris
+                      postal_code: null
+                      state_province: null
+                      country:
+                        code: FR
+                        name: France
+                  notify:
+                    account_number: null
+                    name: TEST CARGO INC.
+                    phone: (33) 12 18 15 46 50
+                    fax: (33) 12 18 15 46 51
+                    email: null
+                    address:
+                      line1: TEST Street
+                      place: null
+                      city:
+                        code: PAR
+                        name: Paris
+                      postal_code: null
+                      state_province: null
+                      country:
+                        code: FR
+                        name: France
+                  routingDetails:
+                  - from_airport_code: CDG
+                    to_airport_code: DXB
+                    carrier_code: '00'
+                    flight_number: '373'
+                  - from_airport_code: DXB
+                    to_airport_code: SIN
+                    carrier_code: '00'
+                    flight_number: null
+                    flight_date: null
+                  chargesDeclaration:
+                    currency_code: EUR
+                    charge_code: PP
+                    weight_or_valuation: P
+                  rates:
+                  - number_of_pieces: 5
+                    gross_weight:
+                      value: 680
+                      uom: K
+                    volume:
+                      value: 2.5336
+                      uom: MC
+                    slac: 5
+                    rate_class_code: C
+                    commodity_item_number: '4122'
+                    chargeable_weight: 680
+                    rate_or_charge: 2.5336
+                    charge_amount: 1720.4
+                    nature_and_quantity_of_goods: AIRCRAFT SUPPLIES
+                    dims:
+                    - pcs: 3
+                      length: 150
+                      width: 112
+                      height: 37
+                      uom: CMT
+                    - pcs: 2
+                      length: 152
+                      width: 110
+                      height: 20
+                      uom: CMT
+                  execution:
+                    date: 23-Jul-24
+                    place: Paris
+                    shipper_signature: Test cargo services
+                    carrier_signature: CargoAirline rpz
+                  handling:
+                    specialServiceInformation: 03 pcs marked and addressed please inform consignee upon
+                      arrival
+                    otherServiceInformation: null
+                  senderReference:
+                    senderAirport: CDG
+                    senderOfficeDesignator: FF
+                  hawbs:
+                  - mawbNumber: 000-12345675
+                    slac: 180
+                    hawb_number: HB123430
+                    number_of_pieces: 3
+                    gross_weight:
+                      value: 480
+                      uom: K
+                    locations:
+                      port_of_origin:
+                        code: CDG
+                      port_of_destination:
+                        code: DXB
+                    commodity: Commodity TEST
+              FWB only:
+                value:
+                  awb_number: 000-12345675
+                  awb_status: PENDING_DELIVERY
+                  userEmail: tests@cargoai.co
+                  userCompanyName: CargoAi Test
+                  shipper:
+                    account_number: null
+                    name: TEST CARGO INC.
+                    phone: (33) 12 18 15 46 50
+                    fax: (33) 12 18 15 46 51
+                    email: null
+                    address:
+                      line1: TEST Street
+                      place: null
+                      city:
+                        code: PAR
+                        name: Paris
+                      postal_code: null
+                      state_province: null
+                      country:
+                        code: FR
+                        name: France
+                  consignee:
+                    account_number: null
+                    name: TEST CARGO S.R.L
+                    phone: (33) 12 18 15 46 50
+                    fax: (33) 12 18 15 46 51
+                    email: ' tests@tests.com'
+                    address:
+                      line1: TEST Street
+                      place: null
+                      city:
+                        code: PAR
+                        name: Paris
+                      postal_code: null
+                      state_province: null
+                      country:
+                        code: FR
+                        name: France
+                  notify:
+                    account_number: null
+                    name: TEST CARGO INC.
+                    phone: (33) 12 18 15 46 50
+                    fax: (33) 12 18 15 46 51
+                    email: null
+                    address:
+                      line1: TEST Street
+                      place: null
+                      city:
+                        code: PAR
+                        name: Paris
+                      postal_code: null
+                      state_province: null
+                      country:
+                        code: FR
+                        name: France
+                  routingDetails:
+                  - from_airport_code: CDG
+                    to_airport_code: DXB
+                    carrier_code: '00'
+                    flight_number: '373'
+                  - from_airport_code: DXB
+                    to_airport_code: SIN
+                    carrier_code: '00'
+                    flight_number: null
+                    flight_date: null
+                  chargesDeclaration:
+                    currency_code: EUR
+                    charge_code: PP
+                    weight_or_valuation: P
+                  rates:
+                  - number_of_pieces: 5
+                    gross_weight:
+                      value: 680
+                      uom: K
+                    volume:
+                      value: 2.5336
+                      uom: MC
+                    slac: 5
+                    rate_class_code: C
+                    commodity_item_number: '4122'
+                    chargeable_weight: 680
+                    rate_or_charge: 2.5336
+                    charge_amount: 1720.4
+                    nature_and_quantity_of_goods: AIRCRAFT SUPPLIES
+                    dims:
+                    - pcs: 3
+                      length: 150
+                      width: 112
+                      height: 37
+                      uom: CMT
+                    - pcs: 2
+                      length: 152
+                      width: 110
+                      height: 20
+                      uom: CMT
+                  execution:
+                    date: 23-Jul-24
+                    place: Paris
+                    shipper_signature: Test cargo services
+                    carrier_signature: CargoAirline rpz
+                  handling:
+                    specialServiceInformation: 03 pcs marked and addressed please inform consignee upon
+                      arrival
+                    otherServiceInformation: null
+                  senderReference:
+                    senderAirport: CDG
+                    senderOfficeDesignator: FF
+              FHL only:
+                value:
+                  awb_number: 000-12345675
+                  awb_status: PENDING_DELIVERY
+                  userEmail: tests@cargoai.co
+                  userCompanyName: CargoAi Test
+                  isFhlOnly: true
+                  shipper:
+                    account_number: null
+                    name: TEST CARGO INC.
+                    phone: (33) 12 18 15 46 50
+                    fax: (33) 12 18 15 46 51
+                    email: null
+                    address:
+                      line1: TEST Street
+                      place: null
+                      city:
+                        code: PAR
+                        name: Paris
+                      postal_code: null
+                      state_province: null
+                      country:
+                        code: FR
+                        name: France
+                  consignee:
+                    account_number: null
+                    name: TEST CARGO S.R.L
+                    phone: (33) 12 18 15 46 50
+                    fax: (33) 12 18 15 46 51
+                    email: ' tests@tests.com'
+                    address:
+                      line1: TEST Street
+                      place: null
+                      city:
+                        code: PAR
+                        name: Paris
+                      postal_code: null
+                      state_province: null
+                      country:
+                        code: FR
+                        name: France
+                  routingDetails:
+                  - from_airport_code: CDG
+                    to_airport_code: DXB
+                    carrier_code: '00'
+                    flight_number: '373'
+                  - from_airport_code: DXB
+                    to_airport_code: SIN
+                    carrier_code: '00'
+                    flight_number: null
+                    flight_date: null
+                  hawbs:
+                  - mawbNumber: 000-12345675
+                    slac: 180
+                    hawb_number: HB123430
+                    number_of_pieces: 3
+                    gross_weight:
+                      value: 480
+                      uom: K
+                    locations:
+                      port_of_origin:
+                        code: CDG
+                      port_of_destination:
+                        code: DXB
+                    commodity: Commodity TEST
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Message Successfully Transmitted to Airline:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid AWB Format:
+                  value: "{\n    \"errorCode\": 400,\n    \"errorMessage\": \"invalid request: awb_number:\
+                    \ must be in a valid format.\"\n}"
+                AWB prefix not supported:
+                  value: "{\n  \"errorCode\": 400,\n  \"errorMessage\": \"invalid request: awb_number:\
+                    \ awb prefix is not supported.\"\n}"
+              schema:
+                oneOf:
+                - title: Invalid AWB Format
+                  type: object
+                  properties:
+                    errorCode:
+                      type: integer
+                      example: 400
+                      default: 0
+                    errorMessage:
+                      type: string
+                      example: 'invalid request: awb_number: must be in a valid format.'
+                - title: AWB prefix not supported
+                  type: object
+                  properties:
+                    errorCode:
+                      type: integer
+                      example: 400
+                      default: 0
+                    errorMessage:
+                      type: string
+                      example: 'invalid request: awb_number: awb prefix is not supported.'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              examples:
+                API Key not Authorized for FWB&FHL API:
+                  value: "{\n    \"errorCode\": 400,\n    \"errorMessage\": \"you are not authorized to\
+                    \ perform operation on FWB&FHL API\"\n}"
+                Unkown API Key:
+                  value: "{\n    \"errorCode\": 400,\n    \"errorMessage\": \"unable to find API Key or\
+                    \ relative restrictions in our system\"\n}"
+              schema:
+                oneOf:
+                - title: API Key not Authorized for FWB&FHL API
+                  type: object
+                  properties:
+                    errorCode:
+                      type: integer
+                      example: 400
+                      default: 0
+                    errorMessage:
+                      type: string
+                      example: you are not authorized to perform operation on FWB&FHL API
+                - title: Unkown API Key
+                  type: object
+                  properties:
+                    errorCode:
+                      type: integer
+                      example: 400
+                      default: 0
+                    errorMessage:
+                      type: string
+                      example: unable to find API Key or relative restrictions in our system
+      deprecated: false

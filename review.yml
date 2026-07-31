@@ -1,0 +1,384 @@
+aid: cargoai
+name: CargoAi
+review:
+  question: >-
+    Does CargoAi publish a real, callable API surface for air cargo, and can what it
+    publishes be spoken by the next party in the chain?
+  answer: true
+  date: '2026-07-30'
+  reviewer: API Evangelist
+  cohort: air-cargo-parcel
+  tier: air-cargo-marketplace
+  homeCountry: Singapore
+identity:
+  legalPresence: Singapore (Block 71 Ayer Rajah Crescent innovation district address published
+    on third-party company records; CargoAi's LinkedIn presence is sg.linkedin.com/company/cargoai)
+  domainNote: >-
+    The roster hint domain was cargoai.com. That host resolves and returns HTTP 200 but
+    serves only a parking lander (a script redirect to /lander) and is NOT operated by this
+    organization. The real primary domain is cargoai.co, confirmed by the marketing site,
+    the app (app.cargoai.co), the API host (api.cargoai.co), the help center
+    (help.cargoai.co) and the corporate email domain used in the docs (support@cargoai.co).
+  whatItIs: >-
+    An air cargo marketplace and technology platform. CargoMART is the forwarder-facing
+    portal for search, quote, book and track across 680+ airlines; CargoCONNECT is the
+    API suite that exposes the same data and transactions into a customer's own TMS or
+    ERP; Cargo2ZERO is the emissions layer; CargoWALLET is the freight payment layer;
+    CargoCOPILOT is the AI extraction/agent layer.
+  positionInChain: >-
+    Aggregator sitting between freight forwarders (and their TMS vendors) and airline
+    reservation, rating and messaging systems. It does not fly cargo and does not clear
+    customs; it normalizes many airlines behind one contract and pushes documents and
+    milestones back out.
+probes:
+  - url: https://cargoai.com
+    status: 200
+    note: Parked lander page, not the organization. Excluded.
+  - url: https://www.cargoai.co
+    status: 200
+    note: Real corporate site (cargoai.co redirects to www.cargoai.co).
+  - url: https://cargoai.readme.io/reference/introduction
+    status: 200
+    note: PUBLIC developer portal, ReadMe-hosted. No login, no gate on the documentation.
+  - url: https://cargoai.readme.io/llms.txt
+    status: 200
+    note: 9,296-byte agent index listing 48 reference pages. Harvested.
+  - url: https://cargoai.readme.io/llms-full.txt
+    status: 404
+    note: Advertised pattern not served; returns the ReadMe 404 shell.
+  - url: https://cargoai.readme.io/openapi.json
+    status: 404
+  - url: https://cargoai.readme.io/swagger.json
+    status: 404
+  - url: https://cargoai.readme.io/.well-known/openapi.json
+    status: 404
+  - url: https://api.cargoai.co/solutions
+    status: 403
+    note: Live API host. 403 without an x-api-key, which confirms the host and the auth gate.
+  - url: https://api.cargoai.co/mcp
+    status: 401
+    note: Live MCP endpoint. 401 without OAuth, which confirms the server exists.
+  - url: https://app.cargoai.co
+    status: 200
+    note: CargoMART customer portal (login).
+  - url: https://connect.cargoai.co/
+    status: 200
+    note: CargoAi ID sign-up/identity host.
+  - url: https://help.cargoai.co/
+    status: 200
+  - url: https://github.com/cargoai
+    status: 200
+    note: GitHub organization exists; no public OpenAPI repository found.
+  - url: https://developer.cargoai.co
+    status: 000
+    note: Does not resolve.
+  - url: https://developers.cargoai.co
+    status: 000
+    note: Does not resolve.
+  - url: https://docs.cargoai.co
+    status: 000
+    note: Does not resolve.
+  - url: https://api.cargoai.com
+    status: 000
+    note: Does not resolve.
+  - url: https://developer.cargoai.com
+    status: 000
+    note: Does not resolve.
+  - url: https://docs.cargoai.com
+    status: 000
+    note: Does not resolve.
+specHarvest:
+  method: >-
+    CargoAi's ReadMe project sets privacy.openapi = "admin", so there is no downloadable
+    definition URL. Each API reference page, however, server-side renders the provider's
+    own OpenAPI 3.1.0 document filtered to that one operation, under the JSON key
+    "oasDefinition". All 48 reference pages listed in llms.txt were fetched (HTTP 200 each)
+    and the embedded oasDefinition extracted where present. 14 pages carried an operation;
+    34 are narrative guides with no spec fragment.
+  sourceDefinition:
+    openapi: 3.1.0
+    infoTitle: Solutions
+    infoVersion: '1.0'
+    server: https://api.cargoai.co/solutions
+    securityScheme: apiKey / header / x-api-key
+  fetchDate: '2026-07-30'
+  operationsHarvested: 14
+  filesWritten: 7
+  files:
+    - path: openapi/cargoai-routes-schedules-and-rates-api-openapi.yml
+      operations: 1
+      paths: ['/search']
+    - path: openapi/cargoai-booking-api-openapi.yml
+      operations: 3
+      paths: ['/book', '/track', '/bookings/{flightUUID}']
+    - path: openapi/cargoai-track-and-trace-api-openapi.yml
+      operations: 2
+      paths: ['/track/subscribe', '/track/unsubscribe']
+    - path: openapi/cargoai-fwb-fhl-api-openapi.yml
+      operations: 1
+      paths: ['/eawb']
+    - path: openapi/cargoai-user-provisioning-api-openapi.yml
+      operations: 4
+      paths: ['/users']
+    - path: openapi/cargoai-cargo2zero-api-openapi.yml
+      operations: 1
+      paths: ['/co2calculation']
+    - path: openapi/cargoai-cargocopilot-api-openapi.yml
+      operations: 2
+      paths: ['/ai/awb', '/ai/shipment']
+  fidelity: >-
+    Operations, parameters, schemas, servers and security schemes are reproduced verbatim
+    from the provider-published fragments. The only additions are an x-provenance block
+    (source URL, HTTP status, fetch date) and an x-cargoai-api-family label used to group
+    the operations the way CargoAi's own documentation groups them. Nothing was authored.
+  notHarvested:
+    - name: CargoWALLET API
+      note: >-
+        Named in the CargoCONNECT introduction as part of the suite ("add payment
+        capabilities to your customer interface"), but no reference page and no operation
+        is published for it. Recorded, not invented.
+    - name: Booking callback / Tracking callback / FlyWINDOW callback
+      note: >-
+        Real, documented outbound webhooks with published payload examples and three
+        supported auth schemes, but they are described in prose only - there is no
+        AsyncAPI document and no OpenAPI `callbacks` object, so nothing was saved as a
+        machine-readable artifact.
+interoperability:
+  standardConformance:
+    verdict: >-
+      Partial and payload-level, not interface-level. CargoAi carries IATA air cargo
+      semantics inside a REST contract of its own design. No ONE Record, no Cargo-XML
+      schema conformance statement, and no DCSA/GS1/UN-EDIFACT reference appears anywhere
+      on its published developer surface.
+    standardsFound:
+      - standard: IATA FWB (Master Air Waybill) and FHL (House Manifest) message content
+        version: not stated on the published surface
+        evidence: https://cargoai.readme.io/reference/fwb-and-fhl
+        note: >-
+          The FWB&FHL API accepts JSON and CargoAi "takes care to parse and format your data
+          in order to be transmitted to the airline". The field-level contract
+          (awb_number, hawbs, shipper, consignee, routingDetails, handling, senderReference)
+          is a JSON projection of the IATA air waybill message, not a raw Cargo-IMP or
+          Cargo-XML document.
+        evidenceExtra: https://cargoai.readme.io/reference/eawb-data-format
+      - standard: IATA cargo status / tracking event codes
+        version: not stated
+        evidence: https://cargoai.readme.io/reference/tracking-event-codes
+        note: >-
+          Published event vocabulary uses the industry codes verbatim - BKD, FWB, FOH, RCS,
+          PRE, MAN, DEP, ARR, RCF, AWD, NFD, DLV, CNL, CUS, CCD, CLD, RCT, TFD, OFF. CargoAi
+          explicitly disclaims that its mapping table is "for informational purpose only,
+          not guaranteed or legally binding", and it collapses AWR into FWB and SCW into FOH,
+          which is a documented deviation from a strict reading of the code set.
+      - standard: IATA Recommended Practice 1678 (air cargo CO2 calculation)
+        version: RP 1678
+        evidence: https://cargoai.readme.io/reference/introduction
+        note: >-
+          Cargo2ZERO CO2 figures are stated to be "based on IATA's recommended practice in
+          1678 standard using exact routing and aircraft code", linking to
+          https://www.iata.org/en/programs/cargo/sustainability/carbon-footprint/
+      - standard: IATA Special Handling Codes (SHC) and Special Commodity Rate (SCR) codes
+        version: not stated
+        evidence: https://cargoai.readme.io/reference/product-coverage
+        note: >-
+          Search requests carry SHC values (PIL, PER, GCR, HUM, VAL, AVI) and temperature
+          SHCs (FRO, COL, ERT, CRT); HS tariff codes and SCR codes are documented as booking
+          metadata.
+    standardsAbsent:
+      - IATA ONE Record - no ONE Record server, no Logistics Object model, no
+        /logistics-objects endpoint, no linked-data payloads, and no ONE Record reference
+        anywhere in llms.txt or the 48 reference pages. Third-party press coverage
+        describes CargoAi as "ONE Record compatible" and building bridges to ONE Record
+        servers, but that claim is not evidenced on any CargoAi-published page probed on
+        2026-07-30, so it is recorded as unverified.
+      - IATA Cargo-XML - no schema reference, no message-type identifiers, no XML surface.
+      - DCSA, GS1 EPCIS, UN/CEFACT MMT RDM, WCO Data Model, eFTI, MLETR/eBL - not
+        applicable or not referenced (CargoAi is air-only; none appear on the surface).
+      - AsyncAPI - not published, despite a real webhook event model.
+  interfaceShape: proprietary-documented
+  interfaceShapeRationale: >-
+    The published contract is CargoAi's own. Paths (/search, /book, /track,
+    /track/subscribe, /eawb, /users, /co2calculation, /ai/awb, /ai/shipment), request
+    bodies, response objects and error catalog are unique to CargoAi; no other party
+    implements this shape, so a forwarder's CargoAi integration is not reusable against
+    another aggregator or against an airline's own ONE Record server. What is standard
+    here is the vocabulary inside the payload, not the interface around it. The
+    integrate-once benefit CargoAi actually sells is aggregation (680+ airlines behind one
+    API) rather than standardization.
+  identifierScheme: >-
+    Air waybill numbers in IATA form (3-digit airline prefix + 8 digits, e.g. 020-12345678,
+    documented as "xxx-xxxxxxxx - length 12"), house air waybill numbers (hawbs / HWBDetails),
+    IATA 3-letter airport codes for origin/destination and event location, IATA 2-letter
+    airline codes (used for the interline `airlineCode` field and airline filtering),
+    flight numbers, IATA Special Handling Codes, HS tariff codes and SCR codes, aircraft
+    type codes, plus CargoAi-internal opaque identifiers - `flightUUID` (the key for
+    reading and cancelling a booking) and user email as the user provisioning key. The
+    shared, cross-party key is the AWB; `flightUUID` is private to CargoAi and is what
+    makes the booking lifecycle non-portable.
+  eventModel: webhook-and-polling
+  eventModelEvidence:
+    subscriptionOperation: POST https://api.cargoai.co/solutions/track/subscribe
+    subscriptionSpec: openapi/cargoai-track-and-trace-api-openapi.yml
+    unsubscribeOperation: POST https://api.cargoai.co/solutions/track/unsubscribe
+    pollingOperation: GET https://api.cargoai.co/solutions/track
+    note: >-
+      Track & Trace is subscription-based - the caller registers a callback `url` (and
+      optional `emails`) per AWB and CargoAi POSTs milestone updates as they arrive, with
+      oldEvents/newEvents/events split in the payload. A separate Booking callback pushes
+      airline-side booking creations and changes, including bookings made directly in the
+      airline's system. Callback authentication is optional and off by default, and offers
+      HTTP Basic, static Bearer token, or an HMAC-SHA256 signature of the raw body keyed on
+      the caller's x-api-key and delivered in a `cargoai-api-key` header. Enabling it
+      requires contacting CargoAi. GET /track (by flightUUID) provides the pull path. No
+      AsyncAPI document is published and the webhooks are not modeled as OpenAPI callbacks.
+    evidence:
+      - https://cargoai.readme.io/reference/tracking-subscription-endpoint-post
+      - https://cargoai.readme.io/reference/subscription-e-mail-and-url-updates
+      - https://cargoai.readme.io/reference/booking-callback
+      - https://cargoai.readme.io/reference/callbacks-authentication-process
+      - https://cargoai.readme.io/reference/interline-tracking
+  ediLegacy: >-
+    EDI is present but deliberately hidden. CargoAi's FWB&FHL API is explicitly sold as a
+    way to "send Master and House Airway bill information to any airline part of our FWB&FHL
+    coverage without the need for expertise in EDI messages" - the caller sends JSON, CargoAi
+    parses and formats it into the airline's expected message and transmits it. The customer
+    therefore needs no VAN, no AS2 connection and no mapping project; CargoAi absorbs that
+    integration on the airline side. There is no EDIFACT or ANSI X12 surface offered to the
+    caller, and no published list of which transport (Cargo-IMP over Type-B, Cargo-XML over
+    web services, or a direct airline API) is used per carrier - airline coverage is
+    published only as a BI dashboard, not as machine-readable data.
+    Evidence: https://cargoai.readme.io/reference/fwb-and-fhl and
+    https://cargoai.readme.io/reference/eawb-data-format
+  multiPartyPosture: >-
+    Publishes outward to its counterparties rather than only consuming. The named live
+    consumers of CargoCONNECT on CargoAi's own contact page are Magaya, Riege Software,
+    DP World, Descartes and Aramex - i.e. TMS and forwarder platforms embedding CargoAi
+    rather than end shippers calling it directly. The User Provisioning API is the tell:
+    an integrator holds one API key and provisions its own end users beneath it, and can
+    mint a redirect token that drops those users into CargoMART (FlyWINDOW), so the
+    commercial relationship is CargoAi-to-platform, not CargoAi-to-shipper. On the supply
+    side CargoAi consumes from 680+ airlines for schedules and 260+ for tracking, with
+    coverage published at https://bi.cargoai.co/superset/dashboard/API_Coverage. There is
+    no public partner/marketplace directory of pre-built integrations and no self-service
+    listing of which carriers are reachable by which API.
+  accessGate: commercial-agreement
+  accessGateDetail: >-
+    Documentation is fully public - no login, no email wall, and an llms.txt agent index.
+    Credentials are not. The contact page states that to "access our API testing platform
+    and discuss your specific requirements and objectives" a prospect books a session with
+    CargoAi's Sales & API Integration Manager; existing customers book implementation
+    sessions with the Head of Enterprise Customer Success. There is no self-serve key
+    issuance, no published pricing for CargoCONNECT, and no sandbox that can be entered
+    without a conversation. Track & Trace Premium is switched on only by contacting a
+    CargoAi point of contact, callback authentication is configured only by contacting
+    CargoAi, and the MCP connector requires a CargoMART Premium or Ultimate office plan
+    obtained through an account manager. What a developer must do to integrate: sign a
+    commercial agreement with CargoAi, receive an x-api-key, register a callback URL with
+    CargoAi (they set it, the customer cannot self-register it), and - for the agent
+    surface - hold a Premium or Ultimate plan and complete OAuth.
+    Evidence: https://cargoai.readme.io/reference/contact-us
+  dcsaMembershipVsPublication: not-applicable
+  dcsaNote: >-
+    CargoAi is air cargo only. DCSA is the ocean container equivalent and has no bearing
+    here. The air analogue of the DCSA question is IATA ONE Record membership versus
+    publication, and on that axis CargoAi publishes nothing: no ONE Record endpoint is
+    exposed on its developer surface.
+  authentication:
+    apiKeyHeader: x-api-key
+    scheme: apiKey in header (components.securitySchemes.sec0 in the provider's own spec)
+    mcp: OAuth 2.0 against CargoAi accounts, endpoint https://api.cargoai.co/mcp (401 unauth)
+    scopes: none published
+apiFamilySegmentation:
+  note: Mirrors the segmentation CargoAi's own introduction page uses.
+  families:
+    - name: Route & Schedule API
+      captured: true
+      as: Routes, Schedules and Rates (POST /search)
+    - name: Quote & Book API
+      captured: true
+      as: POST /search + POST /book + PUT /bookings/{flightUUID} + GET /track
+    - name: Track & Trace API
+      captured: true
+      as: POST /track/subscribe, POST /track/unsubscribe (+ Premium tier, not a separate spec)
+    - name: Cargo2ZERO API
+      captured: true
+      as: GET /co2calculation
+    - name: User Provisioning API
+      captured: true
+      as: POST/GET/PUT/DELETE /users
+    - name: FWB&FHL API
+      captured: true
+      as: POST /eawb
+    - name: CargoCOPILOT API
+      captured: true
+      as: POST /ai/awb, POST /ai/shipment
+    - name: CargoWALLET API
+      captured: false
+      as: announced in the introduction; no reference page, no operation published
+    - name: CargoAi MCP Connector
+      captured: partial
+      as: >-
+        Live at https://api.cargoai.co/mcp (401 unauthenticated) with a documented tool
+        list (Track Shipment, Search Flight Rates, airline contact and GHA lookup,
+        subscription management); no machine-readable tool manifest is published, so it is
+        listed in apis.yml with documentation only and no saved artifact.
+findings:
+  summary: >-
+    CargoAi is one of the stronger publishers in the air cargo cohort: a genuinely public,
+    well-organized developer portal with an agent index, a real OpenAPI 3.1 definition
+    behind every operation, an explicit event catalog, documented webhook authentication
+    options, a public changelog, and a live MCP server. It is also a clean illustration of
+    the cohort's central problem. IATA authored ONE Record so that any party in an air
+    cargo shipment could speak the same interface; the most API-forward marketplace in the
+    lane does not expose it. What CargoAi ships is a proprietary REST contract that carries
+    standard IATA vocabulary - AWB numbers, airport and airline codes, SHC, HS codes, the
+    status event set, RP 1678 emissions, FWB/FHL field content - inside paths and objects
+    only CargoAi implements. The value proposition is explicitly aggregation, not
+    interoperability: integrate once with CargoAi instead of N times with N airlines, which
+    replaces N airline integrations with a dependency on one intermediary and an opaque
+    flightUUID that does not travel. Access is documentation-open and credential-closed:
+    anyone can read the whole surface, nobody gets a key without a sales conversation.
+  strengths:
+    - Public, unauthenticated documentation with llms.txt agent index and a changelog.
+    - Machine-readable OpenAPI 3.1 behind every documented operation.
+    - Genuine push event model with a published event-code vocabulary and three webhook
+      auth options including HMAC-SHA256.
+    - Interline tracking merges two carriers' milestones into one de-duplicated timeline -
+      a real multi-party feature.
+    - A live, documented MCP server, which is rare in this sector.
+  gaps:
+    - No downloadable full OpenAPI document (ReadMe privacy.openapi = admin); the spec is
+      only reachable per-page.
+    - No AsyncAPI for a webhook-first product.
+    - No ONE Record surface despite third-party claims of compatibility.
+    - Callback URLs and callback authentication cannot be self-configured; both require
+      contacting CargoAi.
+    - Airline coverage is a BI dashboard, not an API or a downloadable dataset.
+    - No published pricing, rate limits or scopes for CargoCONNECT.
+sources:
+  - url: https://cargoai.readme.io/reference/introduction
+    type: Documentation
+  - url: https://cargoai.readme.io/llms.txt
+    type: LLMsTxt
+  - url: https://cargoai.readme.io/reference/api-workflows
+    type: Documentation
+  - url: https://cargoai.readme.io/reference/contact-us
+    type: Documentation
+  - url: https://cargoai.readme.io/reference/changelog
+    type: ChangeLog
+  - url: https://cargoai.readme.io/reference/tracking-event-codes
+    type: Documentation
+  - url: https://cargoai.readme.io/reference/callbacks-authentication-process
+    type: Documentation
+  - url: https://cargoai.readme.io/reference/eawb-data-format
+    type: Documentation
+  - url: https://cargoai.readme.io/reference/product-coverage
+    type: Documentation
+  - url: https://cargoai.readme.io/reference/interline-tracking
+    type: Documentation
+  - url: https://cargoai.readme.io/reference/track-trace-premium
+    type: Documentation
+  - url: https://cargoai.readme.io/reference/cargoai-mcp-connector-setup-documentation
+    type: Documentation
+  - url: https://www.cargoai.co/products/cargoconnect/
+    type: ProductPage
