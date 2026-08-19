@@ -1,0 +1,413 @@
+{
+  "item": [
+    {
+      "id": "a5f4b08f-9898-4dae-8079-cf3c0e6fe516",
+      "name": "Routes, Schedules and Rates",
+      "request": {
+        "name": "Routes, Schedules and Rates",
+        "description": {
+          "content": "This document provides information about request body parameters and headers as well as example requests and responses for different search modes",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "search"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "(Required) ",
+            "key": "x-api-key",
+            "value": "<string>"
+          },
+          {
+            "disabled": false,
+            "description": "Set it to \"Schedules\" for Route & Schedule",
+            "key": "x-api-name",
+            "value": "Schedules"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"origin\": \"CDG\",\n  \"destination\": \"JFK\",\n  \"departureDate\": \"2024-01-01\",\n  \"shipment\": {\n    \"pieces\": \"<integer>\",\n    \"weight\": \"<float>\",\n    \"volume\": \"<float>\",\n    \"dimensions\": [\n      {\n        \"pieces\": 1,\n        \"length\": 100,\n        \"width\": 100,\n        \"height\": 100,\n        \"weight\": 200,\n        \"loadType\": \"DIMENSIONS\",\n        \"weightType\": \"PER_ITEM\",\n        \"stackable\": true,\n        \"tiltable\": false,\n        \"toploadable\": false,\n        \"volume\": \"<float>\",\n        \"uldType\": \"<string>\"\n      },\n      {\n        \"pieces\": 1,\n        \"length\": 100,\n        \"width\": 100,\n        \"height\": 100,\n        \"weight\": 200,\n        \"loadType\": \"DIMENSIONS\",\n        \"weightType\": \"PER_ITEM\",\n        \"stackable\": true,\n        \"tiltable\": false,\n        \"toploadable\": false,\n        \"volume\": \"<float>\",\n        \"uldType\": \"<string>\"\n      }\n    ],\n    \"chargeableWeight\": 200,\n    \"measurementUnit\": \"METRIC\",\n    \"product\": \"GCR\",\n    \"globalHS\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"europeanHS\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"scrs\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"specialHandlingCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"user\": {\n    \"email\": \"tests@tests.com\",\n    \"iata\": \"0000000\",\n    \"cass\": \"0000\",\n    \"country\": \"FR\",\n    \"companyName\": \"Test Forwarder\",\n    \"lastName\": \"Test\",\n    \"firstName\": \"Forwarder\"\n  },\n  \"timeout\": 25,\n  \"offset\": 5,\n  \"id\": \"<string>\",\n  \"filters\": {\n    \"withRateOnly\": false,\n    \"liveRequests\": false,\n    \"isOriginByCity\": false,\n    \"isDestinationByCity\": false\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "61568203-24ef-4cdf-bcb1-55a51236585a",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Set it to \"Schedules\" for Route & Schedule",
+                "key": "x-api-name",
+                "value": "Schedules"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"origin\": \"CDG\",\n  \"destination\": \"SIN\",\n  \"departureDate\": \"2025-11-09\",\n  \"offset\": 5,\n  \"shipment\": {\n    \"product\": \"GCR\",\n    \"pieces\": 1,\n    \"weight\": 100,\n    \"chargeableWeight\": 166.67,\n    \"volume\": 1,\n    \"dimensions\": [\n      {\n        \"height\": 100,\n        \"length\": 100,\n        \"width\": 100,\n        \"weight\": 100,\n        \"pieces\": 1,\n        \"volume\": 1,\n        \"stackable\": true,\n        \"tiltable\": false,\n        \"topLoadable\": false,\n        \"weightType\": \"PER_ITEM\",\n        \"loadType\": \"DIMENSIONS\"\n      }\n    ],\n    \"specialHandlingCodes\": [\n      \"GCR\",\n      \"XPS\"\n    ],\n    \"measurementUnit\": \"METRIC\"\n  },\n  \"user\": {\n    \"country\": \"FR\",\n    \"cass\": \"0000\",\n    \"iata\": \"0000000\",\n    \"email\": \"tests@tests.com\"\n  },\n  \"filters\": {\n    \"withRateOnly\": true,\n    \"liveRequests\": true\n  },\n  \"timeout\": 25\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"id\\\": \\\"e8f7d6f8-d00d-4fb5-8600-1d9e5a89677c\\\",\\n    \\\"status\\\": \\\"COMPLETED\\\",\\n    \\\"resultsURL\\\": \\\"https://app.dev.cargoai.co/forwarder/search/search-result?uuid=e8f7d6f8-d00d-4fb5-8600-1d9e5a89677c&auth={{auth_token}}\\\",\\n    \\\"flights\\\": [\\n        {\\n            \\\"flightUUID\\\": \\\"57324f94-bbed-11f0-aa57-82c5a440dd41\\\",\\n            \\\"airlineCode\\\": \\\"00\\\",\\n            \\\"flightNumber\\\": \\\"00768\\\",\\n            \\\"arrivalTime\\\": \\\"2025-11-10T06:00:00+08:00\\\",\\n            \\\"arrivalAirport\\\": \\\"SIN\\\",\\n            \\\"departureTime\\\": \\\"2025-11-09T18:00:00+01:00\\\",\\n            \\\"departureAirport\\\": \\\"CDG\\\",\\n            \\\"latestAcceptanceTime\\\": \\\"2025-11-09T13:00:00+01:00\\\",\\n            \\\"timeOfAvailability\\\": \\\"2025-11-10T11:00:00+08:00\\\",\\n            \\\"legs\\\": [\\n                {\\n                    \\\"flightNumber\\\": \\\"00768\\\",\\n                    \\\"arrivalTime\\\": \\\"2025-11-10T06:00:00+08:00\\\",\\n                    \\\"arrivalAirport\\\": \\\"SIN\\\",\\n                    \\\"departureTime\\\": \\\"2025-11-09T18:00:00+01:00\\\",\\n                    \\\"departureAirport\\\": \\\"CDG\\\",\\n                    \\\"bodyType\\\": \\\"Widebody\\\",\\n                    \\\"aircraftCode\\\": \\\"777\\\",\\n                    \\\"co2\\\": {\\n                        \\\"value\\\": 268.7270446087906,\\n                        \\\"estimation\\\": false\\n                    }\\n                }\\n            ],\\n            \\\"features\\\": {\\n                \\\"bookable\\\": true,\\n                \\\"awbOptional\\\": true\\n            },\\n            \\\"rates\\\": [\\n                {\\n                    \\\"id\\\": \\\"57324f75-bbed-11f0-aa57-82c5a440dd41\\\",\\n                    \\\"name\\\": \\\"Spot\\\",\\n                    \\\"type\\\": \\\"live\\\",\\n                    \\\"currency\\\": \\\"EUR\\\",\\n                    \\\"netRate\\\": 6.08,\\n                    \\\"allInRate\\\": 6.23,\\n                    \\\"total\\\": 1035.05,\\n                    \\\"minimumRate\\\": false,\\n                    \\\"lastUpdatedDate\\\": \\\"\\\",\\n                    \\\"charges\\\": [\\n                        {\\n                            \\\"label\\\": \\\"Security surcharge\\\",\\n                            \\\"rate\\\": 0.08,\\n                            \\\"type\\\": \\\"GROSS_WEIGHT\\\",\\n                            \\\"code\\\": \\\"ssc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        },\\n                        {\\n                            \\\"label\\\": \\\"Fuel surcharge\\\",\\n                            \\\"rate\\\": 0.07,\\n                            \\\"type\\\": \\\"CHARGEABLE_WEIGHT\\\",\\n                            \\\"code\\\": \\\"fsc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        }\\n                    ],\\n                    \\\"ocdc\\\": [],\\n                    \\\"isSpotQuoteRate\\\": true,\\n                    \\\"handlingCodes\\\": [\\n                        \\\"GCR\\\"\\n                    ],\\n                    \\\"bookingURL\\\": \\\"https://app.dev.cargoai.co/shipment-details/new?flightUUID=57324f94-bbed-11f0-aa57-82c5a440dd41&rateID=57324f75-bbed-11f0-aa57-82c5a440dd41&auth={{auth_token}}\\\"\\n                }\\n            ],\\n            \\\"available\\\": true,\\n            \\\"awbPrefixes\\\": [\\n                \\\"000\\\"\\n            ],\\n            \\\"airlineConditions\\\": \\\"\\\\n\\\\t1- Offer subject to capacity when booking.\\\\n\\\\t2- Quotation reference to be imperatively mentioned when booking.\\\\n\\\\t3- This quotation is valid for the packaging indicated only, in the event of modification, please make a new request to the sales department.\\\\n\\\\t4- Taxes (IRC – MYC – etc…) subject to change without notice.\\\\n\\\\t5- In the event of cancellation or no show, we reserve the right to pass on all or part of the costs\\\\n\\\\t- Cancellation 72 hours before the departure of the truck and/or the flight (working hours): invoicing 50% of the amount of the freight\\\\n\\\\t- Cancellation 48 hours before the departure of the truck and/or the flight (working hours): invoicing of 75% of the amount of the freight\\\\n\\\\t- Cancellation 24 hours before the departure of the truck and/or the flight (working hours): invoicing of 100% of the amount of the freight\\\\n\\\\t- In the case of a no show (no presentation of the freight): invoicing of 100% of the amount of the freight\\\\n\\\\t- In the case of a low show (discount less than 50% of the reserved taxable weight): invoicing of 75% of the reserved taxable weight\\\\n\\\",\\n            \\\"handlingInfoLink\\\": \\\"https://www.cargoai.co/terms\\\",\\n            \\\"ghaName\\\": \\\"Mocked GHA\\\",\\n            \\\"hle\\\": \\\"19:00\\\",\\n            \\\"ghaAddress\\\": \\\"Airport road, Cargo Terminal, Mocked Cargo building\\\"\\n        },\\n        {\\n            \\\"flightUUID\\\": \\\"573250c6-bbed-11f0-aa57-82c5a440dd41\\\",\\n            \\\"airlineCode\\\": \\\"00\\\",\\n            \\\"flightNumber\\\": \\\"00768\\\",\\n            \\\"arrivalTime\\\": \\\"2025-11-11T23:00:01+08:00\\\",\\n            \\\"arrivalAirport\\\": \\\"SIN\\\",\\n            \\\"departureTime\\\": \\\"2025-11-11T11:00:01+01:00\\\",\\n            \\\"departureAirport\\\": \\\"CDG\\\",\\n            \\\"latestAcceptanceTime\\\": \\\"2025-11-11T06:00:01+01:00\\\",\\n            \\\"timeOfAvailability\\\": \\\"2025-11-12T04:00:01+08:00\\\",\\n            \\\"legs\\\": [\\n                {\\n                    \\\"flightNumber\\\": \\\"00768\\\",\\n                    \\\"arrivalTime\\\": \\\"2025-11-11T23:00:01+08:00\\\",\\n                    \\\"arrivalAirport\\\": \\\"SIN\\\",\\n                    \\\"departureTime\\\": \\\"2025-11-11T11:00:01+01:00\\\",\\n                    \\\"departureAirport\\\": \\\"CDG\\\",\\n                    \\\"bodyType\\\": \\\"Widebody\\\",\\n                    \\\"aircraftCode\\\": \\\"777\\\",\\n                    \\\"co2\\\": {\\n                        \\\"value\\\": 268.7270446087906,\\n                        \\\"estimation\\\": false\\n                    }\\n                }\\n            ],\\n            \\\"features\\\": {\\n                \\\"bookable\\\": true,\\n                \\\"awbOptional\\\": true\\n            },\\n            \\\"rates\\\": [\\n                {\\n                    \\\"id\\\": \\\"573250a7-bbed-11f0-aa57-82c5a440dd41\\\",\\n                    \\\"name\\\": \\\"Spot\\\",\\n                    \\\"type\\\": \\\"live\\\",\\n                    \\\"currency\\\": \\\"EUR\\\",\\n                    \\\"netRate\\\": 6.08,\\n                    \\\"allInRate\\\": 6.23,\\n                    \\\"total\\\": 1035.05,\\n                    \\\"minimumRate\\\": false,\\n                    \\\"lastUpdatedDate\\\": \\\"\\\",\\n                    \\\"charges\\\": [\\n                        {\\n                            \\\"label\\\": \\\"Fuel surcharge\\\",\\n                            \\\"rate\\\": 0.07,\\n                            \\\"type\\\": \\\"CHARGEABLE_WEIGHT\\\",\\n                            \\\"code\\\": \\\"fsc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        },\\n                        {\\n                            \\\"label\\\": \\\"Security surcharge\\\",\\n                            \\\"rate\\\": 0.08,\\n                            \\\"type\\\": \\\"GROSS_WEIGHT\\\",\\n                            \\\"code\\\": \\\"ssc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        }\\n                    ],\\n                    \\\"ocdc\\\": [],\\n                    \\\"isSpotQuoteRate\\\": true,\\n                    \\\"handlingCodes\\\": [\\n                        \\\"GCR\\\"\\n                    ],\\n                    \\\"bookingURL\\\": \\\"https://app.dev.cargoai.co/shipment-details/new?flightUUID=573250c6-bbed-11f0-aa57-82c5a440dd41&rateID=573250a7-bbed-11f0-aa57-82c5a440dd41&auth={{auth_token}}\\\"\\n                }\\n            ],\\n            \\\"available\\\": true,\\n            \\\"awbPrefixes\\\": [\\n                \\\"000\\\"\\n            ],\\n            \\\"airlineConditions\\\": \\\"\\\\n\\\\t1- Offer subject to capacity when booking.\\\\n\\\\t2- Quotation reference to be imperatively mentioned when booking.\\\\n\\\\t3- This quotation is valid for the packaging indicated only, in the event of modification, please make a new request to the sales department.\\\\n\\\\t4- Taxes (IRC – MYC – etc…) subject to change without notice.\\\\n\\\\t5- In the event of cancellation or no show, we reserve the right to pass on all or part of the costs\\\\n\\\\t- Cancellation 72 hours before the departure of the truck and/or the flight (working hours): invoicing 50% of the amount of the freight\\\\n\\\\t- Cancellation 48 hours before the departure of the truck and/or the flight (working hours): invoicing of 75% of the amount of the freight\\\\n\\\\t- Cancellation 24 hours before the departure of the truck and/or the flight (working hours): invoicing of 100% of the amount of the freight\\\\n\\\\t- In the case of a no show (no presentation of the freight): invoicing of 100% of the amount of the freight\\\\n\\\\t- In the case of a low show (discount less than 50% of the reserved taxable weight): invoicing of 75% of the reserved taxable weight\\\\n\\\",\\n            \\\"handlingInfoLink\\\": \\\"https://www.cargoai.co/terms\\\",\\n            \\\"ghaName\\\": \\\"Mocked GHA\\\",\\n            \\\"hle\\\": \\\"19:00\\\",\\n            \\\"ghaAddress\\\": \\\"Airport road, Cargo Terminal, Mocked Cargo building\\\"\\n        },\\n        {\\n            \\\"flightUUID\\\": \\\"572c628b-bbed-11f0-aa57-82c5a440dd41\\\",\\n            \\\"airlineCode\\\": \\\"00\\\",\\n            \\\"flightNumber\\\": \\\"00768-00687\\\",\\n            \\\"arrivalTime\\\": \\\"2025-11-11T18:00:01+08:00\\\",\\n            \\\"arrivalAirport\\\": \\\"SIN\\\",\\n            \\\"departureTime\\\": \\\"2025-11-10T13:00:01+01:00\\\",\\n            \\\"departureAirport\\\": \\\"CDG\\\",\\n            \\\"latestAcceptanceTime\\\": \\\"2025-11-10T08:00:01+01:00\\\",\\n            \\\"timeOfAvailability\\\": \\\"2025-11-11T23:00:01+08:00\\\",\\n            \\\"stops\\\": 1,\\n            \\\"legs\\\": [\\n                {\\n                    \\\"flightNumber\\\": \\\"00768\\\",\\n                    \\\"arrivalTime\\\": \\\"2025-11-11T01:00:01+09:00\\\",\\n                    \\\"arrivalAirport\\\": \\\"ICN\\\",\\n                    \\\"departureTime\\\": \\\"2025-11-10T13:00:01+01:00\\\",\\n                    \\\"departureAirport\\\": \\\"CDG\\\",\\n                    \\\"bodyType\\\": \\\"Widebody\\\",\\n                    \\\"aircraftCode\\\": \\\"777\\\",\\n                    \\\"co2\\\": {\\n                        \\\"value\\\": 224.7301607646903,\\n                        \\\"estimation\\\": false\\n                    }\\n                },\\n                {\\n                    \\\"flightNumber\\\": \\\"00687\\\",\\n                    \\\"arrivalTime\\\": \\\"2025-11-11T18:00:01+08:00\\\",\\n                    \\\"arrivalAirport\\\": \\\"SIN\\\",\\n                    \\\"departureTime\\\": \\\"2025-11-11T13:00:01+09:00\\\",\\n                    \\\"departureAirport\\\": \\\"ICN\\\",\\n                    \\\"bodyType\\\": \\\"Narrowbody\\\",\\n                    \\\"aircraftCode\\\": \\\"320\\\",\\n                    \\\"co2\\\": {\\n                        \\\"value\\\": 123.12327386171715,\\n                        \\\"estimation\\\": false\\n                    }\\n                }\\n            ],\\n            \\\"features\\\": {\\n                \\\"awbOptional\\\": true\\n            },\\n            \\\"rates\\\": [\\n                {\\n                    \\\"id\\\": \\\"572c6207-bbed-11f0-aa57-82c5a440dd41\\\",\\n                    \\\"name\\\": \\\"Spot\\\",\\n                    \\\"type\\\": \\\"live\\\",\\n                    \\\"currency\\\": \\\"EUR\\\",\\n                    \\\"netRate\\\": 6.08,\\n                    \\\"allInRate\\\": 6.23,\\n                    \\\"total\\\": 1035.05,\\n                    \\\"minimumRate\\\": false,\\n                    \\\"lastUpdatedDate\\\": \\\"\\\",\\n                    \\\"charges\\\": [\\n                        {\\n                            \\\"label\\\": \\\"Security surcharge\\\",\\n                            \\\"rate\\\": 0.08,\\n                            \\\"type\\\": \\\"GROSS_WEIGHT\\\",\\n                            \\\"code\\\": \\\"ssc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        },\\n                        {\\n                            \\\"label\\\": \\\"Fuel surcharge\\\",\\n                            \\\"rate\\\": 0.07,\\n                            \\\"type\\\": \\\"CHARGEABLE_WEIGHT\\\",\\n                            \\\"code\\\": \\\"fsc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        }\\n                    ],\\n                    \\\"ocdc\\\": [],\\n                    \\\"isSpotQuoteRate\\\": true,\\n                    \\\"handlingCodes\\\": [\\n                        \\\"GCR\\\"\\n                    ]\\n                },\\n                {\\n                    \\\"id\\\": \\\"572c6260-bbed-11f0-aa57-82c5a440dd41\\\",\\n                    \\\"name\\\": \\\"Spot\\\",\\n                    \\\"type\\\": \\\"express\\\",\\n                    \\\"currency\\\": \\\"EUR\\\",\\n                    \\\"netRate\\\": 6.38,\\n                    \\\"allInRate\\\": 6.53,\\n                    \\\"total\\\": 1085.15,\\n                    \\\"minimumRate\\\": false,\\n                    \\\"lastUpdatedDate\\\": \\\"\\\",\\n                    \\\"charges\\\": [\\n                        {\\n                            \\\"label\\\": \\\"Fuel surcharge\\\",\\n                            \\\"rate\\\": 0.07,\\n                            \\\"type\\\": \\\"CHARGEABLE_WEIGHT\\\",\\n                            \\\"code\\\": \\\"fsc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        },\\n                        {\\n                            \\\"label\\\": \\\"Security surcharge\\\",\\n                            \\\"rate\\\": 0.08,\\n                            \\\"type\\\": \\\"GROSS_WEIGHT\\\",\\n                            \\\"code\\\": \\\"ssc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        }\\n                    ],\\n                    \\\"ocdc\\\": [],\\n                    \\\"isSpotQuoteRate\\\": true,\\n                    \\\"handlingCodes\\\": [\\n                        \\\"GCR\\\"\\n                    ]\\n                }\\n            ],\\n            \\\"available\\\": false,\\n            \\\"availableReason\\\": \\\"Dimensions are not loadable\\\",\\n            \\\"awbPrefixes\\\": [\\n                \\\"000\\\"\\n            ],\\n            \\\"airlineConditions\\\": \\\"\\\\n\\\\t1- Offer subject to capacity when booking.\\\\n\\\\t2- Quotation reference to be imperatively mentioned when booking.\\\\n\\\\t3- This quotation is valid for the packaging indicated only, in the event of modification, please make a new request to the sales department.\\\\n\\\\t4- Taxes (IRC – MYC – etc…) subject to change without notice.\\\\n\\\\t5- In the event of cancellation or no show, we reserve the right to pass on all or part of the costs\\\\n\\\\t- Cancellation 72 hours before the departure of the truck and/or the flight (working hours): invoicing 50% of the amount of the freight\\\\n\\\\t- Cancellation 48 hours before the departure of the truck and/or the flight (working hours): invoicing of 75% of the amount of the freight\\\\n\\\\t- Cancellation 24 hours before the departure of the truck and/or the flight (working hours): invoicing of 100% of the amount of the freight\\\\n\\\\t- In the case of a no show (no presentation of the freight): invoicing of 100% of the amount of the freight\\\\n\\\\t- In the case of a low show (discount less than 50% of the reserved taxable weight): invoicing of 75% of the reserved taxable weight\\\\n\\\",\\n            \\\"handlingInfoLink\\\": \\\"https://www.cargoai.co/terms\\\",\\n            \\\"ghaName\\\": \\\"Mocked GHA\\\",\\n            \\\"hle\\\": \\\"19:00\\\",\\n            \\\"ghaAddress\\\": \\\"Airport road, Cargo Terminal, Mocked Cargo building\\\"\\n        },\\n        {\\n            \\\"flightUUID\\\": \\\"56dcb616-bbed-11f0-bbc9-fecebbad8404\\\",\\n            \\\"airlineCode\\\": \\\"00\\\",\\n            \\\"flightNumber\\\": \\\"00768\\\",\\n            \\\"arrivalTime\\\": \\\"2025-11-10T06:00:00+08:00\\\",\\n            \\\"arrivalAirport\\\": \\\"SIN\\\",\\n            \\\"departureTime\\\": \\\"2025-11-09T18:00:00+01:00\\\",\\n            \\\"departureAirport\\\": \\\"CDG\\\",\\n            \\\"legs\\\": [\\n                {\\n                    \\\"flightNumber\\\": \\\"000768\\\",\\n                    \\\"arrivalTime\\\": \\\"2025-11-10T06:00:00+08:00\\\",\\n                    \\\"arrivalAirport\\\": \\\"SIN\\\",\\n                    \\\"departureTime\\\": \\\"2025-11-09T18:00:00+01:00\\\",\\n                    \\\"departureAirport\\\": \\\"CDG\\\",\\n                    \\\"bodyType\\\": \\\"Freighter\\\",\\n                    \\\"aircraftCode\\\": \\\"77F\\\",\\n                    \\\"co2\\\": {\\n                        \\\"value\\\": 285.96861485136526,\\n                        \\\"estimation\\\": false\\n                    }\\n                }\\n            ],\\n            \\\"features\\\": {},\\n            \\\"available\\\": false\\n        },\\n        {\\n            \\\"flightUUID\\\": \\\"56dcdbbe-bbed-11f0-bbc9-fecebbad8404\\\",\\n            \\\"airlineCode\\\": \\\"00\\\",\\n            \\\"flightNumber\\\": \\\"00768\\\",\\n            \\\"arrivalTime\\\": \\\"2025-11-11T06:00:00+08:00\\\",\\n            \\\"arrivalAirport\\\": \\\"SIN\\\",\\n            \\\"departureTime\\\": \\\"2025-11-10T18:00:00+01:00\\\",\\n            \\\"departureAirport\\\": \\\"CDG\\\",\\n            \\\"legs\\\": [\\n                {\\n                    \\\"flightNumber\\\": \\\"000768\\\",\\n                    \\\"arrivalTime\\\": \\\"2025-11-11T06:00:00+08:00\\\",\\n                    \\\"arrivalAirport\\\": \\\"SIN\\\",\\n                    \\\"departureTime\\\": \\\"2025-11-10T18:00:00+01:00\\\",\\n                    \\\"departureAirport\\\": \\\"CDG\\\",\\n                    \\\"bodyType\\\": \\\"Freighter\\\",\\n                    \\\"aircraftCode\\\": \\\"77F\\\",\\n                    \\\"co2\\\": {\\n                        \\\"value\\\": 285.96861485136526,\\n                        \\\"estimation\\\": false\\n                    }\\n                }\\n            ],\\n            \\\"features\\\": {},\\n            \\\"available\\\": false\\n        },\\n        {\\n            \\\"flightUUID\\\": \\\"56df4c0f-bbed-11f0-bbc9-fecebbad8404\\\",\\n            \\\"airlineCode\\\": \\\"00\\\",\\n            \\\"flightNumber\\\": \\\"00768\\\",\\n            \\\"arrivalTime\\\": \\\"2025-11-12T06:00:00+08:00\\\",\\n            \\\"arrivalAirport\\\": \\\"SIN\\\",\\n            \\\"departureTime\\\": \\\"2025-11-11T18:00:00+01:00\\\",\\n            \\\"departureAirport\\\": \\\"CDG\\\",\\n            \\\"legs\\\": [\\n                {\\n                    \\\"flightNumber\\\": \\\"000768\\\",\\n                    \\\"arrivalTime\\\": \\\"2025-11-12T06:00:00+08:00\\\",\\n                    \\\"arrivalAirport\\\": \\\"SIN\\\",\\n                    \\\"departureTime\\\": \\\"2025-11-11T18:00:00+01:00\\\",\\n                    \\\"departureAirport\\\": \\\"CDG\\\",\\n                    \\\"bodyType\\\": \\\"Freighter\\\",\\n                    \\\"aircraftCode\\\": \\\"77F\\\",\\n                    \\\"co2\\\": {\\n                        \\\"value\\\": 285.96861485136526,\\n                        \\\"estimation\\\": false\\n                    }\\n                }\\n            ],\\n            \\\"features\\\": {},\\n            \\\"available\\\": false\\n        },\\n        {\\n            \\\"flightUUID\\\": \\\"56dd948f-bbed-11f0-bbc9-fecebbad8404\\\",\\n            \\\"airlineCode\\\": \\\"00\\\",\\n            \\\"flightNumber\\\": \\\"00768\\\",\\n            \\\"arrivalTime\\\": \\\"2025-11-13T06:00:00+08:00\\\",\\n            \\\"arrivalAirport\\\": \\\"SIN\\\",\\n            \\\"departureTime\\\": \\\"2025-11-12T18:00:00+01:00\\\",\\n            \\\"departureAirport\\\": \\\"CDG\\\",\\n            \\\"legs\\\": [\\n                {\\n                    \\\"flightNumber\\\": \\\"000768\\\",\\n                    \\\"arrivalTime\\\": \\\"2025-11-13T06:00:00+08:00\\\",\\n                    \\\"arrivalAirport\\\": \\\"SIN\\\",\\n                    \\\"departureTime\\\": \\\"2025-11-12T18:00:00+01:00\\\",\\n                    \\\"departureAirport\\\": \\\"CDG\\\",\\n                    \\\"bodyType\\\": \\\"Freighter\\\",\\n                    \\\"aircraftCode\\\": \\\"77F\\\",\\n                    \\\"co2\\\": {\\n                        \\\"value\\\": 285.96861485136526,\\n                        \\\"estimation\\\": false\\n                    }\\n                }\\n            ],\\n            \\\"features\\\": {},\\n            \\\"available\\\": false\\n        }\\n    ],\\n    \\\"metadata\\\": {\\n      \\\"searchErrors\\\": [\\n        {\\n          \\\"error\\\": \\\"Customer ID not found\\\",\\n          \\\"airlines\\\": [\\n            \\\"01\\\"\\n          ]\\n        },\\n        {\\n          \\\"error\\\": \\\"Market is closed\\\",\\n          \\\"airlines\\\": [\\n            \\\"02\\\"\\n          ]\\n        }\\n      ]\\n    }\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "0bca81ac-7afc-4a0d-8095-3f9c9df82197",
+          "name": "202",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Set it to \"Schedules\" for Route & Schedule",
+                "key": "x-api-name",
+                "value": "Schedules"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"origin\": \"CDG\",\n  \"destination\": \"SIN\",\n  \"departureDate\": \"2025-11-09\",\n  \"offset\": 5,\n  \"shipment\": {\n    \"product\": \"GCR\",\n    \"pieces\": 1,\n    \"weight\": 100,\n    \"chargeableWeight\": 166.67,\n    \"volume\": 1,\n    \"dimensions\": [\n      {\n        \"height\": 100,\n        \"length\": 100,\n        \"width\": 100,\n        \"weight\": 100,\n        \"pieces\": 1,\n        \"volume\": 1,\n        \"stackable\": true,\n        \"tiltable\": false,\n        \"topLoadable\": false,\n        \"weightType\": \"PER_ITEM\",\n        \"loadType\": \"DIMENSIONS\"\n      }\n    ],\n    \"specialHandlingCodes\": [\n      \"GCR\",\n      \"XPS\"\n    ],\n    \"measurementUnit\": \"METRIC\"\n  },\n  \"user\": {\n    \"country\": \"FR\",\n    \"cass\": \"0000\",\n    \"iata\": \"0000000\",\n    \"email\": \"tests@tests.com\"\n  },\n  \"filters\": {\n    \"withRateOnly\": true,\n    \"liveRequests\": true\n  },\n  \"timeout\": 25\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Accepted",
+          "code": 202,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"id\\\": \\\"e8f7d6f8-d00d-4fb5-8600-1d9e5a89677c\\\",\\n    \\\"status\\\": \\\"STARTED\\\",\\n    \\\"resultsURL\\\": \\\"https://app.dev.cargoai.co/forwarder/search/search-result?uuid=e8f7d6f8-d00d-4fb5-8600-1d9e5a89677c&auth={{auth_token}}\\\",\\n    \\\"flights\\\": [\\n        {\\n            \\\"flightUUID\\\": \\\"57324f94-bbed-11f0-aa57-82c5a440dd41\\\",\\n            \\\"airlineCode\\\": \\\"00\\\",\\n            \\\"flightNumber\\\": \\\"00768\\\",\\n            \\\"arrivalTime\\\": \\\"2025-11-10T06:00:00+08:00\\\",\\n            \\\"arrivalAirport\\\": \\\"SIN\\\",\\n            \\\"departureTime\\\": \\\"2025-11-09T18:00:00+01:00\\\",\\n            \\\"departureAirport\\\": \\\"CDG\\\",\\n            \\\"latestAcceptanceTime\\\": \\\"2025-11-09T13:00:00+01:00\\\",\\n            \\\"timeOfAvailability\\\": \\\"2025-11-10T11:00:00+08:00\\\",\\n            \\\"legs\\\": [\\n                {\\n                    \\\"flightNumber\\\": \\\"00768\\\",\\n                    \\\"arrivalTime\\\": \\\"2025-11-10T06:00:00+08:00\\\",\\n                    \\\"arrivalAirport\\\": \\\"SIN\\\",\\n                    \\\"departureTime\\\": \\\"2025-11-09T18:00:00+01:00\\\",\\n                    \\\"departureAirport\\\": \\\"CDG\\\",\\n                    \\\"bodyType\\\": \\\"Widebody\\\",\\n                    \\\"aircraftCode\\\": \\\"777\\\",\\n                    \\\"co2\\\": {\\n                        \\\"value\\\": 268.7270446087906,\\n                        \\\"estimation\\\": false\\n                    }\\n                }\\n            ],\\n            \\\"features\\\": {\\n                \\\"bookable\\\": true,\\n                \\\"awbOptional\\\": true\\n            },\\n            \\\"rates\\\": [\\n                {\\n                    \\\"id\\\": \\\"57324f75-bbed-11f0-aa57-82c5a440dd41\\\",\\n                    \\\"name\\\": \\\"Spot\\\",\\n                    \\\"type\\\": \\\"live\\\",\\n                    \\\"currency\\\": \\\"EUR\\\",\\n                    \\\"netRate\\\": 6.08,\\n                    \\\"allInRate\\\": 6.23,\\n                    \\\"total\\\": 1035.05,\\n                    \\\"minimumRate\\\": false,\\n                    \\\"lastUpdatedDate\\\": \\\"\\\",\\n                    \\\"charges\\\": [\\n                        {\\n                            \\\"label\\\": \\\"Security surcharge\\\",\\n                            \\\"rate\\\": 0.08,\\n                            \\\"type\\\": \\\"GROSS_WEIGHT\\\",\\n                            \\\"code\\\": \\\"ssc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        },\\n                        {\\n                            \\\"label\\\": \\\"Fuel surcharge\\\",\\n                            \\\"rate\\\": 0.07,\\n                            \\\"type\\\": \\\"CHARGEABLE_WEIGHT\\\",\\n                            \\\"code\\\": \\\"fsc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        }\\n                    ],\\n                    \\\"ocdc\\\": [],\\n                    \\\"isSpotQuoteRate\\\": true,\\n                    \\\"handlingCodes\\\": [\\n                        \\\"GCR\\\"\\n                    ],\\n                    \\\"bookingURL\\\": \\\"https://app.dev.cargoai.co/shipment-details/new?flightUUID=57324f94-bbed-11f0-aa57-82c5a440dd41&rateID=57324f75-bbed-11f0-aa57-82c5a440dd41&auth={{auth_token}}\\\"\\n                }\\n            ],\\n            \\\"available\\\": true,\\n            \\\"awbPrefixes\\\": [\\n                \\\"000\\\"\\n            ],\\n            \\\"airlineConditions\\\": \\\"\\\\n\\\\t1- Offer subject to capacity when booking.\\\\n\\\\t2- Quotation reference to be imperatively mentioned when booking.\\\\n\\\\t3- This quotation is valid for the packaging indicated only, in the event of modification, please make a new request to the sales department.\\\\n\\\\t4- Taxes (IRC – MYC – etc…) subject to change without notice.\\\\n\\\\t5- In the event of cancellation or no show, we reserve the right to pass on all or part of the costs\\\\n\\\\t- Cancellation 72 hours before the departure of the truck and/or the flight (working hours): invoicing 50% of the amount of the freight\\\\n\\\\t- Cancellation 48 hours before the departure of the truck and/or the flight (working hours): invoicing of 75% of the amount of the freight\\\\n\\\\t- Cancellation 24 hours before the departure of the truck and/or the flight (working hours): invoicing of 100% of the amount of the freight\\\\n\\\\t- In the case of a no show (no presentation of the freight): invoicing of 100% of the amount of the freight\\\\n\\\\t- In the case of a low show (discount less than 50% of the reserved taxable weight): invoicing of 75% of the reserved taxable weight\\\\n\\\",\\n            \\\"handlingInfoLink\\\": \\\"https://www.cargoai.co/terms\\\",\\n            \\\"ghaName\\\": \\\"Mocked GHA\\\",\\n            \\\"hle\\\": \\\"19:00\\\",\\n            \\\"ghaAddress\\\": \\\"Airport road, Cargo Terminal, Mocked Cargo building\\\"\\n        },\\n        {\\n            \\\"flightUUID\\\": \\\"573250c6-bbed-11f0-aa57-82c5a440dd41\\\",\\n            \\\"airlineCode\\\": \\\"00\\\",\\n            \\\"flightNumber\\\": \\\"00768\\\",\\n            \\\"arrivalTime\\\": \\\"2025-11-11T23:00:01+08:00\\\",\\n            \\\"arrivalAirport\\\": \\\"SIN\\\",\\n            \\\"departureTime\\\": \\\"2025-11-11T11:00:01+01:00\\\",\\n            \\\"departureAirport\\\": \\\"CDG\\\",\\n            \\\"latestAcceptanceTime\\\": \\\"2025-11-11T06:00:01+01:00\\\",\\n            \\\"timeOfAvailability\\\": \\\"2025-11-12T04:00:01+08:00\\\",\\n            \\\"legs\\\": [\\n                {\\n                    \\\"flightNumber\\\": \\\"00768\\\",\\n                    \\\"arrivalTime\\\": \\\"2025-11-11T23:00:01+08:00\\\",\\n                    \\\"arrivalAirport\\\": \\\"SIN\\\",\\n                    \\\"departureTime\\\": \\\"2025-11-11T11:00:01+01:00\\\",\\n                    \\\"departureAirport\\\": \\\"CDG\\\",\\n                    \\\"bodyType\\\": \\\"Widebody\\\",\\n                    \\\"aircraftCode\\\": \\\"777\\\",\\n                    \\\"co2\\\": {\\n                        \\\"value\\\": 268.7270446087906,\\n                        \\\"estimation\\\": false\\n                    }\\n                }\\n            ],\\n            \\\"features\\\": {\\n                \\\"bookable\\\": true,\\n                \\\"awbOptional\\\": true\\n            },\\n            \\\"rates\\\": [\\n                {\\n                    \\\"id\\\": \\\"573250a7-bbed-11f0-aa57-82c5a440dd41\\\",\\n                    \\\"name\\\": \\\"Spot\\\",\\n                    \\\"type\\\": \\\"live\\\",\\n                    \\\"currency\\\": \\\"EUR\\\",\\n                    \\\"netRate\\\": 6.08,\\n                    \\\"allInRate\\\": 6.23,\\n                    \\\"total\\\": 1035.05,\\n                    \\\"minimumRate\\\": false,\\n                    \\\"lastUpdatedDate\\\": \\\"\\\",\\n                    \\\"charges\\\": [\\n                        {\\n                            \\\"label\\\": \\\"Fuel surcharge\\\",\\n                            \\\"rate\\\": 0.07,\\n                            \\\"type\\\": \\\"CHARGEABLE_WEIGHT\\\",\\n                            \\\"code\\\": \\\"fsc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        },\\n                        {\\n                            \\\"label\\\": \\\"Security surcharge\\\",\\n                            \\\"rate\\\": 0.08,\\n                            \\\"type\\\": \\\"GROSS_WEIGHT\\\",\\n                            \\\"code\\\": \\\"ssc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        }\\n                    ],\\n                    \\\"ocdc\\\": [],\\n                    \\\"isSpotQuoteRate\\\": true,\\n                    \\\"handlingCodes\\\": [\\n                        \\\"GCR\\\"\\n                    ],\\n                    \\\"bookingURL\\\": \\\"https://app.dev.cargoai.co/shipment-details/new?flightUUID=573250c6-bbed-11f0-aa57-82c5a440dd41&rateID=573250a7-bbed-11f0-aa57-82c5a440dd41&auth={{auth_token}}\\\"\\n                }\\n            ],\\n            \\\"available\\\": true,\\n            \\\"awbPrefixes\\\": [\\n                \\\"000\\\"\\n            ],\\n            \\\"airlineConditions\\\": \\\"\\\\n\\\\t1- Offer subject to capacity when booking.\\\\n\\\\t2- Quotation reference to be imperatively mentioned when booking.\\\\n\\\\t3- This quotation is valid for the packaging indicated only, in the event of modification, please make a new request to the sales department.\\\\n\\\\t4- Taxes (IRC – MYC – etc…) subject to change without notice.\\\\n\\\\t5- In the event of cancellation or no show, we reserve the right to pass on all or part of the costs\\\\n\\\\t- Cancellation 72 hours before the departure of the truck and/or the flight (working hours): invoicing 50% of the amount of the freight\\\\n\\\\t- Cancellation 48 hours before the departure of the truck and/or the flight (working hours): invoicing of 75% of the amount of the freight\\\\n\\\\t- Cancellation 24 hours before the departure of the truck and/or the flight (working hours): invoicing of 100% of the amount of the freight\\\\n\\\\t- In the case of a no show (no presentation of the freight): invoicing of 100% of the amount of the freight\\\\n\\\\t- In the case of a low show (discount less than 50% of the reserved taxable weight): invoicing of 75% of the reserved taxable weight\\\\n\\\",\\n            \\\"handlingInfoLink\\\": \\\"https://www.cargoai.co/terms\\\",\\n            \\\"ghaName\\\": \\\"Mocked GHA\\\",\\n            \\\"hle\\\": \\\"19:00\\\",\\n            \\\"ghaAddress\\\": \\\"Airport road, Cargo Terminal, Mocked Cargo building\\\"\\n        },\\n        {\\n            \\\"flightUUID\\\": \\\"572c628b-bbed-11f0-aa57-82c5a440dd41\\\",\\n            \\\"airlineCode\\\": \\\"00\\\",\\n            \\\"flightNumber\\\": \\\"00768-00687\\\",\\n            \\\"arrivalTime\\\": \\\"2025-11-11T18:00:01+08:00\\\",\\n            \\\"arrivalAirport\\\": \\\"SIN\\\",\\n            \\\"departureTime\\\": \\\"2025-11-10T13:00:01+01:00\\\",\\n            \\\"departureAirport\\\": \\\"CDG\\\",\\n            \\\"latestAcceptanceTime\\\": \\\"2025-11-10T08:00:01+01:00\\\",\\n            \\\"timeOfAvailability\\\": \\\"2025-11-11T23:00:01+08:00\\\",\\n            \\\"stops\\\": 1,\\n            \\\"legs\\\": [\\n                {\\n                    \\\"flightNumber\\\": \\\"00768\\\",\\n                    \\\"arrivalTime\\\": \\\"2025-11-11T01:00:01+09:00\\\",\\n                    \\\"arrivalAirport\\\": \\\"ICN\\\",\\n                    \\\"departureTime\\\": \\\"2025-11-10T13:00:01+01:00\\\",\\n                    \\\"departureAirport\\\": \\\"CDG\\\",\\n                    \\\"bodyType\\\": \\\"Widebody\\\",\\n                    \\\"aircraftCode\\\": \\\"777\\\",\\n                    \\\"co2\\\": {\\n                        \\\"value\\\": 224.7301607646903,\\n                        \\\"estimation\\\": false\\n                    }\\n                },\\n                {\\n                    \\\"flightNumber\\\": \\\"00687\\\",\\n                    \\\"arrivalTime\\\": \\\"2025-11-11T18:00:01+08:00\\\",\\n                    \\\"arrivalAirport\\\": \\\"SIN\\\",\\n                    \\\"departureTime\\\": \\\"2025-11-11T13:00:01+09:00\\\",\\n                    \\\"departureAirport\\\": \\\"ICN\\\",\\n                    \\\"bodyType\\\": \\\"Narrowbody\\\",\\n                    \\\"aircraftCode\\\": \\\"320\\\",\\n                    \\\"co2\\\": {\\n                        \\\"value\\\": 123.12327386171715,\\n                        \\\"estimation\\\": false\\n                    }\\n                }\\n            ],\\n            \\\"features\\\": {\\n                \\\"awbOptional\\\": true\\n            },\\n            \\\"rates\\\": [\\n                {\\n                    \\\"id\\\": \\\"572c6207-bbed-11f0-aa57-82c5a440dd41\\\",\\n                    \\\"name\\\": \\\"Spot\\\",\\n                    \\\"type\\\": \\\"live\\\",\\n                    \\\"currency\\\": \\\"EUR\\\",\\n                    \\\"netRate\\\": 6.08,\\n                    \\\"allInRate\\\": 6.23,\\n                    \\\"total\\\": 1035.05,\\n                    \\\"minimumRate\\\": false,\\n                    \\\"lastUpdatedDate\\\": \\\"\\\",\\n                    \\\"charges\\\": [\\n                        {\\n                            \\\"label\\\": \\\"Security surcharge\\\",\\n                            \\\"rate\\\": 0.08,\\n                            \\\"type\\\": \\\"GROSS_WEIGHT\\\",\\n                            \\\"code\\\": \\\"ssc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        },\\n                        {\\n                            \\\"label\\\": \\\"Fuel surcharge\\\",\\n                            \\\"rate\\\": 0.07,\\n                            \\\"type\\\": \\\"CHARGEABLE_WEIGHT\\\",\\n                            \\\"code\\\": \\\"fsc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        }\\n                    ],\\n                    \\\"ocdc\\\": [],\\n                    \\\"isSpotQuoteRate\\\": true,\\n                    \\\"handlingCodes\\\": [\\n                        \\\"GCR\\\"\\n                    ]\\n                },\\n                {\\n                    \\\"id\\\": \\\"572c6260-bbed-11f0-aa57-82c5a440dd41\\\",\\n                    \\\"name\\\": \\\"Spot\\\",\\n                    \\\"type\\\": \\\"express\\\",\\n                    \\\"currency\\\": \\\"EUR\\\",\\n                    \\\"netRate\\\": 6.38,\\n                    \\\"allInRate\\\": 6.53,\\n                    \\\"total\\\": 1085.15,\\n                    \\\"minimumRate\\\": false,\\n                    \\\"lastUpdatedDate\\\": \\\"\\\",\\n                    \\\"charges\\\": [\\n                        {\\n                            \\\"label\\\": \\\"Fuel surcharge\\\",\\n                            \\\"rate\\\": 0.07,\\n                            \\\"type\\\": \\\"CHARGEABLE_WEIGHT\\\",\\n                            \\\"code\\\": \\\"fsc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        },\\n                        {\\n                            \\\"label\\\": \\\"Security surcharge\\\",\\n                            \\\"rate\\\": 0.08,\\n                            \\\"type\\\": \\\"GROSS_WEIGHT\\\",\\n                            \\\"code\\\": \\\"ssc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        }\\n                    ],\\n                    \\\"ocdc\\\": [],\\n                    \\\"isSpotQuoteRate\\\": true,\\n                    \\\"handlingCodes\\\": [\\n                        \\\"GCR\\\"\\n                    ]\\n                }\\n            ],\\n            \\\"available\\\": false,\\n            \\\"availableReason\\\": \\\"Dimensions are not loadable\\\",\\n            \\\"awbPrefixes\\\": [\\n                \\\"000\\\"\\n            ],\\n            \\\"airlineConditions\\\": \\\"\\\\n\\\\t1- Offer subject to capacity when booking.\\\\n\\\\t2- Quotation reference to be imperatively mentioned when booking.\\\\n\\\\t3- This quotation is valid for the packaging indicated only, in the event of modification, please make a new request to the sales department.\\\\n\\\\t4- Taxes (IRC – MYC – etc…) subject to change without notice.\\\\n\\\\t5- In the event of cancellation or no show, we reserve the right to pass on all or part of the costs\\\\n\\\\t- Cancellation 72 hours before the departure of the truck and/or the flight (working hours): invoicing 50% of the amount of the freight\\\\n\\\\t- Cancellation 48 hours before the departure of the truck and/or the flight (working hours): invoicing of 75% of the amount of the freight\\\\n\\\\t- Cancellation 24 hours before the departure of the truck and/or the flight (working hours): invoicing of 100% of the amount of the freight\\\\n\\\\t- In the case of a no show (no presentation of the freight): invoicing of 100% of the amount of the freight\\\\n\\\\t- In the case of a low show (discount less than 50% of the reserved taxable weight): invoicing of 75% of the reserved taxable weight\\\\n\\\",\\n            \\\"handlingInfoLink\\\": \\\"https://www.cargoai.co/terms\\\",\\n            \\\"ghaName\\\": \\\"Mocked GHA\\\",\\n            \\\"hle\\\": \\\"19:00\\\",\\n            \\\"ghaAddress\\\": \\\"Airport road, Cargo Terminal, Mocked Cargo building\\\"\\n        }\\n    ]\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "94189b6c-f956-48a2-bbc8-b63c4bec6be9",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Set it to \"Schedules\" for Route & Schedule",
+                "key": "x-api-name",
+                "value": "Schedules"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"origin\": \"CDG\",\n  \"destination\": \"SIN\",\n  \"departureDate\": \"2025-11-09\",\n  \"offset\": 5,\n  \"shipment\": {\n    \"product\": \"GCR\",\n    \"pieces\": 1,\n    \"weight\": 100,\n    \"chargeableWeight\": 166.67,\n    \"volume\": 1,\n    \"dimensions\": [\n      {\n        \"height\": 100,\n        \"length\": 100,\n        \"width\": 100,\n        \"weight\": 100,\n        \"pieces\": 1,\n        \"volume\": 1,\n        \"stackable\": true,\n        \"tiltable\": false,\n        \"topLoadable\": false,\n        \"weightType\": \"PER_ITEM\",\n        \"loadType\": \"DIMENSIONS\"\n      }\n    ],\n    \"specialHandlingCodes\": [\n      \"GCR\",\n      \"XPS\"\n    ],\n    \"measurementUnit\": \"METRIC\"\n  },\n  \"user\": {\n    \"country\": \"FR\",\n    \"cass\": \"0000\",\n    \"iata\": \"0000000\",\n    \"email\": \"tests@tests.com\"\n  },\n  \"filters\": {\n    \"withRateOnly\": true,\n    \"liveRequests\": true\n  },\n  \"timeout\": 25\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"[\\n    {\\n        \\\"field\\\": \\\"destination\\\",\\n        \\\"error\\\": \\\"airport XXX not found. please verify iata airport code and contact cargoai if the airport does exist\\\"\\n    },\\n    {\\n        \\\"field\\\": \\\"departureDate\\\",\\n        \\\"error\\\": \\\"the date is out of range\\\"\\n    },\\n    {\\n        \\\"field\\\": \\\"user\\\",\\n        \\\"error\\\": \\\"cass: cass is required when email is not provided; email: email is required when iata, cass or country is not provided; iata: iata is required when email is not provided.\\\"\\n    }\\n]\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "3557c66a-bfb6-490e-8ccb-15cfd93c829a",
+          "name": "403",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Set it to \"Schedules\" for Route & Schedule",
+                "key": "x-api-name",
+                "value": "Schedules"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"origin\": \"CDG\",\n  \"destination\": \"SIN\",\n  \"departureDate\": \"2025-11-09\",\n  \"offset\": 5,\n  \"shipment\": {\n    \"product\": \"GCR\",\n    \"pieces\": 1,\n    \"weight\": 100,\n    \"chargeableWeight\": 166.67,\n    \"volume\": 1,\n    \"dimensions\": [\n      {\n        \"height\": 100,\n        \"length\": 100,\n        \"width\": 100,\n        \"weight\": 100,\n        \"pieces\": 1,\n        \"volume\": 1,\n        \"stackable\": true,\n        \"tiltable\": false,\n        \"topLoadable\": false,\n        \"weightType\": \"PER_ITEM\",\n        \"loadType\": \"DIMENSIONS\"\n      }\n    ],\n    \"specialHandlingCodes\": [\n      \"GCR\",\n      \"XPS\"\n    ],\n    \"measurementUnit\": \"METRIC\"\n  },\n  \"user\": {\n    \"country\": \"FR\",\n    \"cass\": \"0000\",\n    \"iata\": \"0000000\",\n    \"email\": \"tests@tests.com\"\n  },\n  \"filters\": {\n    \"withRateOnly\": true,\n    \"liveRequests\": true\n  },\n  \"timeout\": 25\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"message\\\": \\\"Forbidden\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "12b16678-4689-47f5-995a-f1165942d547",
+          "name": "502",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Set it to \"Schedules\" for Route & Schedule",
+                "key": "x-api-name",
+                "value": "Schedules"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"origin\": \"CDG\",\n  \"destination\": \"SIN\",\n  \"departureDate\": \"2025-11-09\",\n  \"offset\": 5,\n  \"shipment\": {\n    \"product\": \"GCR\",\n    \"pieces\": 1,\n    \"weight\": 100,\n    \"chargeableWeight\": 166.67,\n    \"volume\": 1,\n    \"dimensions\": [\n      {\n        \"height\": 100,\n        \"length\": 100,\n        \"width\": 100,\n        \"weight\": 100,\n        \"pieces\": 1,\n        \"volume\": 1,\n        \"stackable\": true,\n        \"tiltable\": false,\n        \"topLoadable\": false,\n        \"weightType\": \"PER_ITEM\",\n        \"loadType\": \"DIMENSIONS\"\n      }\n    ],\n    \"specialHandlingCodes\": [\n      \"GCR\",\n      \"XPS\"\n    ],\n    \"measurementUnit\": \"METRIC\"\n  },\n  \"user\": {\n    \"country\": \"FR\",\n    \"cass\": \"0000\",\n    \"iata\": \"0000000\",\n    \"email\": \"tests@tests.com\"\n  },\n  \"filters\": {\n    \"withRateOnly\": true,\n    \"liveRequests\": true\n  },\n  \"timeout\": 25\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Gateway",
+          "code": 502,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"message\\\": \\\"Internal server error\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cargoai.co/solutions",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "df3eb014-c000-4c3d-94e2-243cc44bb0a8",
+    "name": "Solutions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,905 @@
+{
+  "item": [
+    {
+      "id": "535e1736-4eae-4663-bf68-07c5dd8941ac",
+      "name": "Booking",
+      "request": {
+        "name": "Booking",
+        "description": {
+          "content": "This document outlines the process for booking with CargoCONNECT API.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "book"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "(Required) ",
+            "key": "x-api-key",
+            "value": "<string>"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"user\": {\n    \"email\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"iata\": \"<string>\",\n    \"cass\": \"<string>\",\n    \"country\": \"<string>\",\n    \"companyName\": \"<string>\"\n  },\n  \"flightUUID\": \"<string>\",\n  \"rateId\": \"<string>\",\n  \"itinerary\": {\n    \"origin\": \"<string>\",\n    \"destination\": \"<string>\",\n    \"departureDates\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"airlineCode\": \"<string>\",\n    \"flightNumbers\": \"<string>\",\n    \"allotmentCode\": \"<string>\"\n  },\n  \"shipment\": {\n    \"pieces\": \"<integer>\",\n    \"weight\": \"<float>\",\n    \"volume\": \"<float>\",\n    \"dimensions\": [\n      {\n        \"pieces\": 1,\n        \"length\": 100,\n        \"width\": 100,\n        \"height\": 100,\n        \"weight\": 200,\n        \"loadType\": \"DIMENSIONS\",\n        \"weightType\": \"PER_ITEM\",\n        \"stackable\": true,\n        \"tiltable\": false,\n        \"toploadable\": false,\n        \"volume\": \"<float>\",\n        \"uldType\": \"<string>\"\n      },\n      {\n        \"pieces\": 1,\n        \"length\": 100,\n        \"width\": 100,\n        \"height\": 100,\n        \"weight\": 200,\n        \"loadType\": \"DIMENSIONS\",\n        \"weightType\": \"PER_ITEM\",\n        \"stackable\": true,\n        \"tiltable\": false,\n        \"toploadable\": false,\n        \"volume\": \"<float>\",\n        \"uldType\": \"<string>\"\n      }\n    ],\n    \"chargeableWeight\": 200,\n    \"measurementUnit\": \"METRIC\",\n    \"product\": \"GCR\",\n    \"globalHS\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"europeanHS\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"scrs\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"specialHandlingCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"awb\": \"<string>\",\n  \"comment\": \"<string>\",\n  \"handlingCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"id\": \"<string>\",\n  \"allotmentCode\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "143b8e9d-460e-4fc7-9381-5c778f639efc",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "book"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"flightUUID\": \"cea884fc-a000-11ee-9471-a61fc42e35dd\",\n  \"rateId\": \"cea8847d-a000-11ee-9471-a61fc42e35dd\",\n  \"awb\": \"\",\n  \"comment\": \"\",\n  \"handlingCodes\": [\n    \"GCR\"\n  ],\n  \"user\": {\n    \"email\": \"test@test.com\",\n    \"companyName\": \"Test Forwarding\",\n    \"lastName\": \"test\",\n    \"firstName\": \"tests\",\n    \"iata\": \"0000000\",\n    \"cass\": \"0000\",\n    \"country\": \"FR\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"flightUUID\\\": \\\"cea884fc-a000-11ee-9471-a61fc42e35dd\\\",\\n    \\\"bookingStatus\\\": \\\"PENDING_DELIVERY\\\",\\n    \\\"awb\\\": \\\"000-00042652\\\",\\n    \\\"handlingCodes\\\": [\\n        \\\"GCR\\\"\\n    ]\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "1172ebc0-5630-456e-99df-feba8f53bb42",
+          "name": "202",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "book"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"flightUUID\": \"cea884fc-a000-11ee-9471-a61fc42e35dd\",\n  \"rateId\": \"cea8847d-a000-11ee-9471-a61fc42e35dd\",\n  \"awb\": \"\",\n  \"comment\": \"\",\n  \"handlingCodes\": [\n    \"GCR\"\n  ],\n  \"user\": {\n    \"email\": \"test@test.com\",\n    \"companyName\": \"Test Forwarding\",\n    \"lastName\": \"test\",\n    \"firstName\": \"tests\",\n    \"iata\": \"0000000\",\n    \"cass\": \"0000\",\n    \"country\": \"FR\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Accepted",
+          "code": 202,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"flightUUID\\\": \\\"4ce820fa-377b-11ef-a31f-c65344bbd18e\\\",\\n    \\\"bookingStatus\\\": \\\"PENDING_AIRLINE_INFORMATION\\\",\\n    \\\"description\\\": \\\"Booking has been processed\\\",\\n    \\\"trackingURL\\\": \\\"https://api.dev.cargoai.co/solutions/track?flight-uuid=4ce820fa-377b-11ef-a31f-c65344bbd18e\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "620e2806-bc5d-47f0-a597-5e0ae8032a01",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "book"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"flightUUID\": \"cea884fc-a000-11ee-9471-a61fc42e35dd\",\n  \"rateId\": \"cea8847d-a000-11ee-9471-a61fc42e35dd\",\n  \"awb\": \"\",\n  \"comment\": \"\",\n  \"handlingCodes\": [\n    \"GCR\"\n  ],\n  \"user\": {\n    \"email\": \"test@test.com\",\n    \"companyName\": \"Test Forwarding\",\n    \"lastName\": \"test\",\n    \"firstName\": \"tests\",\n    \"iata\": \"0000000\",\n    \"cass\": \"0000\",\n    \"country\": \"FR\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n\\t\\\"flightUIID\\\": \\\"cea884fc-a000-11ee-9471-a61fc42e35dd\\\",\\n\\t\\\"bookingStatus\\\": \\\"FAILED\\\",\\n\\t\\\"error\\\": \\\"This flight cannot be booked\\\",\\n\\t\\\"description\\\": \\\"Failure due to validation request\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "c40916f9-749f-47ca-b2af-c8471d1a1249",
+          "name": "403",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "book"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"flightUUID\": \"cea884fc-a000-11ee-9471-a61fc42e35dd\",\n  \"rateId\": \"cea8847d-a000-11ee-9471-a61fc42e35dd\",\n  \"awb\": \"\",\n  \"comment\": \"\",\n  \"handlingCodes\": [\n    \"GCR\"\n  ],\n  \"user\": {\n    \"email\": \"test@test.com\",\n    \"companyName\": \"Test Forwarding\",\n    \"lastName\": \"test\",\n    \"firstName\": \"tests\",\n    \"iata\": \"0000000\",\n    \"cass\": \"0000\",\n    \"country\": \"FR\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"field\\\": \\\"global\\\",\\n    \\\"error\\\": \\\"Cannot match user information\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "6ce9d899-2a9b-40cb-a30e-88902f771dde",
+          "name": "502",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "book"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"flightUUID\": \"cea884fc-a000-11ee-9471-a61fc42e35dd\",\n  \"rateId\": \"cea8847d-a000-11ee-9471-a61fc42e35dd\",\n  \"awb\": \"\",\n  \"comment\": \"\",\n  \"handlingCodes\": [\n    \"GCR\"\n  ],\n  \"user\": {\n    \"email\": \"test@test.com\",\n    \"companyName\": \"Test Forwarding\",\n    \"lastName\": \"test\",\n    \"firstName\": \"tests\",\n    \"iata\": \"0000000\",\n    \"cass\": \"0000\",\n    \"country\": \"FR\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Gateway",
+          "code": 502,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"message\\\": \\\"Internal server error\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "6ca7dfae-b1bd-4db8-bb6c-d0d08dc618a5",
+          "name": "5XX",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "book"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"flightUUID\": \"cea884fc-a000-11ee-9471-a61fc42e35dd\",\n  \"rateId\": \"cea8847d-a000-11ee-9471-a61fc42e35dd\",\n  \"awb\": \"\",\n  \"comment\": \"\",\n  \"handlingCodes\": [\n    \"GCR\"\n  ],\n  \"user\": {\n    \"email\": \"test@test.com\",\n    \"companyName\": \"Test Forwarding\",\n    \"lastName\": \"test\",\n    \"firstName\": \"tests\",\n    \"iata\": \"0000000\",\n    \"cass\": \"0000\",\n    \"country\": \"FR\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"flightUUID\\\": \\\"ca64b09f-0fe5-11f0-84dd-cececbcfb5eb\\\",\\n    \\\"bookingStatus\\\": \\\"FAILED\\\",\\n    \\\"awb\\\": \\\"000\\\",\\n    \\\"error\\\": \\\"Booking not allowed for this user\\\",\\n    \\\"rejectedReason\\\": \\\"Booking not allowed for this user\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "67705161-aab9-41b7-adb5-ac6e4e03eb97",
+      "name": "Track by Flight UUID",
+      "request": {
+        "name": "Track by Flight UUID",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "track"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "flight-uuid",
+              "value": "<string>",
+              "description": "flightUUID used during booking creation — required to get updates on booking, flight itinerary and shipment details"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "(Required) ",
+            "key": "x-api-key",
+            "value": "<string>"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "f5ebfc79-1ddb-4f47-b7bf-32de4df83d06",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "track"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "flight-uuid",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"[\\n    {\\n        \\\"flightUUID\\\": \\\"1bc492d0-bbee-11f0-8f9c-86c2340adebc\\\",\\n        \\\"awb\\\": \\\"000-15019804\\\",\\n        \\\"flight\\\": {\\n            \\\"flightUUID\\\": \\\"1bc492d0-bbee-11f0-8f9c-86c2340adebc\\\",\\n            \\\"airlineCode\\\": \\\"00\\\",\\n            \\\"flightNumber\\\": \\\"00867\\\",\\n            \\\"arrivalTime\\\": \\\"2025-11-10T06:00:00+08:00\\\",\\n            \\\"arrivalAirport\\\": \\\"SIN\\\",\\n            \\\"departureTime\\\": \\\"2025-11-09T19:00:00+01:00\\\",\\n            \\\"departureAirport\\\": \\\"XCR\\\",\\n            \\\"latestAcceptanceTime\\\": \\\"2025-11-09T14:00:00+01:00\\\",\\n            \\\"timeOfAvailability\\\": \\\"2025-11-10T11:00:00+08:00\\\",\\n            \\\"legs\\\": [\\n                {\\n                    \\\"flightNumber\\\": \\\"00867\\\",\\n                    \\\"arrivalTime\\\": \\\"2025-11-10T06:00:00+08:00\\\",\\n                    \\\"arrivalAirport\\\": \\\"SIN\\\",\\n                    \\\"departureTime\\\": \\\"2025-11-09T19:00:00+01:00\\\",\\n                    \\\"departureAirport\\\": \\\"XCR\\\",\\n                    \\\"bodyType\\\": \\\"Widebody\\\",\\n                    \\\"aircraftCode\\\": \\\"777\\\",\\n                    \\\"co2\\\": {\\n                        \\\"value\\\": 265.9386359118521,\\n                        \\\"estimation\\\": false\\n                    }\\n                }\\n            ],\\n            \\\"features\\\": {\\n                \\\"bookable\\\": true,\\n                \\\"awbOptional\\\": true\\n            },\\n            \\\"rates\\\": [\\n                {\\n                    \\\"id\\\": \\\"1bc492b9-bbee-11f0-8f9c-86c2340adebc\\\",\\n                    \\\"name\\\": \\\"Spot\\\",\\n                    \\\"type\\\": \\\"live\\\",\\n                    \\\"currency\\\": \\\"EUR\\\",\\n                    \\\"netRate\\\": 5.94,\\n                    \\\"allInRate\\\": 6.08,\\n                    \\\"total\\\": 1010.0,\\n                    \\\"minimumRate\\\": false,\\n                    \\\"charges\\\": [\\n                        {\\n                            \\\"label\\\": \\\"Fuel surcharge\\\",\\n                            \\\"rate\\\": 0.06,\\n                            \\\"type\\\": \\\"CHARGEABLE_WEIGHT\\\",\\n                            \\\"code\\\": \\\"fsc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        },\\n                        {\\n                            \\\"label\\\": \\\"Security surcharge\\\",\\n                            \\\"rate\\\": 0.08,\\n                            \\\"type\\\": \\\"GROSS_WEIGHT\\\",\\n                            \\\"code\\\": \\\"ssc\\\",\\n                            \\\"minAmount\\\": 0.0,\\n                            \\\"maxAmount\\\": 0.0\\n                        }\\n                    ],\\n                    \\\"ocdc\\\": [],\\n                    \\\"isSpotQuoteRate\\\": true,\\n                    \\\"handlingCodes\\\": [\\n                        \\\"GCR\\\"\\n                    ]\\n                }\\n            ],\\n            \\\"available\\\": true,\\n            \\\"source\\\": \\\"AI-MOCK\\\",\\n            \\\"awbPrefixes\\\": [\\n                \\\"000\\\"\\n            ],\\n            \\\"airlineConditions\\\": \\\"\\\\n\\\\t1- Offer subject to capacity when booking.\\\\n\\\\t2- Quotation reference to be imperatively mentioned when booking.\\\\n\\\\t3- This quotation is valid for the packaging indicated only, in the event of modification, please make a new request to the sales department.\\\\n\\\\t4- Taxes (IRC – MYC – etc…) subject to change without notice.\\\\n\\\\t5- In the event of cancellation or no show, we reserve the right to pass on all or part of the costs\\\\n\\\\t- Cancellation 72 hours before the departure of the truck and/or the flight (working hours): invoicing 50% of the amount of the freight\\\\n\\\\t- Cancellation 48 hours before the departure of the truck and/or the flight (working hours): invoicing of 75% of the amount of the freight\\\\n\\\\t- Cancellation 24 hours before the departure of the truck and/or the flight (working hours): invoicing of 100% of the amount of the freight\\\\n\\\\t- In the case of a no show (no presentation of the freight): invoicing of 100% of the amount of the freight\\\\n\\\\t- In the case of a low show (discount less than 50% of the reserved taxable weight): invoicing of 75% of the reserved taxable weight\\\\n\\\",\\n            \\\"contacts\\\": [\\n                \\\"tests@cargoai.co\\\"\\n            ],\\n            \\\"handlingInfoLink\\\": \\\"https://www.cargoai.co/terms\\\",\\n            \\\"ghaName\\\": \\\"Mocked GHA\\\",\\n            \\\"hle\\\": \\\"19:00\\\",\\n            \\\"ghaAddress\\\": \\\"Airport road, Cargo Terminal, Mocked Cargo building\\\"\\n        },\\n        \\\"shipment\\\": {\\n            \\\"product\\\": \\\"GCR\\\",\\n            \\\"weight\\\": 100.0,\\n            \\\"pieces\\\": 1,\\n          \\\"chargeableWeight\\\": 167.0,\\n\\t\\t\\t\\t\\t\\\"dimensions\\\": [\\n              {\\n                  \\\"height\\\": 100.0,\\n                  \\\"length\\\": 100.0,\\n                  \\\"width\\\": 100.0,\\n                  \\\"weight\\\": 100.0,\\n                  \\\"pieces\\\": 1,\\n                  \\\"volume\\\": 1.0,\\n                  \\\"stackable\\\": true,\\n                  \\\"tiltable\\\": false,\\n                  \\\"topLoadable\\\": false,\\n                  \\\"weightType\\\": \\\"PER_ITEM\\\",\\n                  \\\"loadType\\\": \\\"DIMENSIONS\\\"\\n              }\\n       \\t\\t ],\\n            \\\"specialHandlingCodes\\\": [\\n                \\\"GCR\\\"\\n            ],\\n            \\\"volume\\\": 1.0,\\n            \\\"measurementUnit\\\": \\\"METRIC\\\"\\n        },\\n        \\\"bookingResponse\\\": {\\n            \\\"flightUUID\\\": \\\"1bc492d0-bbee-11f0-8f9c-86c2340adebc\\\",\\n            \\\"bookingStatus\\\": \\\"DELIVERED\\\",\\n            \\\"awb\\\": \\\"000-15019804\\\",\\n            \\\"ffr\\\": \\\"\\\"\\n        }\\n    }\\n]\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "33e56602-5c3a-400f-bbee-ef3a96b8c4f6",
+          "name": "404",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "track"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "flight-uuid",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"status\\\": 404,\\n    \\\"error\\\": \\\"not found\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "e6114f57-0081-4969-8b05-bafd663273df",
+          "name": "500",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "track"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "flight-uuid",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"status\\\": 500,\\n    \\\"error\\\": \\\"ValidationException: One or more parameter values are not valid. The AttributeValue for a key attribute cannot contain an empty string value. Key: flightId\\\\n\\\\tstatus code: 400, request id: PQ9MICEMNGKEJ4JDJRV4UIKQ53VV4KQNSO5AEMVJF66Q9ASUAAJG\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "3c3f1112-a303-4a22-93ef-41590cffb241",
+      "name": "Cancellation",
+      "request": {
+        "name": "Cancellation",
+        "description": {
+          "content": "This document outlines the process to cancel a booking performed via CargoCONNECT API.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "bookings",
+            ":flightUUID"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "flightUUID",
+              "description": "(Required) Flight UUID used for booking creation"
+            }
+          ]
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "(Required) ",
+            "key": "x-api-key",
+            "value": "<string>"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "PUT",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"flightUUID\": \"<string>\",\n  \"action\": \"CANCEL\",\n  \"cancelledReasons\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "5acf44fc-4cec-46c2-b651-2144ac6e8621",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "bookings",
+                ":flightUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "flightUUID",
+                  "description": "(Required) Flight UUID used for booking creation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"flightUUID\": \"test-59c7-11ec-9afe-5aa5c611cbcb\",\n  \"action\": \"CANCEL\",\n  \"cancelledReasons\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n\\t\\\"status\\\": \\\"CANCELLED\\\",\\n\\t\\\"flightUUID\\\": \\\"test-59c7-11ec-9afe-5aa5c611cbcb\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "8f0e9883-dad4-48c0-9378-6b730496c510",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "bookings",
+                ":flightUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "flightUUID",
+                  "description": "(Required) Flight UUID used for booking creation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"flightUUID\": \"test-59c7-11ec-9afe-5aa5c611cbcb\",\n  \"action\": \"CANCEL\",\n  \"cancelledReasons\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"errorCode\\\": 400,\\n    \\\"errorMessage\\\": \\\"invalid request: invalid value for action: \\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "aa268ac9-b4a6-44ac-87eb-3603b9146e83",
+          "name": "502",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "bookings",
+                ":flightUUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "flightUUID",
+                  "description": "(Required) Flight UUID used for booking creation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"flightUUID\": \"test-59c7-11ec-9afe-5aa5c611cbcb\",\n  \"action\": \"CANCEL\",\n  \"cancelledReasons\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Gateway",
+          "code": 502,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"message\\\": \\\"Internal server error\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cargoai.co/solutions",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "67c8217f-f16d-40a0-b596-60eafc7373e9",
+    "name": "Solutions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

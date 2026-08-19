@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Solutions",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Get Token",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.cargoai.co/solutions/users",
+        "headers": [
+          {
+            "name": "x-api-key",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "email",
+            "value": "",
+            "type": "query",
+            "description": "user's registered email"
+          }
+        ]
+      },
+      "docs": "This endpoint enables the retrieval of an authentication token and a redirection link for accessing the CargoMART portal."
+    },
+    {
+      "info": {
+        "name": "Create User",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.cargoai.co/solutions/users",
+        "headers": [
+          {
+            "name": "x-api-key",
+            "value": ""
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "This document outlines the process for self-user provisioning using the CargoCONNECT API. This endpoint facilitates the addition of users to your existing authorized API key."
+    },
+    {
+      "info": {
+        "name": "Update User",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://api.cargoai.co/solutions/users",
+        "headers": [
+          {
+            "name": "x-api-key",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "firstName",
+            "value": "",
+            "type": "query",
+            "description": "first name of the user"
+          },
+          {
+            "name": "lastName",
+            "value": "",
+            "type": "query",
+            "description": "last name of the user"
+          },
+          {
+            "name": "email",
+            "value": "",
+            "type": "query",
+            "description": "user's email address"
+          },
+          {
+            "name": "companyName",
+            "value": "",
+            "type": "query",
+            "description": "user's company name"
+          },
+          {
+            "name": "offices",
+            "value": "",
+            "type": "query",
+            "description": "list of offices to add"
+          }
+        ]
+      },
+      "docs": "This endpoint allows you to add offices to any user already created and associated with your API key."
+    },
+    {
+      "info": {
+        "name": "Delete User Token",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://api.cargoai.co/solutions/users",
+        "headers": [
+          {
+            "name": "x-api-key",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "email",
+            "value": "",
+            "type": "query",
+            "description": "user's email address"
+          }
+        ]
+      },
+      "docs": "This endpoint allows you to delete a user associated with the API key by providing their email address as a query parameter. Once deleted, the user will no longer be able to access the APIs tied to the provided API key."
+    }
+  ],
+  "bundled": true
+}

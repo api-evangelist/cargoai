@@ -1,0 +1,939 @@
+{
+  "item": [
+    {
+      "id": "91464881-a4a7-4e14-b972-34a91d6f5873",
+      "name": "Create User",
+      "request": {
+        "name": "Create User",
+        "description": {
+          "content": "This document outlines the process for self-user provisioning using the CargoCONNECT API. This endpoint facilitates the addition of users to your existing authorized API key.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "users"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "(Required) ",
+            "key": "x-api-key",
+            "value": "<string>"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"countryCode\": \"<string>\",\n  \"iataCode\": \"<string>\",\n  \"cassCode\": \"<string>\",\n  \"officeAirportCode\": \"<string>\",\n  \"partnerId\": \"<string>\",\n  \"offices\": {\n    \"countryCode\": \"<string>\",\n    \"iataCode\": \"<string>\",\n    \"cassCode\": \"<string>\",\n    \"officeAirportCode\": \"<string>\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "7afcf1d6-89bc-45ab-b327-de0330955358",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Test\",\n  \"lastName\": \"Test name\",\n  \"companyName\": \"test\",\n  \"email\": \"test@test.com\",\n  \"offices\": [\n    {\n      \"iataCode\": \"0000000\",\n      \"cassCode\": \"0000\",\n      \"countryCode\": \"US\",\n      \"officeAirportCode\": \"JFK\"\n    },\n    {\n      \"iataCode\": \"0000000\",\n      \"cassCode\": \"0000\",\n      \"countryCode\": \"NL\",\n      \"officeAirportCode\": \"AMS\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n\\t\\\"status\\\": \\\"Activated\\\",\\n\\t\\\"message\\\": \\\"Successful request: User created and account already activated\\\",\\n\\t\\\"token\\\": \\\"{{auth_token}}\\\",\\n\\t\\\"link\\\": \\\"https://app.dev.cargoai.co/forwarder/search/forwarder-search?auth={{auth_token}}\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "a3db2cbd-ec47-4d44-ba72-3ef319f2f61d",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Test\",\n  \"lastName\": \"Test name\",\n  \"companyName\": \"test\",\n  \"email\": \"test@test.com\",\n  \"offices\": [\n    {\n      \"iataCode\": \"0000000\",\n      \"cassCode\": \"0000\",\n      \"countryCode\": \"US\",\n      \"officeAirportCode\": \"JFK\"\n    },\n    {\n      \"iataCode\": \"0000000\",\n      \"cassCode\": \"0000\",\n      \"countryCode\": \"NL\",\n      \"officeAirportCode\": \"AMS\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"message\\\": \\\"Invalid request: validation errors: [email cannot be empty]\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "689078b0-49b6-4a2e-922f-b9acf14ae7fb",
+          "name": "502",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Test\",\n  \"lastName\": \"Test name\",\n  \"companyName\": \"test\",\n  \"email\": \"test@test.com\",\n  \"offices\": [\n    {\n      \"iataCode\": \"0000000\",\n      \"cassCode\": \"0000\",\n      \"countryCode\": \"US\",\n      \"officeAirportCode\": \"JFK\"\n    },\n    {\n      \"iataCode\": \"0000000\",\n      \"cassCode\": \"0000\",\n      \"countryCode\": \"NL\",\n      \"officeAirportCode\": \"AMS\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Gateway",
+          "code": 502,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"message\\\": \\\"Internal server error\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "4b481402-395e-4f01-9363-5c3853607b5e",
+      "name": "Get Token",
+      "request": {
+        "name": "Get Token",
+        "description": {
+          "content": "This endpoint enables the retrieval of an authentication token and a redirection link for accessing the CargoMART portal.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "users"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "email",
+              "value": "<string>",
+              "description": "(Required) user's registered email"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "(Required) ",
+            "key": "x-api-key",
+            "value": "<string>"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "18b1e8ea-6958-4f4c-a4ad-6c9d6f23b907",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"status\\\": \\\"Activated\\\",\\n  \\\"message\\\": \\\"Successful request: please follow the link\\\",\\n  \\\"token\\\": \\\"{{auth_token}}\\\",\\n  \\\"link\\\": \\\"https://app.dev.cargoai.co/forwarder/search/forwarder-search?auth={{auth_token}}\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "2d14c49a-b9f7-4398-ba78-16a3e729a937",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"message\\\": \\\"Invalid request: user not verified\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "d60c2f2d-d6bb-4188-a914-99e4babbf7c4",
+          "name": "502",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Gateway",
+          "code": 502,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"message\\\": \\\"Internal server error\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "07d829ba-8f07-4f5e-bb2b-aa1194199871",
+      "name": "Update User",
+      "request": {
+        "name": "Update User",
+        "description": {
+          "content": "This endpoint allows you to add offices to any user already created and associated with your API key.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "users"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "firstName",
+              "value": "<string>",
+              "description": "(Required) first name of the user"
+            },
+            {
+              "disabled": false,
+              "key": "lastName",
+              "value": "<string>",
+              "description": "(Required) last name of the user"
+            },
+            {
+              "disabled": false,
+              "key": "email",
+              "value": "<string>",
+              "description": "(Required) user's email address"
+            },
+            {
+              "disabled": false,
+              "key": "companyName",
+              "value": "<string>",
+              "description": "(Required) user's company name"
+            },
+            {
+              "disabled": false,
+              "key": "offices[0][countryCode]",
+              "value": "<string>",
+              "description": "(Required) list of offices to add"
+            },
+            {
+              "disabled": false,
+              "key": "offices[0][iataCode]",
+              "value": "<string>",
+              "description": "(Required) list of offices to add"
+            },
+            {
+              "disabled": false,
+              "key": "offices[0][cassCode]",
+              "value": "<string>",
+              "description": "(Required) list of offices to add"
+            },
+            {
+              "disabled": false,
+              "key": "offices[0][officeAirportCode]",
+              "value": "<string>",
+              "description": "(Required) list of offices to add"
+            },
+            {
+              "disabled": false,
+              "key": "offices[1][countryCode]",
+              "value": "<string>",
+              "description": "(Required) list of offices to add"
+            },
+            {
+              "disabled": false,
+              "key": "offices[1][iataCode]",
+              "value": "<string>",
+              "description": "(Required) list of offices to add"
+            },
+            {
+              "disabled": false,
+              "key": "offices[1][cassCode]",
+              "value": "<string>",
+              "description": "(Required) list of offices to add"
+            },
+            {
+              "disabled": false,
+              "key": "offices[1][officeAirportCode]",
+              "value": "<string>",
+              "description": "(Required) list of offices to add"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "(Required) ",
+            "key": "x-api-key",
+            "value": "<string>"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "PUT",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "afe79124-3b31-4c1b-be46-bbe987dfea68",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "firstName",
+                  "value": "<string>"
+                },
+                {
+                  "key": "lastName",
+                  "value": "<string>"
+                },
+                {
+                  "key": "email",
+                  "value": "<string>"
+                },
+                {
+                  "key": "companyName",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[0][countryCode]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[0][iataCode]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[0][cassCode]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[0][officeAirportCode]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[1][countryCode]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[1][iataCode]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[1][cassCode]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[1][officeAirportCode]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"status\\\": \\\"Activated\\\",\\n    \\\"message\\\": \\\"Successful request: User updated successfully\\\",\\n    \\\"token\\\": \\\"{{token}}\\\",\\n    \\\"link\\\": \\\"https://app.dev.cargoai.co/forwarder/search/forwarder-search?auth={{token}}\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "5e2601b4-1374-4458-b1de-f70fd112040a",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "firstName",
+                  "value": "<string>"
+                },
+                {
+                  "key": "lastName",
+                  "value": "<string>"
+                },
+                {
+                  "key": "email",
+                  "value": "<string>"
+                },
+                {
+                  "key": "companyName",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[0][countryCode]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[0][iataCode]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[0][cassCode]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[0][officeAirportCode]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[1][countryCode]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[1][iataCode]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[1][cassCode]",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offices[1][officeAirportCode]",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"error\\\": \\\"Invalid request: User is not attached to your key, please use create user endpoint to link user with your key: test+update_user@cargoaitest.co\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "76418664-562c-4dfb-8ad2-2ab32db93441",
+      "name": "Delete User Token",
+      "request": {
+        "name": "Delete User Token",
+        "description": {
+          "content": "This endpoint allows you to delete a user associated with the API key by providing their email address as a query parameter. Once deleted, the user will no longer be able to access the APIs tied to the provided API key.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "users"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "email",
+              "value": "<string>",
+              "description": "(Required) user's email address"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "(Required) ",
+            "key": "x-api-key",
+            "value": "<string>"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "DELETE",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "52f2ef6f-ef52-4325-912e-2d47daba3cba",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"message\\\": \\\"Successful request: User has been successfully deleted from your API key: user_test@cargoaitest.co\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "26821a25-11af-408c-a515-dfa766970323",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"message\\\": \\\"Invalid request: user not found: email@cargoaitest.co\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cargoai.co/solutions",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7f9a3ccc-2040-450c-8258-b5852db74d91",
+    "name": "Solutions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+# CargoCONNECT APIs Documentation Documentation
+
+> Discover the power of CargoAi's CargoCONNECT APIs. Our comprehensive documentation is designed to guide developers step-by-step through the integration of air transport and logistics solutions. Whether you want to automate reservations, improve supply chain visibility, or optimize data exchange between systems, CargoCONNECT offers flexible and robust tools.  Find your integration guides for : Track & Trace API, Rate & Book API, Route & Schedule API, FWB & FHL API, UserCargoWALLET API, CargoCOPILOT API & Cargo2ZERO API. Dive into our guides and examples to start connecting your solutions today.
+
+## API Reference
+- [Introduction](https://cargoai.readme.io/reference/introduction.md): This document introduces you to the CargoCONNECT API functionality
+- [API Workflows](https://cargoai.readme.io/reference/api-workflows.md): This page provides different schemas to help you to understand the different possible workflows with CargoCONNECT APIs
+- [Changelog](https://cargoai.readme.io/reference/changelog.md)
+- [Contact Us](https://cargoai.readme.io/reference/contact-us.md)
+- [Search and Book Flow](https://cargoai.readme.io/reference/search-book-flow.md): This document provides a step-by-step guide to using the CargoCONNECT API. The API allows you to fetch rates & schedules, perform booking operations and track your shipment.
+- [Routes, Schedules and Rates](https://cargoai.readme.io/reference/routes-schedules-and-rates.md): This document provides all the information you need to fully use our Routes, Schedules and Rates endpoint
+- [Routes, Schedules and Rates](https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post.md): This document provides information about request body parameters and headers as well as example requests and responses for different search modes
+- [Search Response Objects Definition](https://cargoai.readme.io/reference/search-response-objects-definition.md): See the detailed description of every field in your Quote & Book response
+- [Rate Types](https://cargoai.readme.io/reference/rate-types.md): This page will help you navigate various search and booking flows with different types of rates
+- [Rate Search Types & Coloader Behavior](https://cargoai.readme.io/reference/rate-search-types-coloader-behaviour.md): Overview of rate search types and coloader booking behavior
+- [Product Coverage](https://cargoai.readme.io/reference/product-coverage.md): This document describes the products you can search with Routes, Schedules and Rates API
+- [Air Freight Calculations](https://cargoai.readme.io/reference/air-freight-calculations.md)
+- [Booking](https://cargoai.readme.io/reference/booking.md): This document outlines the different booking endpoints of CargoCONNECT API.
+- [Booking](https://cargoai.readme.io/reference/booking-endpoint-post.md): This document outlines the process for booking with CargoCONNECT API.
+- [Track by Flight UUID](https://cargoai.readme.io/reference/track-by-flight-uuid-endpoint-get.md)
+- [Booking Status](https://cargoai.readme.io/reference/booking-status.md)
+- [Booking Payments](https://cargoai.readme.io/reference/booking-payments.md): This page will describe the different payment solutions you can use to settle booking payments
+- [Booking Errors](https://cargoai.readme.io/reference/booking-errors.md): This page list all the codes and associated description and http status for all booking operations performed on CargoCONNECT API
+- [Cancellation](https://cargoai.readme.io/reference/booking-cancellation-endpoint-put.md): This document outlines the process to cancel a booking performed via CargoCONNECT API.
+- [Booking Callback](https://cargoai.readme.io/reference/booking-callback.md): This page provides details, examples and object definition for the booking callback
+- [FlyWINDOW - (Optional)](https://cargoai.readme.io/reference/flywindow.md): Learn about our FlyWINDOW booking feature
+- [FlyWINDOW Callback Details](https://cargoai.readme.io/reference/flywindow-callback-details.md): This page provides details, examples and object definition for the FlyWINDOW callback
+- [Track & Trace](https://cargoai.readme.io/reference/track-and-trace.md): Track your booking updates and milestones with our Track & Trace API. Stay informed effortlessly with our tracking subscription service.
+- [Tracking Subscription](https://cargoai.readme.io/reference/tracking-subscription-endpoint-post.md): This endpoint facilitates retrieving tracking events and milestones by subscribing to our Track & Trace updates.
+- [Tracking Unsubscription](https://cargoai.readme.io/reference/tracking-unsubscription-endpoint-post.md): This endpoint facilitates unsubscribing to our Track & Trace updates.
+- [Subscription E-mail and URL Updates](https://cargoai.readme.io/reference/subscription-e-mail-and-url-updates.md): See the updates you will receive if you subscribe to our Tracking Updates.
+- [Tracking Event Codes](https://cargoai.readme.io/reference/tracking-event-codes.md): Please find below the mapping between tracking event codes and associated description
+- [AI Tracking Predictive & Alerts](https://cargoai.readme.io/reference/ai-tracking-predictive-alerts.md)
+- [Guide to Track&Trace](https://cargoai.readme.io/reference/guide-to-tracktrace.md): This document combines two authoritative sources CargoAi Guide to Track & Trace Data & CargoAi Guide to Airfreight Track&Trace
+- [Guide to Track & Trace Data](https://cargoai.readme.io/reference/guide-to-track-trace-data.md): This page describes the meaning behind our Track & Trace data and how to use it
+- [Airfreight Track&Trace Explained](https://cargoai.readme.io/reference/airfreight-track-and-trace.md): The Definitive Guide to Understanding, Interpreting & Trusting Tracking Events
+- [Track & Trace Premium](https://cargoai.readme.io/reference/track-trace-premium.md): Exclusive capabilities to elevate your shipment visibility, built on top of the standard Track & Trace API.
+- [Interline AWB Subscription](https://cargoai.readme.io/reference/interline-tracking.md): Subscribe to an Air Waybill for track-and-trace, and optionally track a second interline carrier.
+- [FWB&FHL API](https://cargoai.readme.io/reference/fwb-and-fhl.md): This page describes the flow of receiving airlines' responses for FWB&FHL sent via our API
+- [FWB&FHL Sending](https://cargoai.readme.io/reference/eawb-endpoint-post.md): This document outlines the process of sending FWB&FHL to airlines
+- [Data Format](https://cargoai.readme.io/reference/eawb-data-format.md): This page describes the format which data needs to follow in FWB and FHL request and provides the error response structure related to data format errors
+- [Callback(s) Authentication Process](https://cargoai.readme.io/reference/callbacks-authentication-process.md): This page describes the Authentication Processes available for Booking and Tracking Callback of CargoCONNECT API suite
+- [User Provisioning](https://cargoai.readme.io/reference/user-provisioning.md): Overview of User Provisioning flows, authentication, and airline recognition requirements.
+- [Create User](https://cargoai.readme.io/reference/create-user.md): This document outlines the process for self-user provisioning using the CargoCONNECT API. This endpoint facilitates the addition of users to your existing authorized API key.
+- [Data Format](https://cargoai.readme.io/reference/data-format.md): This page describes the format which data needs to follow in Create User endpoint request
+- [Get Token](https://cargoai.readme.io/reference/get-token.md): This endpoint enables the retrieval of an authentication token and a redirection link for accessing the CargoMART portal.
+- [Update User](https://cargoai.readme.io/reference/update-user.md): This endpoint allows you to add offices to any user already created and associated with your API key.
+- [Delete User Token](https://cargoai.readme.io/reference/delete-user-token.md): This endpoint allows you to delete a user associated with the API key by providing their email address as a query parameter. Once deleted, the user will no longer be able to access the APIs tied to the provided API key.
+- [Co2 Calculation](https://cargoai.readme.io/reference/co2calculation.md)
+- [CargoCOPILOT API](https://cargoai.readme.io/reference/cargocopilot-api.md): Transform raw email content, images and documents into accurate, structured data. Remove manual data entry from your quote, book and documentation processes, and leverage powerful AI capabilities to supercharge your workflows.
+- [AWB Data Extraction](https://cargoai.readme.io/reference/awb-extraction.md): AI Powered - Transform AWB image data into structured AWB information and remove manual data entry from your AWB transmission process.
+- [Shipment Data Extraction (Text, Image)](https://cargoai.readme.io/reference/shipment-extraction.md): Transform raw email data into accurate shipment information and remove manual data entry from your quote and book process. By far the easiest way to leverage powerful AI capabilities to supercharge your workflows.
+- [CargoAI MCP Connector - Setup & Documentation](https://cargoai.readme.io/reference/cargoai-mcp-connector-setup-documentation.md): Connect Claude to CargoAI's air cargo platform using the Model Context Protocol (MCP).
+
+## Pages
+- [Updates](https://cargoai.readme.io/page/updates.md)

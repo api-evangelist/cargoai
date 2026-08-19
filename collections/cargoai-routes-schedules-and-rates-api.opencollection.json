@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Solutions",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Routes, Schedules and Rates",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.cargoai.co/solutions/search",
+        "headers": [
+          {
+            "name": "x-api-key",
+            "value": ""
+          },
+          {
+            "name": "x-api-name",
+            "value": ""
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "This document provides information about request body parameters and headers as well as example requests and responses for different search modes"
+    }
+  ],
+  "bundled": true
+}

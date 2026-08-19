@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Solutions",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tracking Subscription",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.cargoai.co/solutions/track/subscribe",
+        "headers": [
+          {
+            "name": "x-api-key",
+            "value": ""
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "This endpoint facilitates retrieving tracking events and milestones by subscribing to our Track & Trace updates."
+    },
+    {
+      "info": {
+        "name": "Tracking Unsubscription",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.cargoai.co/solutions/track/unsubscribe",
+        "headers": [
+          {
+            "name": "x-api-key",
+            "value": ""
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "This endpoint facilitates unsubscribing to our Track & Trace updates."
+    }
+  ],
+  "bundled": true
+}

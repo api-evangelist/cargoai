@@ -1,0 +1,380 @@
+{
+  "item": [
+    {
+      "id": "4cfbd8cb-8497-408f-a56d-10bb3a91d0be",
+      "name": "AWB Data Extraction",
+      "request": {
+        "name": "AWB Data Extraction",
+        "description": {
+          "content": "AI Powered - Transform AWB image data into structured AWB information and remove manual data entry from your AWB transmission process.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "ai",
+            "awb"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "(Required) API Key",
+            "key": "x-api-key",
+            "value": "<string>"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"<string>\",\n  \"data\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "9c872c9e-bebe-4c32-9cf4-8c289ea835d2",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "ai",
+                "awb"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) API Key",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ops@forwarder.com\",\n  \"type\": \"IMAGE\",\n  \"data\": \"<base64-encoded-awb-image>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"awb\\\": {\\n        \\\"shipper\\\": {\\n            \\\"name\\\": \\\"Shipper's name\\\",\\n            \\\"account_number\\\": \\\"0000\\\",\\n            \\\"phone\\\": \\\"+00000000000\\\",\\n            \\\"fax\\\": null,\\n            \\\"email\\\": \\\"Shipper's email\\\",\\n            \\\"address\\\": {\\n                \\\"line1\\\": \\\"1462 Test street\\\",\\n                \\\"line2\\\": \\\"\\\",\\n                \\\"place\\\": \\\"\\\",\\n                \\\"city\\\": {\\n                    \\\"code\\\": \\\"\\\",\\n                    \\\"name\\\": \\\"Paris\\\"\\n                },\\n                \\\"postal_code\\\": \\\"00000\\\",\\n                \\\"state_province\\\": \\\"\\\",\\n                \\\"country\\\": {\\n                    \\\"code\\\": \\\"FR\\\",\\n                    \\\"name\\\": \\\"France\\\"\\n                }\\n            },\\n            \\\"eori\\\": \\\"\\\"\\n        },\\n        \\\"consignee\\\": {\\n            \\\"name\\\": \\\"Consignee's name\\\",\\n            \\\"account_number\\\": null,\\n            \\\"phone\\\": \\\"+00000000000\\\",\\n            \\\"fax\\\": null,\\n            \\\"email\\\": \\\"\\\",\\n            \\\"address\\\": {\\n                \\\"line1\\\": \\\"1463 Test road\\\",\\n                \\\"line2\\\": \\\"\\\",\\n                \\\"place\\\": \\\"\\\",\\n                \\\"city\\\": {\\n                    \\\"code\\\": \\\"\\\",\\n                    \\\"name\\\": \\\"Singapore\\\"\\n                },\\n                \\\"postal_code\\\": \\\"0000000\\\",\\n                \\\"state_province\\\": \\\"\\\",\\n                \\\"country\\\": {\\n                    \\\"code\\\": \\\"SG\\\",\\n                    \\\"name\\\": \\\"Singapore\\\"\\n                }\\n            },\\n            \\\"eori\\\": \\\"\\\"\\n        },\\n        \\\"notify\\\": {\\n            \\\"name\\\": \\\"\\\",\\n            \\\"account_number\\\": null,\\n            \\\"phone\\\": null,\\n            \\\"fax\\\": null,\\n            \\\"email\\\": \\\"\\\",\\n            \\\"address\\\": {\\n                \\\"line1\\\": \\\"\\\",\\n                \\\"line2\\\": \\\"\\\",\\n                \\\"place\\\": \\\"\\\",\\n                \\\"city\\\": {\\n                    \\\"code\\\": \\\"\\\",\\n                    \\\"name\\\": \\\"\\\"\\n                },\\n                \\\"postal_code\\\": \\\"\\\",\\n                \\\"state_province\\\": \\\"\\\",\\n                \\\"country\\\": {\\n                    \\\"code\\\": \\\"\\\",\\n                    \\\"name\\\": \\\"\\\"\\n                }\\n            },\\n            \\\"eori\\\": \\\"\\\"\\n        },\\n        \\\"routingDetails\\\": [\\n            {\\n                \\\"from_airport_code\\\": \\\"CDG\\\",\\n                \\\"to_airport_code\\\": \\\"AMS\\\",\\n                \\\"carrier_code\\\": \\\"00\\\",\\n                \\\"flight_number\\\": \\\"687\\\",\\n                \\\"flight_date\\\": \\\"2025-08-20\\\"\\n            },\\n            {\\n                \\\"from_airport_code\\\": \\\"AMS\\\",\\n                \\\"to_airport_code\\\": \\\"SIN\\\",\\n                \\\"carrier_code\\\": \\\"00\\\",\\n                \\\"flight_number\\\": \\\"768\\\",\\n                \\\"flight_date\\\": \\\"2025-08-22\\\"\\n            }\\n        ],\\n        \\\"chargesDeclaration\\\": {\\n            \\\"currency_code\\\": \\\"EUR\\\",\\n            \\\"charge_code\\\": \\\"PP\\\",\\n            \\\"weight_or_valuation\\\": \\\"P\\\",\\n            \\\"other\\\": \\\"X\\\",\\n            \\\"values_for_carriage\\\": 0,\\n            \\\"values_for_custom\\\": 0,\\n            \\\"values_for_insurance\\\": 0\\n        },\\n        \\\"rates\\\": [\\n            {\\n                \\\"number_of_pieces\\\": 5,\\n                \\\"gross_weight\\\": {\\n                    \\\"value\\\": 354.1,\\n                    \\\"uom\\\": \\\"K\\\"\\n                },\\n                \\\"volume\\\": {\\n                    \\\"value\\\": 0,\\n                    \\\"uom\\\": \\\"\\\"\\n                },\\n                \\\"slac\\\": 0,\\n                \\\"rate_class_code\\\": \\\"Q\\\",\\n                \\\"commodity_item_number\\\": \\\"\\\",\\n                \\\"chargeable_weight\\\": 357,\\n                \\\"rate_or_charge\\\": 4.02,\\n                \\\"charge_amount\\\": 1435.14,\\n                \\\"nature_and_quantity_of_goods\\\": \\\"PERSONAL GOODS\\\",\\n                \\\"dims\\\": [\\n                    {\\n                        \\\"pcs\\\": 1,\\n                        \\\"length\\\": 80,\\n                        \\\"width\\\": 60,\\n                        \\\"height\\\": 40,\\n                        \\\"weight\\\": 0,\\n                        \\\"Volume\\\": 0,\\n                        \\\"uom\\\": \\\"CMT\\\"\\n                    },\\n                    {\\n                        \\\"pcs\\\": 1,\\n                        \\\"length\\\": 80,\\n                        \\\"width\\\": 60,\\n                        \\\"height\\\": 60,\\n                        \\\"weight\\\": 0,\\n                        \\\"Volume\\\": 0,\\n                        \\\"uom\\\": \\\"CMT\\\"\\n                    },\\n                    {\\n                        \\\"pcs\\\": 1,\\n                        \\\"length\\\": 80,\\n                        \\\"width\\\": 60,\\n                        \\\"height\\\": 60,\\n                        \\\"weight\\\": 0,\\n                        \\\"Volume\\\": 0,\\n                        \\\"uom\\\": \\\"CMT\\\"\\n                    },\\n                    {\\n                        \\\"pcs\\\": 1,\\n                        \\\"length\\\": 80,\\n                        \\\"width\\\": 60,\\n                        \\\"height\\\": 60,\\n                        \\\"weight\\\": 0,\\n                        \\\"Volume\\\": 0,\\n                        \\\"uom\\\": \\\"CMT\\\"\\n                    },\\n                    {\\n                        \\\"pcs\\\": 1,\\n                        \\\"length\\\": 120,\\n                        \\\"width\\\": 80,\\n                        \\\"height\\\": 90,\\n                        \\\"weight\\\": 0,\\n                        \\\"Volume\\\": 0,\\n                        \\\"uom\\\": \\\"CMT\\\"\\n                    }\\n                ],\\n                \\\"uld\\\": [],\\n                \\\"hsc\\\": null\\n            }\\n        ],\\n        \\\"execution\\\": {\\n            \\\"date\\\": \\\"2025-08-20\\\",\\n            \\\"place\\\": \\\"Paris\\\",\\n            \\\"shipper_signature\\\": \\\"Shipper's Signature\\\",\\n            \\\"carrier_signature\\\": \\\"Carrier's Signature\\\"\\n        },\\n        \\\"oci\\\": {\\n            \\\"origin_country_code\\\": \\\"FR\\\"\\n        },\\n        \\\"agent\\\": {\\n            \\\"iata\\\": \\\"0000000\\\",\\n            \\\"cass\\\": \\\"0000\\\",\\n            \\\"name\\\": \\\"Agent's name\\\",\\n            \\\"place\\\": \\\"LYON\\\"\\n        },\\n        \\\"handling\\\": {\\n            \\\"shc\\\": \\\"\\\",\\n            \\\"other_info\\\": \\\"\\\",\\n            \\\"sci\\\": \\\"X\\\"\\n        },\\n        \\\"otherCharges\\\": null\\n    },\\n    \\\"awb_number\\\": \\\"000-00000000\\\",\\n    \\\"confidenceScore\\\": 0.9\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "dc047aaf-bf7f-48f3-a29c-837d6ca18ec5",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "ai",
+                "awb"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) API Key",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ops@forwarder.com\",\n  \"type\": \"IMAGE\",\n  \"data\": \"<base64-encoded-awb-image>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"error\\\": {\\n        \\\"type\\\": \\\"INVALID_REQUEST\\\",\\n        \\\"description\\\": \\\"data: cannot be blank.\\\"\\n    }\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "91b7ff29-e806-4efa-899f-1343646b51c9",
+      "name": "Shipment Data Extraction (Text, Image)",
+      "request": {
+        "name": "Shipment Data Extraction (Text, Image)",
+        "description": {
+          "content": "Transform raw email data into accurate shipment information and remove manual data entry from your quote and book process. By far the easiest way to leverage powerful AI capabilities to supercharge your workflows.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "ai",
+            "shipment"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "(Required) ",
+            "key": "x-api-key",
+            "value": "<string>"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"<string>\",\n  \"data\": \"<string>\",\n  \"type\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"emailBody\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "85e7f9f8-8bfd-4470-8117-c8cfb6355cff",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "ai",
+                "shipment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@gmail.com\",\n  \"data\": \"Hello, Please take the following reservation according to the quotation below: Delivery Thursday 28/10, Origin CDG, Destination BKK, NON GERBABLE, Weight: 500KG - 2m3, Type of goods: Fresh products +2+8°C (no dry ice) Best regards.\",\n  \"type\": \"RAWTEXT\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n\\t\\\"origin\\\": \\\"CDG\\\",\\n\\t\\\"destination\\\": \\\"BKK\\\",\\n\\t\\\"date\\\": \\\"2024-10-28\\\",\\n\\t\\\"loadType\\\": \\\"PER\\\",\\n\\t\\\"weight\\\": 500,\\n\\t\\\"volume\\\": 2,\\n\\t\\\"dimensions\\\": [\\n\\t\\t{\\n\\t\\t\\t\\\"pieces\\\": 2,\\n\\t\\t\\t\\\"length\\\": 140,\\n\\t\\t\\t\\\"width\\\": 100,\\n\\t\\t\\t\\\"height\\\": 120,\\n\\t\\t\\t\\\"weight\\\": 250,\\n\\t\\t\\t\\\"lengthUnit\\\": \\\"\\\",\\n\\t\\t\\t\\\"weightUnit\\\": \\\"kg\\\",\\n\\t\\t\\t\\\"stackable\\\": false\\n\\t\\t}\\n\\t]\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "4cebdeb1-d612-4d63-aead-f08ed2f1b69f",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "ai",
+                "shipment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@gmail.com\",\n  \"data\": \"Hello, Please take the following reservation according to the quotation below: Delivery Thursday 28/10, Origin CDG, Destination BKK, NON GERBABLE, Weight: 500KG - 2m3, Type of goods: Fresh products +2+8°C (no dry ice) Best regards.\",\n  \"type\": \"RAWTEXT\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"customer\\\": null\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cargoai.co/solutions",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "38111122-391b-473e-8b10-b56e4ba0eca6",
+    "name": "Solutions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

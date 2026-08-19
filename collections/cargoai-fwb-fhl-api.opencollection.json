@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Solutions",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "FWB&FHL Sending",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.cargoai.co/solutions/eawb",
+        "headers": [
+          {
+            "name": "x-api-key",
+            "value": ""
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "This document outlines the process of sending FWB&FHL to airlines"
+    }
+  ],
+  "bundled": true
+}

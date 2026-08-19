@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Solutions",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Co2 Calculation",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.cargoai.co/solutions/co2calculation",
+        "params": [
+          {
+            "name": "awb",
+            "value": "",
+            "type": "query",
+            "description": "Booking's AWB prefix and number"
+          },
+          {
+            "name": "flightnumber",
+            "value": "",
+            "type": "query",
+            "description": "Flight Number of a specific flight"
+          },
+          {
+            "name": "date",
+            "value": "",
+            "type": "query",
+            "description": "Flight departure date in local time at origin"
+          },
+          {
+            "name": "weight",
+            "value": "",
+            "type": "query",
+            "description": "Shipment's total weight (kg)"
+          },
+          {
+            "name": "origin",
+            "value": "",
+            "type": "query",
+            "description": "Flight origin"
+          },
+          {
+            "name": "destination",
+            "value": "",
+            "type": "query",
+            "description": "Flight destination"
+          },
+          {
+            "name": "aircraft",
+            "value": "",
+            "type": "query",
+            "description": "Flight Aircraft IATA code (ex: 73Y)"
+          }
+        ]
+      },
+      "docs": "Co2 Calculation"
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Solutions",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AWB Data Extraction",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.cargoai.co/solutions/ai/awb",
+        "headers": [
+          {
+            "name": "x-api-key",
+            "value": ""
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "AI Powered - Transform AWB image data into structured AWB information and remove manual data entry from your AWB transmission process."
+    },
+    {
+      "info": {
+        "name": "Shipment Data Extraction (Text, Image)",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.cargoai.co/solutions/ai/shipment",
+        "headers": [
+          {
+            "name": "x-api-key",
+            "value": ""
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Transform raw email data into accurate shipment information and remove manual data entry from your quote and book process. By far the easiest way to leverage powerful AI capabilities to supercharge your workflows."
+    }
+  ],
+  "bundled": true
+}

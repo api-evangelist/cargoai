@@ -1,0 +1,263 @@
+{
+  "item": [
+    {
+      "id": "50290826-6e24-408a-b98e-016072ef5200",
+      "name": "FWB&FHL Sending",
+      "request": {
+        "name": "FWB&FHL Sending",
+        "description": {
+          "content": "This document outlines the process of sending FWB&FHL to airlines",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "eawb"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "(Required) ",
+            "key": "x-api-key",
+            "value": "<string>"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"awb_number\": \"<string>\",\n  \"awb_status\": \"<string>\",\n  \"userEmail\": \"<string>\",\n  \"userCompanyName\": \"<string>\",\n  \"shipper\": {\n    \"name\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"fax\": \"<string>\",\n    \"email\": \"<string>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"place\": \"<string>\",\n      \"city\": {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"postal_code\": \"<string>\",\n      \"state_province\": \"<string>\",\n      \"country\": {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\"\n      }\n    }\n  },\n  \"consignee\": {\n    \"name\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"fax\": \"<string>\",\n    \"email\": \"<string>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"place\": \"<string>\",\n      \"city\": {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"postal_code\": \"<string>\",\n      \"state_province\": \"<string>\",\n      \"country\": {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\"\n      }\n    }\n  },\n  \"routingDetails\": [\n    {\n      \"from_airport_code\": \"<string>\",\n      \"to_airport_code\": \"<string>\",\n      \"carrier_code\": \"<string>\",\n      \"flight_number\": \"<string>\"\n    },\n    {\n      \"from_airport_code\": \"<string>\",\n      \"to_airport_code\": \"<string>\",\n      \"carrier_code\": \"<string>\",\n      \"flight_number\": \"<string>\"\n    }\n  ],\n  \"isFhlOnly\": false,\n  \"hawbs\": [\n    {\n      \"hawb_number\": \"<string>\",\n      \"number_of_pieces\": \"<integer>\",\n      \"mawbNumber\": \"<string>\",\n      \"slac\": \"<integer>\",\n      \"gross_weight\": {\n        \"value\": \"<float>\",\n        \"uom\": \"<string>\"\n      },\n      \"locations\": {\n        \"port_of_origin\": {\n          \"code\": \"<string>\"\n        },\n        \"port_of_destination\": {\n          \"code\": \"<string>\"\n        }\n      },\n      \"commodity\": \"<string>\",\n      \"currency_code\": \"<string>\",\n      \"charge_code\": \"<string>\",\n      \"other\": \"<string>\",\n      \"values_for_carriage\": \"<float>\",\n      \"values_for_custom\": \"<float>\",\n      \"values_for_insurance\": \"<string>\"\n    },\n    {\n      \"hawb_number\": \"<string>\",\n      \"number_of_pieces\": \"<integer>\",\n      \"mawbNumber\": \"<string>\",\n      \"slac\": \"<integer>\",\n      \"gross_weight\": {\n        \"value\": \"<float>\",\n        \"uom\": \"<string>\"\n      },\n      \"locations\": {\n        \"port_of_origin\": {\n          \"code\": \"<string>\"\n        },\n        \"port_of_destination\": {\n          \"code\": \"<string>\"\n        }\n      },\n      \"commodity\": \"<string>\",\n      \"currency_code\": \"<string>\",\n      \"charge_code\": \"<string>\",\n      \"other\": \"<string>\",\n      \"values_for_carriage\": \"<float>\",\n      \"values_for_custom\": \"<float>\",\n      \"values_for_insurance\": \"<string>\"\n    }\n  ],\n  \"handling\": {\n    \"specialServiceInformation\": \"<string>\",\n    \"otherServiceInformation\": \"<string>\",\n    \"specialHandling\": [\n      {\n        \"code\": \"<string>\"\n      },\n      {\n        \"code\": \"<string>\"\n      }\n    ]\n  },\n  \"senderReference\": {\n    \"senderAirport\": \"<string>\",\n    \"senderOfficeDesignator\": \"<string>\"\n  },\n  \"notify\": {\n    \"name\": \"<string>\",\n    \"account_number\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"fax\": \"<string>\",\n    \"email\": \"<string>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"place\": \"<string>\",\n      \"city\": {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      \"postal_code\": \"<string>\",\n      \"state_province\": \"<string>\",\n      \"country\": {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\"\n      }\n    }\n  },\n  \"chargesDeclaration\": {\n    \"currency_code\": \"<string>\",\n    \"charge_code\": \"<string>\",\n    \"weight_or_valuation\": \"<string>\",\n    \"values_for_carriage\": \"<string>\",\n    \"values_for_custom\": \"<string>\",\n    \"values_for_insurance\": \"<string>\"\n  },\n  \"rates\": [\n    {\n      \"number_of_pieces\": \"<integer>\",\n      \"rate_class_code\": \"<string>\",\n      \"charge_amount\": \"<float>\",\n      \"gross_weight\": {\n        \"value\": \"<float>\",\n        \"uom\": \"<string>\"\n      },\n      \"volume\": {\n        \"value\": \"<float>\",\n        \"uom\": \"<string>\"\n      },\n      \"slac\": \"<integer>\",\n      \"commodity_item_number\": \"<string>\",\n      \"chargeable_weight\": \"<float>\",\n      \"rate_or_charge\": \"<float>\",\n      \"nature_and_quantity_of_goods\": \"<string>\",\n      \"dims\": [\n        {\n          \"pcs\": \"<integer>\",\n          \"length\": \"<integer>\",\n          \"width\": \"<integer>\",\n          \"height\": \"<integer>\",\n          \"uom\": \"<string>\",\n          \"weight\": \"<float>\",\n          \"volume\": \"<float>\"\n        },\n        {\n          \"pcs\": \"<integer>\",\n          \"length\": \"<integer>\",\n          \"width\": \"<integer>\",\n          \"height\": \"<integer>\",\n          \"uom\": \"<string>\",\n          \"weight\": \"<float>\",\n          \"volume\": \"<float>\"\n        }\n      ],\n      \"uld\": [\n        {\n          \"number\": \"<string>\"\n        },\n        {\n          \"number\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"number_of_pieces\": \"<integer>\",\n      \"rate_class_code\": \"<string>\",\n      \"charge_amount\": \"<float>\",\n      \"gross_weight\": {\n        \"value\": \"<float>\",\n        \"uom\": \"<string>\"\n      },\n      \"volume\": {\n        \"value\": \"<float>\",\n        \"uom\": \"<string>\"\n      },\n      \"slac\": \"<integer>\",\n      \"commodity_item_number\": \"<string>\",\n      \"chargeable_weight\": \"<float>\",\n      \"rate_or_charge\": \"<float>\",\n      \"nature_and_quantity_of_goods\": \"<string>\",\n      \"dims\": [\n        {\n          \"pcs\": \"<integer>\",\n          \"length\": \"<integer>\",\n          \"width\": \"<integer>\",\n          \"height\": \"<integer>\",\n          \"uom\": \"<string>\",\n          \"weight\": \"<float>\",\n          \"volume\": \"<float>\"\n        },\n        {\n          \"pcs\": \"<integer>\",\n          \"length\": \"<integer>\",\n          \"width\": \"<integer>\",\n          \"height\": \"<integer>\",\n          \"uom\": \"<string>\",\n          \"weight\": \"<float>\",\n          \"volume\": \"<float>\"\n        }\n      ],\n      \"uld\": [\n        {\n          \"number\": \"<string>\"\n        },\n        {\n          \"number\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"execution\": {\n    \"date\": \"<string>\",\n    \"place\": \"<string>\",\n    \"shipper_signature\": \"<string>\",\n    \"carrier_signature\": \"<string>\"\n  },\n  \"oci\": {\n    \"origin_country_code\": \"<string>\"\n  },\n  \"agent\": {\n    \"iata\": \"<string>\",\n    \"place\": \"<string>\",\n    \"name\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"cass\": \"<string>\"\n  },\n  \"otherCharges\": [\n    {\n      \"pc_indicator\": \"<string>\",\n      \"charge_code\": \"<string>\",\n      \"entitlement_code\": \"<string>\",\n      \"charge_amount\": \"<float>\"\n    },\n    {\n      \"pc_indicator\": \"<string>\",\n      \"charge_code\": \"<string>\",\n      \"entitlement_code\": \"<string>\",\n      \"charge_amount\": \"<float>\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "c50d1975-e0f3-415a-a869-0ef467434106",
+          "name": "204",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eawb"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"awb_number\": \"000-12345675\",\n  \"awb_status\": \"PENDING_DELIVERY\",\n  \"userEmail\": \"tests@cargoai.co\",\n  \"userCompanyName\": \"CargoAi Test\",\n  \"shipper\": {\n    \"account_number\": null,\n    \"name\": \"TEST CARGO INC.\",\n    \"phone\": \"(33) 12 18 15 46 50\",\n    \"fax\": \"(33) 12 18 15 46 51\",\n    \"email\": null,\n    \"address\": {\n      \"line1\": \"TEST Street\",\n      \"place\": null,\n      \"city\": {\n        \"code\": \"PAR\",\n        \"name\": \"Paris\"\n      },\n      \"postal_code\": null,\n      \"state_province\": null,\n      \"country\": {\n        \"code\": \"FR\",\n        \"name\": \"France\"\n      }\n    }\n  },\n  \"consignee\": {\n    \"account_number\": null,\n    \"name\": \"TEST CARGO S.R.L\",\n    \"phone\": \"(33) 12 18 15 46 50\",\n    \"fax\": \"(33) 12 18 15 46 51\",\n    \"email\": \" tests@tests.com\",\n    \"address\": {\n      \"line1\": \"TEST Street\",\n      \"place\": null,\n      \"city\": {\n        \"code\": \"PAR\",\n        \"name\": \"Paris\"\n      },\n      \"postal_code\": null,\n      \"state_province\": null,\n      \"country\": {\n        \"code\": \"FR\",\n        \"name\": \"France\"\n      }\n    }\n  },\n  \"notify\": {\n    \"account_number\": null,\n    \"name\": \"TEST CARGO INC.\",\n    \"phone\": \"(33) 12 18 15 46 50\",\n    \"fax\": \"(33) 12 18 15 46 51\",\n    \"email\": null,\n    \"address\": {\n      \"line1\": \"TEST Street\",\n      \"place\": null,\n      \"city\": {\n        \"code\": \"PAR\",\n        \"name\": \"Paris\"\n      },\n      \"postal_code\": null,\n      \"state_province\": null,\n      \"country\": {\n        \"code\": \"FR\",\n        \"name\": \"France\"\n      }\n    }\n  },\n  \"routingDetails\": [\n    {\n      \"from_airport_code\": \"CDG\",\n      \"to_airport_code\": \"DXB\",\n      \"carrier_code\": \"00\",\n      \"flight_number\": \"373\"\n    },\n    {\n      \"from_airport_code\": \"DXB\",\n      \"to_airport_code\": \"SIN\",\n      \"carrier_code\": \"00\",\n      \"flight_number\": null,\n      \"flight_date\": null\n    }\n  ],\n  \"chargesDeclaration\": {\n    \"currency_code\": \"EUR\",\n    \"charge_code\": \"PP\",\n    \"weight_or_valuation\": \"P\"\n  },\n  \"rates\": [\n    {\n      \"number_of_pieces\": 5,\n      \"gross_weight\": {\n        \"value\": 680,\n        \"uom\": \"K\"\n      },\n      \"volume\": {\n        \"value\": 2.5336,\n        \"uom\": \"MC\"\n      },\n      \"slac\": 5,\n      \"rate_class_code\": \"C\",\n      \"commodity_item_number\": \"4122\",\n      \"chargeable_weight\": 680,\n      \"rate_or_charge\": 2.5336,\n      \"charge_amount\": 1720.4,\n      \"nature_and_quantity_of_goods\": \"AIRCRAFT SUPPLIES\",\n      \"dims\": [\n        {\n          \"pcs\": 3,\n          \"length\": 150,\n          \"width\": 112,\n          \"height\": 37,\n          \"uom\": \"CMT\"\n        },\n        {\n          \"pcs\": 2,\n          \"length\": 152,\n          \"width\": 110,\n          \"height\": 20,\n          \"uom\": \"CMT\"\n        }\n      ]\n    }\n  ],\n  \"execution\": {\n    \"date\": \"23-Jul-24\",\n    \"place\": \"Paris\",\n    \"shipper_signature\": \"Test cargo services\",\n    \"carrier_signature\": \"CargoAirline rpz\"\n  },\n  \"handling\": {\n    \"specialServiceInformation\": \"03 pcs marked and addressed please inform consignee upon arrival\",\n    \"otherServiceInformation\": null\n  },\n  \"senderReference\": {\n    \"senderAirport\": \"CDG\",\n    \"senderOfficeDesignator\": \"FF\"\n  },\n  \"hawbs\": [\n    {\n      \"mawbNumber\": \"000-12345675\",\n      \"slac\": 180,\n      \"hawb_number\": \"HB123430\",\n      \"number_of_pieces\": 3,\n      \"gross_weight\": {\n        \"value\": 480,\n        \"uom\": \"K\"\n      },\n      \"locations\": {\n        \"port_of_origin\": {\n          \"code\": \"CDG\"\n        },\n        \"port_of_destination\": {\n          \"code\": \"DXB\"\n        }\n      },\n      \"commodity\": \"Commodity TEST\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "5df5807d-6b95-44d2-ac7a-2cb856f24d6f",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eawb"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"awb_number\": \"000-12345675\",\n  \"awb_status\": \"PENDING_DELIVERY\",\n  \"userEmail\": \"tests@cargoai.co\",\n  \"userCompanyName\": \"CargoAi Test\",\n  \"shipper\": {\n    \"account_number\": null,\n    \"name\": \"TEST CARGO INC.\",\n    \"phone\": \"(33) 12 18 15 46 50\",\n    \"fax\": \"(33) 12 18 15 46 51\",\n    \"email\": null,\n    \"address\": {\n      \"line1\": \"TEST Street\",\n      \"place\": null,\n      \"city\": {\n        \"code\": \"PAR\",\n        \"name\": \"Paris\"\n      },\n      \"postal_code\": null,\n      \"state_province\": null,\n      \"country\": {\n        \"code\": \"FR\",\n        \"name\": \"France\"\n      }\n    }\n  },\n  \"consignee\": {\n    \"account_number\": null,\n    \"name\": \"TEST CARGO S.R.L\",\n    \"phone\": \"(33) 12 18 15 46 50\",\n    \"fax\": \"(33) 12 18 15 46 51\",\n    \"email\": \" tests@tests.com\",\n    \"address\": {\n      \"line1\": \"TEST Street\",\n      \"place\": null,\n      \"city\": {\n        \"code\": \"PAR\",\n        \"name\": \"Paris\"\n      },\n      \"postal_code\": null,\n      \"state_province\": null,\n      \"country\": {\n        \"code\": \"FR\",\n        \"name\": \"France\"\n      }\n    }\n  },\n  \"notify\": {\n    \"account_number\": null,\n    \"name\": \"TEST CARGO INC.\",\n    \"phone\": \"(33) 12 18 15 46 50\",\n    \"fax\": \"(33) 12 18 15 46 51\",\n    \"email\": null,\n    \"address\": {\n      \"line1\": \"TEST Street\",\n      \"place\": null,\n      \"city\": {\n        \"code\": \"PAR\",\n        \"name\": \"Paris\"\n      },\n      \"postal_code\": null,\n      \"state_province\": null,\n      \"country\": {\n        \"code\": \"FR\",\n        \"name\": \"France\"\n      }\n    }\n  },\n  \"routingDetails\": [\n    {\n      \"from_airport_code\": \"CDG\",\n      \"to_airport_code\": \"DXB\",\n      \"carrier_code\": \"00\",\n      \"flight_number\": \"373\"\n    },\n    {\n      \"from_airport_code\": \"DXB\",\n      \"to_airport_code\": \"SIN\",\n      \"carrier_code\": \"00\",\n      \"flight_number\": null,\n      \"flight_date\": null\n    }\n  ],\n  \"chargesDeclaration\": {\n    \"currency_code\": \"EUR\",\n    \"charge_code\": \"PP\",\n    \"weight_or_valuation\": \"P\"\n  },\n  \"rates\": [\n    {\n      \"number_of_pieces\": 5,\n      \"gross_weight\": {\n        \"value\": 680,\n        \"uom\": \"K\"\n      },\n      \"volume\": {\n        \"value\": 2.5336,\n        \"uom\": \"MC\"\n      },\n      \"slac\": 5,\n      \"rate_class_code\": \"C\",\n      \"commodity_item_number\": \"4122\",\n      \"chargeable_weight\": 680,\n      \"rate_or_charge\": 2.5336,\n      \"charge_amount\": 1720.4,\n      \"nature_and_quantity_of_goods\": \"AIRCRAFT SUPPLIES\",\n      \"dims\": [\n        {\n          \"pcs\": 3,\n          \"length\": 150,\n          \"width\": 112,\n          \"height\": 37,\n          \"uom\": \"CMT\"\n        },\n        {\n          \"pcs\": 2,\n          \"length\": 152,\n          \"width\": 110,\n          \"height\": 20,\n          \"uom\": \"CMT\"\n        }\n      ]\n    }\n  ],\n  \"execution\": {\n    \"date\": \"23-Jul-24\",\n    \"place\": \"Paris\",\n    \"shipper_signature\": \"Test cargo services\",\n    \"carrier_signature\": \"CargoAirline rpz\"\n  },\n  \"handling\": {\n    \"specialServiceInformation\": \"03 pcs marked and addressed please inform consignee upon arrival\",\n    \"otherServiceInformation\": null\n  },\n  \"senderReference\": {\n    \"senderAirport\": \"CDG\",\n    \"senderOfficeDesignator\": \"FF\"\n  },\n  \"hawbs\": [\n    {\n      \"mawbNumber\": \"000-12345675\",\n      \"slac\": 180,\n      \"hawb_number\": \"HB123430\",\n      \"number_of_pieces\": 3,\n      \"gross_weight\": {\n        \"value\": 480,\n        \"uom\": \"K\"\n      },\n      \"locations\": {\n        \"port_of_origin\": {\n          \"code\": \"CDG\"\n        },\n        \"port_of_destination\": {\n          \"code\": \"DXB\"\n        }\n      },\n      \"commodity\": \"Commodity TEST\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"errorCode\\\": 400,\\n    \\\"errorMessage\\\": \\\"invalid request: awb_number: must be in a valid format.\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "010831e8-d8d5-4574-9ceb-380e971a9dd8",
+          "name": "403",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eawb"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"awb_number\": \"000-12345675\",\n  \"awb_status\": \"PENDING_DELIVERY\",\n  \"userEmail\": \"tests@cargoai.co\",\n  \"userCompanyName\": \"CargoAi Test\",\n  \"shipper\": {\n    \"account_number\": null,\n    \"name\": \"TEST CARGO INC.\",\n    \"phone\": \"(33) 12 18 15 46 50\",\n    \"fax\": \"(33) 12 18 15 46 51\",\n    \"email\": null,\n    \"address\": {\n      \"line1\": \"TEST Street\",\n      \"place\": null,\n      \"city\": {\n        \"code\": \"PAR\",\n        \"name\": \"Paris\"\n      },\n      \"postal_code\": null,\n      \"state_province\": null,\n      \"country\": {\n        \"code\": \"FR\",\n        \"name\": \"France\"\n      }\n    }\n  },\n  \"consignee\": {\n    \"account_number\": null,\n    \"name\": \"TEST CARGO S.R.L\",\n    \"phone\": \"(33) 12 18 15 46 50\",\n    \"fax\": \"(33) 12 18 15 46 51\",\n    \"email\": \" tests@tests.com\",\n    \"address\": {\n      \"line1\": \"TEST Street\",\n      \"place\": null,\n      \"city\": {\n        \"code\": \"PAR\",\n        \"name\": \"Paris\"\n      },\n      \"postal_code\": null,\n      \"state_province\": null,\n      \"country\": {\n        \"code\": \"FR\",\n        \"name\": \"France\"\n      }\n    }\n  },\n  \"notify\": {\n    \"account_number\": null,\n    \"name\": \"TEST CARGO INC.\",\n    \"phone\": \"(33) 12 18 15 46 50\",\n    \"fax\": \"(33) 12 18 15 46 51\",\n    \"email\": null,\n    \"address\": {\n      \"line1\": \"TEST Street\",\n      \"place\": null,\n      \"city\": {\n        \"code\": \"PAR\",\n        \"name\": \"Paris\"\n      },\n      \"postal_code\": null,\n      \"state_province\": null,\n      \"country\": {\n        \"code\": \"FR\",\n        \"name\": \"France\"\n      }\n    }\n  },\n  \"routingDetails\": [\n    {\n      \"from_airport_code\": \"CDG\",\n      \"to_airport_code\": \"DXB\",\n      \"carrier_code\": \"00\",\n      \"flight_number\": \"373\"\n    },\n    {\n      \"from_airport_code\": \"DXB\",\n      \"to_airport_code\": \"SIN\",\n      \"carrier_code\": \"00\",\n      \"flight_number\": null,\n      \"flight_date\": null\n    }\n  ],\n  \"chargesDeclaration\": {\n    \"currency_code\": \"EUR\",\n    \"charge_code\": \"PP\",\n    \"weight_or_valuation\": \"P\"\n  },\n  \"rates\": [\n    {\n      \"number_of_pieces\": 5,\n      \"gross_weight\": {\n        \"value\": 680,\n        \"uom\": \"K\"\n      },\n      \"volume\": {\n        \"value\": 2.5336,\n        \"uom\": \"MC\"\n      },\n      \"slac\": 5,\n      \"rate_class_code\": \"C\",\n      \"commodity_item_number\": \"4122\",\n      \"chargeable_weight\": 680,\n      \"rate_or_charge\": 2.5336,\n      \"charge_amount\": 1720.4,\n      \"nature_and_quantity_of_goods\": \"AIRCRAFT SUPPLIES\",\n      \"dims\": [\n        {\n          \"pcs\": 3,\n          \"length\": 150,\n          \"width\": 112,\n          \"height\": 37,\n          \"uom\": \"CMT\"\n        },\n        {\n          \"pcs\": 2,\n          \"length\": 152,\n          \"width\": 110,\n          \"height\": 20,\n          \"uom\": \"CMT\"\n        }\n      ]\n    }\n  ],\n  \"execution\": {\n    \"date\": \"23-Jul-24\",\n    \"place\": \"Paris\",\n    \"shipper_signature\": \"Test cargo services\",\n    \"carrier_signature\": \"CargoAirline rpz\"\n  },\n  \"handling\": {\n    \"specialServiceInformation\": \"03 pcs marked and addressed please inform consignee upon arrival\",\n    \"otherServiceInformation\": null\n  },\n  \"senderReference\": {\n    \"senderAirport\": \"CDG\",\n    \"senderOfficeDesignator\": \"FF\"\n  },\n  \"hawbs\": [\n    {\n      \"mawbNumber\": \"000-12345675\",\n      \"slac\": 180,\n      \"hawb_number\": \"HB123430\",\n      \"number_of_pieces\": 3,\n      \"gross_weight\": {\n        \"value\": 480,\n        \"uom\": \"K\"\n      },\n      \"locations\": {\n        \"port_of_origin\": {\n          \"code\": \"CDG\"\n        },\n        \"port_of_destination\": {\n          \"code\": \"DXB\"\n        }\n      },\n      \"commodity\": \"Commodity TEST\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n    \\\"errorCode\\\": 400,\\n    \\\"errorMessage\\\": \\\"you are not authorized to perform operation on FWB&FHL API\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cargoai.co/solutions",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "492217eb-ed68-4cb7-b85b-56d426585130",
+    "name": "Solutions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

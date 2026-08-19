@@ -1,0 +1,260 @@
+{
+  "item": [
+    {
+      "id": "647eb9af-2cd7-4e85-857e-890b0597e323",
+      "name": "Co2 Calculation",
+      "request": {
+        "name": "Co2 Calculation",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "co2calculation"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "awb",
+              "value": "<string>",
+              "description": "Booking's AWB prefix and number"
+            },
+            {
+              "disabled": false,
+              "key": "flightnumber",
+              "value": "<integer>",
+              "description": "Flight Number of a specific flight"
+            },
+            {
+              "disabled": false,
+              "key": "date",
+              "value": "<string>",
+              "description": "Flight departure date in local time at origin"
+            },
+            {
+              "disabled": false,
+              "key": "weight",
+              "value": "<integer>",
+              "description": "Shipment's total weight (kg)"
+            },
+            {
+              "disabled": false,
+              "key": "origin",
+              "value": "<string>",
+              "description": "Flight origin"
+            },
+            {
+              "disabled": false,
+              "key": "destination",
+              "value": "<string>",
+              "description": "Flight destination"
+            },
+            {
+              "disabled": false,
+              "key": "aircraft",
+              "value": "<string>",
+              "description": "Flight Aircraft IATA code (ex: 73Y)"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "7cdfe354-780c-4e96-9412-def4b53bba4b",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "co2calculation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "awb",
+                  "value": "<string>"
+                },
+                {
+                  "key": "flightnumber",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "date",
+                  "value": "<string>"
+                },
+                {
+                  "key": "weight",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "origin",
+                  "value": "<string>"
+                },
+                {
+                  "key": "destination",
+                  "value": "<string>"
+                },
+                {
+                  "key": "aircraft",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n\\t\\\"origin\\\": \\\"CDG\\\",\\n\\t\\\"destination\\\": \\\"JFK\\\",\\n\\t\\\"aircraft\\\": \\\"330\\\",\\n\\t\\\"distance\\\": {\\n\\t\\t\\\"value\\\": 5833.6,\\n\\t\\t\\\"unit\\\": \\\"km\\\"\\n\\t},\\n\\t\\\"weight\\\": {\\n\\t\\t\\\"value\\\": 100,\\n\\t\\t\\\"unit\\\": \\\"kg\\\"\\n\\t},\\n\\t\\\"co2TTW\\\": {\\n\\t\\t\\\"value\\\": 128.47,\\n\\t\\t\\\"unit\\\": \\\"kg\\\"\\n\\t},\\n\\t\\\"co2WTW\\\": {\\n\\t\\t\\\"value\\\": 157.02,\\n\\t\\t\\\"unit\\\": \\\"kg\\\"\\n\\t},\\n\\t\\\"co2eTTW\\\": {\\n\\t\\t\\\"value\\\": 129.69,\\n\\t\\t\\\"unit\\\": \\\"kg\\\"\\n\\t},\\n\\t\\\"co2eWTW\\\": {\\n\\t\\t\\\"value\\\": 158.24,\\n\\t\\t\\\"unit\\\": \\\"kg\\\"\\n\\t},\\n\\t\\\"co2EfficiencyScore\\\": 100,\\n\\t\\\"co2EfficiencyIndustry\\\": 86\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "40aa6e24-bbb2-4578-ab98-cb7be0a8aa57",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "co2calculation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "awb",
+                  "value": "<string>"
+                },
+                {
+                  "key": "flightnumber",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "date",
+                  "value": "<string>"
+                },
+                {
+                  "key": "weight",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "origin",
+                  "value": "<string>"
+                },
+                {
+                  "key": "destination",
+                  "value": "<string>"
+                },
+                {
+                  "key": "aircraft",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cargoai.co/solutions",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dfdaaaba-394c-4cac-ad65-ff00da333022",
+    "name": "Solutions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
