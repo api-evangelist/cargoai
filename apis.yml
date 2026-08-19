@@ -30,7 +30,7 @@ tags:
 - Standards
 created: '2026-07-30'
 modified: '2026-07-30'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: cargoai:cargoai-routes-schedules-and-rates-api
   name: CargoAi Routes, Schedules and Rates API
