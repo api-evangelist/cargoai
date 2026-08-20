@@ -101,6 +101,10 @@ apis:
   baseURL: https://api.cargoai.co/solutions
   tags:
   - Track and Trace
+  - Webhook
+  - Air Cargo
+  tags_raw:
+  - Track and Trace
   - Webhooks
   - Air Cargo
   properties:
@@ -191,6 +195,10 @@ apis:
   humanURL: https://cargoai.readme.io/reference/cargocopilot-api
   baseURL: https://api.cargoai.co/solutions
   tags:
+  - Artificial Intelligence
+  - Document Extraction
+  - Air Cargo
+  tags_raw:
   - AI
   - Document Extraction
   - Air Cargo
