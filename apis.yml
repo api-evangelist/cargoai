@@ -38,20 +38,31 @@ created: '2026-07-30'
 modified: '2026-07-30'
 specificationVersion: '0.23'
 apis:
-- aid: cargoai:cargoai-routes-schedules-and-rates-api
-  name: CargoAi Routes, Schedules and Rates API
-  description: Search live routes, schedules, capacity, availability and rates across
-    CargoAi's airline network from a single POST /search call, returning quotable
-    flight options with rate types, transit times and CO2 per option.
+- aid: cargoai:cargoai-mcp-connector
+  name: CargoAi MCP Connector
+  description: >-
+    A hosted Model Context Protocol server that wraps the CargoCONNECT endpoints as tools for AI assistants
+    - track a shipment by AWB, search flight rates, look up airline contacts and ground handling agents,
+    and manage tracking subscriptions. OAuth 2.0, restricted to CargoMART Premium and Ultimate offices.
+  humanURL: https://cargoai.readme.io/reference/cargoai-mcp-connector-setup-documentation
+  baseURL: https://api.cargoai.co/mcp
+  tags:
+  - MCP
+  - AI Agents
+  - Air Cargo
+  properties:
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/cargoai-mcp-connector-setup-documentation
+- aid: cargoai:cargoai-ai-api
+  name: CargoAi AI API
+  description: The Ai API from CargoAi — 2 operation(s) for ai.
   humanURL: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
   baseURL: https://api.cargoai.co/solutions
   tags:
-  - Quoting and Rating
-  - Capacity
-  - Air Cargo
+  - Ai
   properties:
   - type: OpenAPI
-    url: openapi/cargoai-routes-schedules-and-rates-api-openapi.yml
+    url: openapi/cargoai-ai-api-openapi.yml
   - type: Documentation
     url: https://cargoai.readme.io/reference/routes-schedules-and-rates
   - type: Documentation
@@ -66,19 +77,6 @@ apis:
     url: https://cargoai.readme.io/reference/air-freight-calculations
   - type: APIReference
     url: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
-- aid: cargoai:cargoai-booking-api
-  name: CargoAi Booking API
-  description: Book a quoted air cargo option, read a booking back by flight UUID,
-    and cancel a booking made through CargoCONNECT. Booking updates from the airline
-    are pushed back on a customer-registered booking callback URL.
-  humanURL: https://cargoai.readme.io/reference/booking
-  baseURL: https://api.cargoai.co/solutions
-  tags:
-  - Booking
-  - Air Cargo
-  properties:
-  - type: OpenAPI
-    url: openapi/cargoai-booking-api-openapi.yml
   - type: Documentation
     url: https://cargoai.readme.io/reference/booking
   - type: Documentation
@@ -97,25 +95,6 @@ apis:
     url: https://cargoai.readme.io/reference/search-book-flow
   - type: APIReference
     url: https://cargoai.readme.io/reference/booking-endpoint-post
-- aid: cargoai:cargoai-track-and-trace-api
-  name: CargoAi Track & Trace API
-  description: Subscribe an air waybill to CargoAi's milestone tracking service and
-    receive event updates by webhook callback and email, or unsubscribe. Supports
-    interline subscriptions that merge two carriers' milestones into one
-    de-duplicated timeline.
-  humanURL: https://cargoai.readme.io/reference/track-and-trace
-  baseURL: https://api.cargoai.co/solutions
-  tags:
-  - Track and Trace
-  - Webhook
-  - Air Cargo
-  tags_raw:
-  - Track and Trace
-  - Webhooks
-  - Air Cargo
-  properties:
-  - type: OpenAPI
-    url: openapi/cargoai-track-and-trace-api-openapi.yml
   - type: Documentation
     url: https://cargoai.readme.io/reference/track-and-trace
   - type: Documentation
@@ -134,39 +113,12 @@ apis:
     url: https://cargoai.readme.io/reference/airfreight-track-and-trace
   - type: APIReference
     url: https://cargoai.readme.io/reference/tracking-subscription-endpoint-post
-- aid: cargoai:cargoai-fwb-fhl-api
-  name: CargoAi FWB & FHL API
-  description: Send master (FWB) and house (FHL) air waybill data to the airline
-    handling a booking as JSON, with CargoAi parsing and formatting it into the IATA
-    cargo message the airline expects, so the caller needs no in-house EDI expertise.
-  humanURL: https://cargoai.readme.io/reference/fwb-and-fhl
-  baseURL: https://api.cargoai.co/solutions
-  tags:
-  - Documentation and eAWB
-  - EDI
-  - Air Cargo
-  properties:
-  - type: OpenAPI
-    url: openapi/cargoai-fwb-fhl-api-openapi.yml
   - type: Documentation
     url: https://cargoai.readme.io/reference/fwb-and-fhl
   - type: Documentation
     url: https://cargoai.readme.io/reference/eawb-data-format
   - type: APIReference
     url: https://cargoai.readme.io/reference/eawb-endpoint-post
-- aid: cargoai:cargoai-user-provisioning-api
-  name: CargoAi User Provisioning API
-  description: Create, read, update and delete the end users an integrator carries
-    under its own CargoCONNECT API key, and mint a redirection token that drops a
-    user into the CargoMART portal without a separate login.
-  humanURL: https://cargoai.readme.io/reference/user-provisioning
-  baseURL: https://api.cargoai.co/solutions
-  tags:
-  - User Management
-  - Provisioning
-  properties:
-  - type: OpenAPI
-    url: openapi/cargoai-user-provisioning-api-openapi.yml
   - type: Documentation
     url: https://cargoai.readme.io/reference/user-provisioning
   - type: Documentation
@@ -175,63 +127,604 @@ apis:
     url: https://cargoai.readme.io/reference/create-user
   - type: APIReference
     url: https://cargoai.readme.io/reference/get-token
-- aid: cargoai:cargoai-cargo2zero-api
-  name: CargoAi Cargo2ZERO CO2 API
-  description: Return the CO2 emissions for an air waybill or a specific flight leg,
-    calculated per IATA Recommended Practice 1678 using the exact routing and
-    aircraft code rather than an origin-destination approximation.
-  humanURL: https://cargoai.readme.io/reference/co2calculation
-  baseURL: https://api.cargoai.co/solutions
-  tags:
-  - Sustainability
-  - Emissions
-  - Air Cargo
-  properties:
-  - type: OpenAPI
-    url: openapi/cargoai-cargo2zero-api-openapi.yml
   - type: APIReference
     url: https://cargoai.readme.io/reference/co2calculation
   - type: Documentation
     url: https://www.iata.org/en/programs/cargo/sustainability/carbon-footprint/
-- aid: cargoai:cargoai-cargocopilot-api
-  name: CargoAi CargoCOPILOT API
-  description: AI extraction endpoints that turn an air waybill image or raw shipment
-    email text into structured JSON that can be fed straight into the quote, book
-    and eAWB endpoints, removing manual re-keying between parties.
-  humanURL: https://cargoai.readme.io/reference/cargocopilot-api
-  baseURL: https://api.cargoai.co/solutions
-  tags:
-  - Artificial Intelligence
-  - Document Extraction
-  - Air Cargo
-  tags_raw:
-  - AI
-  - Document Extraction
-  - Air Cargo
-  properties:
-  - type: OpenAPI
-    url: openapi/cargoai-cargocopilot-api-openapi.yml
   - type: Documentation
     url: https://cargoai.readme.io/reference/cargocopilot-api
   - type: APIReference
     url: https://cargoai.readme.io/reference/awb-extraction
   - type: APIReference
     url: https://cargoai.readme.io/reference/shipment-extraction
-- aid: cargoai:cargoai-mcp-connector
-  name: CargoAi MCP Connector
-  description: A hosted Model Context Protocol server that wraps the CargoCONNECT
-    endpoints as tools for AI assistants - track a shipment by AWB, search flight
-    rates, look up airline contacts and ground handling agents, and manage tracking
-    subscriptions. OAuth 2.0, restricted to CargoMART Premium and Ultimate offices.
-  humanURL: https://cargoai.readme.io/reference/cargoai-mcp-connector-setup-documentation
-  baseURL: https://api.cargoai.co/mcp
+- aid: cargoai:cargoai-book-api
+  name: CargoAi Book API
+  description: The Book API from CargoAi — 1 operation(s) for book.
+  humanURL: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
+  baseURL: https://api.cargoai.co/solutions
   tags:
-  - MCP
-  - AI Agents
-  - Air Cargo
+  - Book
   properties:
+  - type: OpenAPI
+    url: openapi/cargoai-book-api-openapi.yml
   - type: Documentation
-    url: https://cargoai.readme.io/reference/cargoai-mcp-connector-setup-documentation
+    url: https://cargoai.readme.io/reference/routes-schedules-and-rates
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/rate-types
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/rate-search-types-coloader-behaviour
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/product-coverage
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/search-response-objects-definition
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/air-freight-calculations
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-status
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-payments
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-errors
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-callback
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/flywindow
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/flywindow-callback-details
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/search-book-flow
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/booking-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/track-and-trace
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/tracking-event-codes
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/subscription-e-mail-and-url-updates
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/interline-tracking
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/track-trace-premium
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/ai-tracking-predictive-alerts
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/guide-to-track-trace-data
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/airfreight-track-and-trace
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/tracking-subscription-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/fwb-and-fhl
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/eawb-data-format
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/eawb-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/user-provisioning
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/data-format
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/create-user
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/get-token
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/co2calculation
+  - type: Documentation
+    url: https://www.iata.org/en/programs/cargo/sustainability/carbon-footprint/
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/cargocopilot-api
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/awb-extraction
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/shipment-extraction
+- aid: cargoai:cargoai-bookings-api
+  name: CargoAi Bookings API
+  description: The Bookings API from CargoAi — 1 operation(s) for bookings.
+  humanURL: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
+  baseURL: https://api.cargoai.co/solutions
+  tags:
+  - Bookings
+  properties:
+  - type: OpenAPI
+    url: openapi/cargoai-bookings-api-openapi.yml
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/routes-schedules-and-rates
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/rate-types
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/rate-search-types-coloader-behaviour
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/product-coverage
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/search-response-objects-definition
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/air-freight-calculations
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-status
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-payments
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-errors
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-callback
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/flywindow
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/flywindow-callback-details
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/search-book-flow
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/booking-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/track-and-trace
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/tracking-event-codes
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/subscription-e-mail-and-url-updates
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/interline-tracking
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/track-trace-premium
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/ai-tracking-predictive-alerts
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/guide-to-track-trace-data
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/airfreight-track-and-trace
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/tracking-subscription-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/fwb-and-fhl
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/eawb-data-format
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/eawb-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/user-provisioning
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/data-format
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/create-user
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/get-token
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/co2calculation
+  - type: Documentation
+    url: https://www.iata.org/en/programs/cargo/sustainability/carbon-footprint/
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/cargocopilot-api
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/awb-extraction
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/shipment-extraction
+- aid: cargoai:cargoai-co2calculation-api
+  name: CargoAi Co2calculation API
+  description: The Co2calculation API from CargoAi — 1 operation(s) for co2calculation.
+  humanURL: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
+  baseURL: https://api.cargoai.co/solutions
+  tags:
+  - Co2calculation
+  properties:
+  - type: OpenAPI
+    url: openapi/cargoai-co2calculation-api-openapi.yml
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/routes-schedules-and-rates
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/rate-types
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/rate-search-types-coloader-behaviour
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/product-coverage
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/search-response-objects-definition
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/air-freight-calculations
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-status
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-payments
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-errors
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-callback
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/flywindow
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/flywindow-callback-details
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/search-book-flow
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/booking-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/track-and-trace
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/tracking-event-codes
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/subscription-e-mail-and-url-updates
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/interline-tracking
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/track-trace-premium
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/ai-tracking-predictive-alerts
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/guide-to-track-trace-data
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/airfreight-track-and-trace
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/tracking-subscription-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/fwb-and-fhl
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/eawb-data-format
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/eawb-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/user-provisioning
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/data-format
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/create-user
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/get-token
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/co2calculation
+  - type: Documentation
+    url: https://www.iata.org/en/programs/cargo/sustainability/carbon-footprint/
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/cargocopilot-api
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/awb-extraction
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/shipment-extraction
+- aid: cargoai:cargoai-eawb-api
+  name: CargoAi Eawb API
+  description: The Eawb API from CargoAi — 1 operation(s) for eawb.
+  humanURL: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
+  baseURL: https://api.cargoai.co/solutions
+  tags:
+  - Eawb
+  properties:
+  - type: OpenAPI
+    url: openapi/cargoai-eawb-api-openapi.yml
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/routes-schedules-and-rates
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/rate-types
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/rate-search-types-coloader-behaviour
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/product-coverage
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/search-response-objects-definition
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/air-freight-calculations
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-status
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-payments
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-errors
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-callback
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/flywindow
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/flywindow-callback-details
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/search-book-flow
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/booking-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/track-and-trace
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/tracking-event-codes
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/subscription-e-mail-and-url-updates
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/interline-tracking
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/track-trace-premium
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/ai-tracking-predictive-alerts
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/guide-to-track-trace-data
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/airfreight-track-and-trace
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/tracking-subscription-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/fwb-and-fhl
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/eawb-data-format
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/eawb-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/user-provisioning
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/data-format
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/create-user
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/get-token
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/co2calculation
+  - type: Documentation
+    url: https://www.iata.org/en/programs/cargo/sustainability/carbon-footprint/
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/cargocopilot-api
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/awb-extraction
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/shipment-extraction
+- aid: cargoai:cargoai-search-api
+  name: CargoAi Search API
+  description: The Search API from CargoAi — 1 operation(s) for search.
+  humanURL: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
+  baseURL: https://api.cargoai.co/solutions
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/cargoai-search-api-openapi.yml
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/routes-schedules-and-rates
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/rate-types
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/rate-search-types-coloader-behaviour
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/product-coverage
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/search-response-objects-definition
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/air-freight-calculations
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-status
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-payments
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-errors
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-callback
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/flywindow
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/flywindow-callback-details
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/search-book-flow
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/booking-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/track-and-trace
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/tracking-event-codes
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/subscription-e-mail-and-url-updates
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/interline-tracking
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/track-trace-premium
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/ai-tracking-predictive-alerts
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/guide-to-track-trace-data
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/airfreight-track-and-trace
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/tracking-subscription-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/fwb-and-fhl
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/eawb-data-format
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/eawb-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/user-provisioning
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/data-format
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/create-user
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/get-token
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/co2calculation
+  - type: Documentation
+    url: https://www.iata.org/en/programs/cargo/sustainability/carbon-footprint/
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/cargocopilot-api
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/awb-extraction
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/shipment-extraction
+- aid: cargoai:cargoai-track-api
+  name: CargoAi Track API
+  description: The Track API from CargoAi — 3 operation(s) for track.
+  humanURL: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
+  baseURL: https://api.cargoai.co/solutions
+  tags:
+  - Track
+  properties:
+  - type: OpenAPI
+    url: openapi/cargoai-track-api-openapi.yml
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/routes-schedules-and-rates
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/rate-types
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/rate-search-types-coloader-behaviour
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/product-coverage
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/search-response-objects-definition
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/air-freight-calculations
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-status
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-payments
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-errors
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-callback
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/flywindow
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/flywindow-callback-details
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/search-book-flow
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/booking-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/track-and-trace
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/tracking-event-codes
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/subscription-e-mail-and-url-updates
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/interline-tracking
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/track-trace-premium
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/ai-tracking-predictive-alerts
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/guide-to-track-trace-data
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/airfreight-track-and-trace
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/tracking-subscription-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/fwb-and-fhl
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/eawb-data-format
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/eawb-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/user-provisioning
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/data-format
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/create-user
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/get-token
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/co2calculation
+  - type: Documentation
+    url: https://www.iata.org/en/programs/cargo/sustainability/carbon-footprint/
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/cargocopilot-api
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/awb-extraction
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/shipment-extraction
+- aid: cargoai:cargoai-users-api
+  name: CargoAi Users API
+  description: The Users API from CargoAi — 1 operation(s) for users.
+  humanURL: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
+  baseURL: https://api.cargoai.co/solutions
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/cargoai-users-api-openapi.yml
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/routes-schedules-and-rates
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/rate-types
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/rate-search-types-coloader-behaviour
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/product-coverage
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/search-response-objects-definition
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/air-freight-calculations
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-status
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-payments
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-errors
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/booking-callback
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/flywindow
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/flywindow-callback-details
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/search-book-flow
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/booking-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/track-and-trace
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/tracking-event-codes
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/subscription-e-mail-and-url-updates
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/interline-tracking
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/track-trace-premium
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/ai-tracking-predictive-alerts
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/guide-to-track-trace-data
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/airfreight-track-and-trace
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/tracking-subscription-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/fwb-and-fhl
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/eawb-data-format
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/eawb-endpoint-post
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/user-provisioning
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/data-format
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/create-user
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/get-token
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/co2calculation
+  - type: Documentation
+    url: https://www.iata.org/en/programs/cargo/sustainability/carbon-footprint/
+  - type: Documentation
+    url: https://cargoai.readme.io/reference/cargocopilot-api
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/awb-extraction
+  - type: APIReference
+    url: https://cargoai.readme.io/reference/shipment-extraction
 common:
 - type: Website
   url: https://www.cargoai.co/
