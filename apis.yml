@@ -34,6 +34,18 @@ tags:
 - Booking
 - Marketplace
 - Standards
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 created: '2026-07-30'
 modified: '2026-07-30'
 specificationVersion: '0.23'
