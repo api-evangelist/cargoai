@@ -1,0 +1,154 @@
+openapi: 3.2.0
+info:
+  title: Solutions Bookings API
+  version: '1.0'
+servers:
+- url: https://api.cargoai.co/solutions
+security:
+- sec0: []
+tags:
+- name: Bookings
+paths:
+  /bookings/{flightUUID}:
+    put:
+      summary: Cancellation
+      description: This document outlines the process to cancel a booking performed via CargoCONNECT API.
+      operationId: booking-cancellation-endpoint-put
+      parameters:
+      - name: flightUUID
+        in: path
+        description: Flight UUID used for booking creation
+        schema:
+          type: string
+        required: true
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - flightUUID
+              - action
+              properties:
+                flightUUID:
+                  type: string
+                  description: Flight UUID used for booking creation
+                action:
+                  type: string
+                  description: Set to "CANCEL"
+                  default: CANCEL
+                cancelledReasons:
+                  type: string
+                  description: Reasons for the cancellation to be forwarded to the airline
+            examples:
+              Cancellation Request:
+                value:
+                  flightUUID: test-59c7-11ec-9afe-5aa5c611cbcb
+                  action: CANCEL
+                  cancelledReasons: ''
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Booking Cancelled:
+                  value: "{\n\t\"status\": \"CANCELLED\",\n\t\"flightUUID\": \"test-59c7-11ec-9afe-5aa5c611cbcb\"\n}"
+                Cancellation Rejected:
+                  value: "{\n\t\"status\": \"CANCELLED_REJECTED\",\n\t\"flightUUID\": \"test-59c7-11ec-9afe-5aa5c611cbcb\"\n}"
+                Request Timeout:
+                  value: "{\n    \"flightUUID\": \"72466615-1bfe-11ef-b928-465c7a35df8c\",\n    \"status\": \"CANCELLATION_REQUESTED\",\n    \"trackingURL\": \"https://api.dev.cargoai.co/solutions/track?flight-uuid=72466615-1bfe-11ef-b928-465c7a35df8c\"\n}"
+              schema:
+                oneOf:
+                - title: Booking Cancelled
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: CANCELLED
+                    flightUUID:
+                      type: string
+                      example: test-59c7-11ec-9afe-5aa5c611cbcb
+                - title: Cancellation Rejected
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: CANCELLED_REJECTED
+                    flightUUID:
+                      type: string
+                      example: test-59c7-11ec-9afe-5aa5c611cbcb
+                - title: Request Timeout
+                  type: object
+                  properties:
+                    flightUUID:
+                      type: string
+                      example: 72466615-1bfe-11ef-b928-465c7a35df8c
+                    status:
+                      type: string
+                      example: CANCELLATION_REQUESTED
+                    trackingURL:
+                      type: string
+                      example: https://api.dev.cargoai.co/solutions/track?flight-uuid=72466615-1bfe-11ef-b928-465c7a35df8c
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Bad Request:
+                  value: "{\n    \"errorCode\": 400,\n    \"errorMessage\": \"invalid request: invalid value for action: \"\n}"
+              schema:
+                type: object
+                properties:
+                  errorCode:
+                    type: integer
+                    example: 400
+                    default: 0
+                  errorMessage:
+                    type: string
+                    example: 'invalid request: invalid value for action: '
+        '502':
+          description: '502'
+          content:
+            application/json:
+              examples:
+                Internal Server Error:
+                  value: "{\n    \"message\": \"Internal server error\"\n}"
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error
+      deprecated: false
+      tags:
+      - Bookings
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: x-api-key
+      in: header
+x-cargoai-api-family: Quote & Book — Booking
+x-provenance:
+  harvestedFrom: CargoAi CargoCONNECT developer portal (ReadMe) — per-operation oasDefinition embedded in each reference page
+  fetchDate: '2026-07-30'
+  httpStatus: 200
+  sourceInfoTitle: Solutions
+  sourceInfoVersion: '1.0'
+  note: Operations reproduced verbatim from the provider-published OpenAPI 3.1 definition. No operation, path, parameter, schema or server was authored by API Evangelist.
+  operations:
+  - sourceURL: https://cargoai.readme.io/reference/booking-endpoint-post
+    httpStatus: 200
+    operation: POST /book
+  - sourceURL: https://cargoai.readme.io/reference/track-by-flight-uuid-endpoint-get
+    httpStatus: 200
+    operation: GET /track
+  - sourceURL: https://cargoai.readme.io/reference/booking-cancellation-endpoint-put
+    httpStatus: 200
+    operation: PUT /bookings/{flightUUID}

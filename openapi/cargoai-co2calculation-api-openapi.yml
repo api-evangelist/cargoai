@@ -1,0 +1,173 @@
+openapi: 3.2.0
+info:
+  title: Solutions Co2calculation API
+  version: '1.0'
+servers:
+- url: https://api.cargoai.co/solutions
+security:
+- sec0: []
+tags:
+- name: Co2calculation
+paths:
+  /co2calculation:
+    get:
+      summary: Co2 Calculation
+      description: ''
+      operationId: co2calculation
+      parameters:
+      - name: awb
+        in: query
+        description: Booking's AWB prefix and number
+        schema:
+          type: string
+      - name: flightnumber
+        in: query
+        description: Flight Number of a specific flight
+        schema:
+          type: integer
+          format: int32
+      - name: date
+        in: query
+        description: Flight departure date in local time at origin
+        schema:
+          type: string
+      - name: weight
+        in: query
+        description: Shipment's total weight (kg)
+        schema:
+          type: integer
+          format: int32
+      - name: origin
+        in: query
+        description: Flight origin
+        schema:
+          type: string
+      - name: destination
+        in: query
+        description: Flight destination
+        schema:
+          type: string
+      - name: aircraft
+        in: query
+        description: 'Flight Aircraft IATA code (ex: 73Y)'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value: "{\n\t\"origin\": \"CDG\",\n\t\"destination\": \"JFK\",\n\t\"aircraft\": \"330\",\n\t\"distance\": {\n\t\t\"value\": 5833.6,\n\t\t\"unit\": \"km\"\n\t},\n\t\"weight\": {\n\t\t\"value\": 100,\n\t\t\"unit\": \"kg\"\n\t},\n\t\"co2TTW\": {\n\t\t\"value\": 128.47,\n\t\t\"unit\": \"kg\"\n\t},\n\t\"co2WTW\": {\n\t\t\"value\": 157.02,\n\t\t\"unit\": \"kg\"\n\t},\n\t\"co2eTTW\": {\n\t\t\"value\": 129.69,\n\t\t\"unit\": \"kg\"\n\t},\n\t\"co2eWTW\": {\n\t\t\"value\": 158.24,\n\t\t\"unit\": \"kg\"\n\t},\n\t\"co2EfficiencyScore\": 100,\n\t\"co2EfficiencyIndustry\": 86\n}"
+              schema:
+                type: object
+                properties:
+                  origin:
+                    type: string
+                    example: CDG
+                  destination:
+                    type: string
+                    example: JFK
+                  aircraft:
+                    type: string
+                    example: '330'
+                  distance:
+                    type: object
+                    properties:
+                      value:
+                        type: number
+                        example: 5833.6
+                        default: 0
+                      unit:
+                        type: string
+                        example: km
+                  weight:
+                    type: object
+                    properties:
+                      value:
+                        type: integer
+                        example: 100
+                        default: 0
+                      unit:
+                        type: string
+                        example: kg
+                  co2TTW:
+                    type: object
+                    properties:
+                      value:
+                        type: number
+                        example: 128.47
+                        default: 0
+                      unit:
+                        type: string
+                        example: kg
+                  co2WTW:
+                    type: object
+                    properties:
+                      value:
+                        type: number
+                        example: 157.02
+                        default: 0
+                      unit:
+                        type: string
+                        example: kg
+                  co2eTTW:
+                    type: object
+                    properties:
+                      value:
+                        type: number
+                        example: 129.69
+                        default: 0
+                      unit:
+                        type: string
+                        example: kg
+                  co2eWTW:
+                    type: object
+                    properties:
+                      value:
+                        type: number
+                        example: 158.24
+                        default: 0
+                      unit:
+                        type: string
+                        example: kg
+                  co2EfficiencyScore:
+                    type: integer
+                    example: 100
+                    default: 0
+                  co2EfficiencyIndustry:
+                    type: integer
+                    example: 86
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Co2calculation
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: x-api-key
+      in: header
+x-cargoai-api-family: Cargo2ZERO CO2
+x-provenance:
+  harvestedFrom: CargoAi CargoCONNECT developer portal (ReadMe) — per-operation oasDefinition embedded in each reference page
+  fetchDate: '2026-07-30'
+  httpStatus: 200
+  sourceInfoTitle: Solutions
+  sourceInfoVersion: '1.0'
+  note: Operations reproduced verbatim from the provider-published OpenAPI 3.1 definition. No operation, path, parameter, schema or server was authored by API Evangelist.
+  operations:
+  - sourceURL: https://cargoai.readme.io/reference/co2calculation
+    httpStatus: 200
+    operation: GET /co2calculation

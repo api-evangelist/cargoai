@@ -1,0 +1,635 @@
+openapi: 3.2.0
+info:
+  title: Cargoai Track API
+  version: '1.0'
+  description: 'Operations tagged Track across 2 of this provider''s published API definitions: cargoai-booking-api-openapi.yml, cargoai-track-and-trace-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cargoai.co/solutions
+security:
+- sec0: []
+tags:
+- name: Track
+paths:
+  /track:
+    get:
+      summary: Track by Flight UUID
+      description: ''
+      operationId: track-by-flight-uuid-endpoint-get
+      parameters:
+      - name: flight-uuid
+        in: query
+        description: flightUUID used during booking creation — required to get updates on booking, flight itinerary and shipment details
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Booking Confirmed:
+                  value: "[\n    {\n        \"flightUUID\": \"1bc492d0-bbee-11f0-8f9c-86c2340adebc\",\n        \"awb\": \"000-15019804\",\n        \"flight\": {\n            \"flightUUID\": \"1bc492d0-bbee-11f0-8f9c-86c2340adebc\",\n            \"airlineCode\": \"00\",\n            \"flightNumber\": \"00867\",\n            \"arrivalTime\": \"2025-11-10T06:00:00+08:00\",\n            \"arrivalAirport\": \"SIN\",\n            \"departureTime\": \"2025-11-09T19:00:00+01:00\",\n            \"departureAirport\": \"XCR\",\n            \"latestAcceptanceTime\": \"2025-11-09T14:00:00+01:00\",\n            \"timeOfAvailability\": \"2025-11-10T11:00:00+08:00\",\n            \"legs\": [\n                {\n                    \"flightNumber\": \"00867\",\n                    \"arrivalTime\": \"2025-11-10T06:00:00+08:00\",\n                    \"arrivalAirport\": \"SIN\",\n                    \"departureTime\": \"2025-11-09T19:00:00+01:00\",\n                    \"departureAirport\": \"XCR\",\n                    \"bodyType\": \"Widebody\",\n                    \"aircraftCode\": \"777\",\n                    \"co2\": {\n                        \"value\": 265.9386359118521,\n                        \"estimation\": false\n                    }\n                }\n            ],\n            \"features\": {\n                \"bookable\": true,\n                \"awbOptional\": true\n            },\n            \"rates\": [\n                {\n                    \"id\": \"1bc492b9-bbee-11f0-8f9c-86c2340adebc\",\n                    \"name\": \"Spot\",\n                    \"type\": \"live\",\n                    \"currency\": \"EUR\",\n                    \"netRate\": 5.94,\n                    \"allInRate\": 6.08,\n                    \"total\": 1010.0,\n                    \"minimumRate\": false,\n                    \"charges\": [\n                        {\n                            \"label\": \"Fuel surcharge\",\n                            \"rate\": 0.06,\n                            \"type\": \"CHARGEABLE_WEIGHT\",\n                            \"code\": \"fsc\",\n                            \"minAmount\": 0.0,\n                            \"maxAmount\": 0.0\n                        },\n                        {\n                            \"label\": \"Security surcharge\",\n                            \"rate\": 0.08,\n                            \"type\": \"GROSS_WEIGHT\",\n                            \"code\": \"ssc\",\n                            \"minAmount\": 0.0,\n                            \"maxAmount\": 0.0\n                        }\n                    ],\n                    \"ocdc\": [],\n                    \"isSpotQuoteRate\": true,\n                    \"handlingCodes\": [\n                        \"GCR\"\n                    ]\n                }\n            ],\n            \"available\": true,\n            \"source\": \"AI-MOCK\",\n            \"awbPrefixes\": [\n                \"000\"\n            ],\n            \"airlineConditions\": \"\\n\\t1- Offer subject to capacity when booking.\\n\\t2- Quotation reference to be imperatively mentioned when booking.\\n\\t3- This quotation is valid for the packaging indicated only, in the event of modification, please make a new request to the sales department.\\n\\t4- Taxes (IRC – MYC – etc…) subject to change without notice.\\n\\t5- In the event of cancellation or no show, we reserve the right to pass on all or part of the costs\\n\\t- Cancellation 72 hours before the departure of the truck and/or the flight (working hours): invoicing 50% of the amount of the freight\\n\\t- Cancellation 48 hours before the departure of the truck and/or the flight (working hours): invoicing of 75% of the amount of the freight\\n\\t- Cancellation 24 hours before the departure of the truck and/or the flight (working hours): invoicing of 100% of the amount of the freight\\n\\t- In the case of a no show (no presentation of the freight): invoicing of 100% of the amount of the freight\\n\\t- In the case of a low show (discount less than 50% of the reserved taxable weight): invoicing of 75% of the reserved taxable weight\\n\",\n            \"contacts\": [\n                \"tests@cargoai.co\"\n            ],\n            \"handlingInfoLink\": \"https://www.cargoai.co/terms\",\n            \"ghaName\": \"Mocked GHA\",\n            \"hle\": \"19:00\",\n            \"ghaAddress\": \"Airport road, Cargo Terminal, Mocked Cargo building\"\n        },\n        \"shipment\": {\n            \"product\": \"GCR\",\n            \"weight\": 100.0,\n            \"pieces\": 1,\n          \"chargeableWeight\": 167.0,\n\t\t\t\t\t\"dimensions\": [\n              {\n                  \"height\": 100.0,\n                  \"length\": 100.0,\n                  \"width\": 100.0,\n                  \"weight\": 100.0,\n                  \"pieces\": 1,\n                  \"volume\": 1.0,\n                  \"stackable\": true,\n                  \"tiltable\": false,\n                  \"topLoadable\": false,\n                  \"weightType\": \"PER_ITEM\",\n                  \"loadType\": \"DIMENSIONS\"\n              }\n       \t\t ],\n            \"specialHandlingCodes\": [\n                \"GCR\"\n            ],\n            \"volume\": 1.0,\n            \"measurementUnit\": \"METRIC\"\n        },\n        \"bookingResponse\": {\n            \"flightUUID\": \"1bc492d0-bbee-11f0-8f9c-86c2340adebc\",\n            \"bookingStatus\": \"DELIVERED\",\n            \"awb\": \"000-15019804\",\n            \"ffr\": \"\"\n        }\n    }\n]"
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    flightUUID:
+                      type: string
+                      example: 1bc492d0-bbee-11f0-8f9c-86c2340adebc
+                    awb:
+                      type: string
+                      example: 000-15019804
+                    flight:
+                      type: object
+                      properties:
+                        flightUUID:
+                          type: string
+                          example: 1bc492d0-bbee-11f0-8f9c-86c2340adebc
+                        airlineCode:
+                          type: string
+                          example: '00'
+                        flightNumber:
+                          type: string
+                          example: 00867
+                        arrivalTime:
+                          type: string
+                          example: '2025-11-10T06:00:00+08:00'
+                        arrivalAirport:
+                          type: string
+                          example: SIN
+                        departureTime:
+                          type: string
+                          example: '2025-11-09T19:00:00+01:00'
+                        departureAirport:
+                          type: string
+                          example: XCR
+                        latestAcceptanceTime:
+                          type: string
+                          example: '2025-11-09T14:00:00+01:00'
+                        timeOfAvailability:
+                          type: string
+                          example: '2025-11-10T11:00:00+08:00'
+                        legs:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              flightNumber:
+                                type: string
+                                example: 00867
+                              arrivalTime:
+                                type: string
+                                example: '2025-11-10T06:00:00+08:00'
+                              arrivalAirport:
+                                type: string
+                                example: SIN
+                              departureTime:
+                                type: string
+                                example: '2025-11-09T19:00:00+01:00'
+                              departureAirport:
+                                type: string
+                                example: XCR
+                              bodyType:
+                                type: string
+                                example: Widebody
+                              aircraftCode:
+                                type: string
+                                example: '777'
+                              co2:
+                                type: object
+                                properties:
+                                  value:
+                                    type: number
+                                    example: 265.9386359118521
+                                    default: 0
+                                  estimation:
+                                    type: boolean
+                                    example: false
+                                    default: true
+                        features:
+                          type: object
+                          properties:
+                            bookable:
+                              type: boolean
+                              example: true
+                              default: true
+                            awbOptional:
+                              type: boolean
+                              example: true
+                              default: true
+                        rates:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                example: 1bc492b9-bbee-11f0-8f9c-86c2340adebc
+                              name:
+                                type: string
+                                example: Spot
+                              type:
+                                type: string
+                                example: live
+                              currency:
+                                type: string
+                                example: EUR
+                              netRate:
+                                type: number
+                                example: 5.94
+                                default: 0
+                              allInRate:
+                                type: number
+                                example: 6.08
+                                default: 0
+                              total:
+                                type: integer
+                                example: 1010
+                                default: 0
+                              minimumRate:
+                                type: boolean
+                                example: false
+                                default: true
+                              charges:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    label:
+                                      type: string
+                                      example: Fuel surcharge
+                                    rate:
+                                      type: number
+                                      example: 0.06
+                                      default: 0
+                                    type:
+                                      type: string
+                                      example: CHARGEABLE_WEIGHT
+                                    code:
+                                      type: string
+                                      example: fsc
+                                    minAmount:
+                                      type: integer
+                                      example: 0
+                                      default: 0
+                                    maxAmount:
+                                      type: integer
+                                      example: 0
+                                      default: 0
+                              ocdc:
+                                type: array
+                                items:
+                                  type: object
+                                  properties: {}
+                              isSpotQuoteRate:
+                                type: boolean
+                                example: true
+                                default: true
+                              handlingCodes:
+                                type: array
+                                items:
+                                  type: string
+                                  example: GCR
+                        available:
+                          type: boolean
+                          example: true
+                          default: true
+                        source:
+                          type: string
+                          example: AI-MOCK
+                        awbPrefixes:
+                          type: array
+                          items:
+                            type: string
+                            example: '000'
+                        airlineConditions:
+                          type: string
+                          example: "\n\t1- Offer subject to capacity when booking.\n\t2- Quotation reference to be imperatively mentioned when booking.\n\t3- This quotation is valid for the packaging indicated only, in the event of modification, please make a new request to the sales department.\n\t4- Taxes (IRC – MYC – etc…) subject to change without notice.\n\t5- In the event of cancellation or no show, we reserve the right to pass on all or part of the costs\n\t- Cancellation 72 hours before the departure of the truck and/or the flight (working hours): invoicing 50% of the amount of the freight\n\t- Cancellation 48 hours before the departure of the truck and/or the flight (working hours): invoicing of 75% of the amount of the freight\n\t- Cancellation 24 hours before the departure of the truck and/or the flight (working hours): invoicing of 100% of the amount of the freight\n\t- In the case of a no show (no presentation of the freight): invoicing of 100% of the amount of the freight\n\t- In the case of a low show (discount less than 50% of the reserved taxable weight): invoicing of 75% of the reserved taxable weight\n"
+                        contacts:
+                          type: array
+                          items:
+                            type: string
+                            example: tests@cargoai.co
+                        handlingInfoLink:
+                          type: string
+                          example: https://www.cargoai.co/terms
+                        ghaName:
+                          type: string
+                          example: Mocked GHA
+                        hle:
+                          type: string
+                          example: '19:00'
+                        ghaAddress:
+                          type: string
+                          example: Airport road, Cargo Terminal, Mocked Cargo building
+                    shipment:
+                      type: object
+                      properties:
+                        product:
+                          type: string
+                          example: GCR
+                        weight:
+                          type: integer
+                          example: 100
+                          default: 0
+                        pieces:
+                          type: integer
+                          example: 1
+                          default: 0
+                        chargeableWeight:
+                          type: integer
+                          example: 167
+                          default: 0
+                        dimensions:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              height:
+                                type: integer
+                                example: 100
+                                default: 0
+                              length:
+                                type: integer
+                                example: 100
+                                default: 0
+                              width:
+                                type: integer
+                                example: 100
+                                default: 0
+                              weight:
+                                type: integer
+                                example: 100
+                                default: 0
+                              pieces:
+                                type: integer
+                                example: 1
+                                default: 0
+                              volume:
+                                type: integer
+                                example: 1
+                                default: 0
+                              stackable:
+                                type: boolean
+                                example: true
+                                default: true
+                              tiltable:
+                                type: boolean
+                                example: false
+                                default: true
+                              topLoadable:
+                                type: boolean
+                                example: false
+                                default: true
+                              weightType:
+                                type: string
+                                example: PER_ITEM
+                              loadType:
+                                type: string
+                                example: DIMENSIONS
+                        specialHandlingCodes:
+                          type: array
+                          items:
+                            type: string
+                            example: GCR
+                        volume:
+                          type: integer
+                          example: 1
+                          default: 0
+                        measurementUnit:
+                          type: string
+                          example: METRIC
+                    bookingResponse:
+                      type: object
+                      properties:
+                        flightUUID:
+                          type: string
+                          example: 1bc492d0-bbee-11f0-8f9c-86c2340adebc
+                        bookingStatus:
+                          type: string
+                          example: DELIVERED
+                        awb:
+                          type: string
+                          example: 000-15019804
+                        ffr:
+                          type: string
+                          example: ''
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                Booking not found:
+                  value: "{\n    \"status\": 404,\n    \"error\": \"not found\"\n}"
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                    default: 0
+                  error:
+                    type: string
+                    example: not found
+        '500':
+          description: '500'
+          content:
+            application/json:
+              examples:
+                Missing query param:
+                  value: "{\n    \"status\": 500,\n    \"error\": \"ValidationException: One or more parameter values are not valid. The AttributeValue for a key attribute cannot contain an empty string value. Key: flightId\\n\\tstatus code: 400, request id: PQ9MICEMNGKEJ4JDJRV4UIKQ53VV4KQNSO5AEMVJF66Q9ASUAAJG\"\n}"
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 500
+                    default: 0
+                  error:
+                    type: string
+                    example: "ValidationException: One or more parameter values are not valid. The AttributeValue for a key attribute cannot contain an empty string value. Key: flightId\n\tstatus code: 400, request id: PQ9MICEMNGKEJ4JDJRV4UIKQ53VV4KQNSO5AEMVJF66Q9ASUAAJG"
+      deprecated: false
+      tags:
+      - Track
+    servers:
+    - url: https://api.cargoai.co/solutions
+  /track/subscribe:
+    post:
+      summary: Tracking Subscription
+      description: This endpoint facilitates retrieving tracking events and milestones by subscribing to our Track & Trace updates.
+      operationId: tracking-subscription-endpoint-post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - awb
+              properties:
+                awb:
+                  type: string
+                  description: Booking AWB prefix and number
+                url:
+                  type: string
+                  description: callback URL — required to subscribe to updates via HTTP POST
+                emails:
+                  type: array
+                  description: list of email addresses — required to subscribe to updates via email
+                  items:
+                    type: string
+                airlineCode:
+                  type: string
+                  description: IATA 2-letter airline code in case of interline shipments
+            examples:
+              E-Mail Subscription Only:
+                value:
+                  awb: 000-11223343
+                  emails:
+                  - tests@test.com
+              URL Subscription Only:
+                value:
+                  url: https:://www.callback-url.to
+                  awb: 000-11223343
+              URL and E-mail Subscription:
+                value:
+                  url: https:://www.callback-url.to
+                  awb: 000-11223343
+                  emails:
+                  - tests@test.com
+              Interline AWB Subscription:
+                value:
+                  awb: 000-12345675
+                  airlineCode: XX
+                  url: https://test-url.com
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Subscription Successful:
+                  value: "{\n    \"status\": 200,\n    \"message\": \"successfully subscribed\"\n}"
+                Subscription Successful (Limited Updates):
+                  value: "{\n    \"status\": 200,\n    \"message\": \"successfully subscribed - This airline is not fully supported, so updates may be limited.\"\n}"
+              schema:
+                oneOf:
+                - title: Subscription Successful
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    message:
+                      type: string
+                      example: successfully subscribed
+                - title: Subscription Successful (Limited Updates)
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    message:
+                      type: string
+                      example: successfully subscribed - This airline is not fully supported, so updates may be limited.
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Bad Request:
+                  value: "{\n    \"status\": 400,\n    \"error\": \"invalid body\"\n}"
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 400
+                    default: 0
+                  error:
+                    type: string
+                    example: invalid body
+      deprecated: false
+      tags:
+      - Track
+    servers:
+    - url: https://api.cargoai.co/solutions
+  /track/unsubscribe:
+    post:
+      summary: Tracking Unsubscription
+      description: This endpoint facilitates unsubscribing to our Track & Trace updates.
+      operationId: tracking-unsubscription-endpoint-post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - awb
+              properties:
+                awb:
+                  type: string
+                  description: Booking AWB prefix and number
+                url:
+                  type: string
+                  description: callback URL — required to unsubscribe from updates via HTTP POST
+                email:
+                  type: string
+                  description: email address — required to unsubscribe from updates via email [to be deprecated]
+                emails:
+                  type: array
+                  description: email addresses — required to unsubscribe from updates via email
+                  items:
+                    type: string
+            examples:
+              Unsubscribe from URL and E-Mail Subscription:
+                value:
+                  awb: 000-11223343
+                  url: https://www.test-url.to
+                  email: tests@tests.com
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Successfully unsubscribed:
+                  value: "{\n    \"status\": 200,\n    \"message\": \"successfully unsubscribed\"\n}"
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  message:
+                    type: string
+                    example: successfully unsubscribed
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Bad Request:
+                  value: "{\n\t\"status\": 400,\n\t\"error\": \"invalid body\"\n}"
+                Invalid URL Format:
+                  value: "{\n    \"status\": 400,\n    \"error\": \"invalid url format\"\n}"
+                Not Subscribed:
+                  value: "{\n    \"status\": 400,\n    \"error\": \"not subscribed\"\n}"
+              schema:
+                oneOf:
+                - title: Bad Request
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 400
+                      default: 0
+                    error:
+                      type: string
+                      example: invalid body
+                - title: Invalid URL Format
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 400
+                      default: 0
+                    error:
+                      type: string
+                      example: invalid url format
+                - title: Not Subscribed
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 400
+                      default: 0
+                    error:
+                      type: string
+                      example: not subscribed
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                no active subscription found:
+                  value: "{\n    \"status\": 404,\n    \"error\": \"No active subscription found for the given AWB/target\"\n}"
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                    default: 0
+                  error:
+                    type: string
+                    example: No active subscription found for the given AWB/target
+        '500':
+          description: '500'
+          content:
+            application/json:
+              examples:
+                Internal Server Error:
+                  value: "{\n    \"status\": 500,\n    \"error\": \"internal server error\"\n}"
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 500
+                    default: 0
+                  error:
+                    type: string
+                    example: internal server error
+      deprecated: false
+      tags:
+      - Track
+    servers:
+    - url: https://api.cargoai.co/solutions
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: x-api-key
+      in: header
+x-refined-from:
+- cargoai-booking-api-openapi.yml
+- cargoai-track-and-trace-api-openapi.yml
+x-cargoai-api-family: Quote & Book — Booking
+x-provenance:
+  harvestedFrom: CargoAi CargoCONNECT developer portal (ReadMe) — per-operation oasDefinition embedded in each reference page
+  fetchDate: '2026-07-30'
+  httpStatus: 200
+  sourceInfoTitle: Solutions
+  sourceInfoVersion: '1.0'
+  note: Operations reproduced verbatim from the provider-published OpenAPI 3.1 definition. No operation, path, parameter, schema or server was authored by API Evangelist.
+  operations:
+  - sourceURL: https://cargoai.readme.io/reference/booking-endpoint-post
+    httpStatus: 200
+    operation: POST /book
+  - sourceURL: https://cargoai.readme.io/reference/track-by-flight-uuid-endpoint-get
+    httpStatus: 200
+    operation: GET /track
+  - sourceURL: https://cargoai.readme.io/reference/booking-cancellation-endpoint-put
+    httpStatus: 200
+    operation: PUT /bookings/{flightUUID}

@@ -1,0 +1,757 @@
+openapi: 3.2.0
+info:
+  title: Solutions Book API
+  version: '1.0'
+servers:
+- url: https://api.cargoai.co/solutions
+security:
+- sec0: []
+tags:
+- name: Book
+paths:
+  /book:
+    post:
+      summary: Booking
+      description: This document outlines the process for booking with CargoCONNECT API.
+      operationId: booking-endpoint-post
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user
+              properties:
+                user:
+                  type: object
+                  description: User details
+                  required:
+                  - email
+                  - lastName
+                  - firstName
+                  - iata
+                  - cass
+                  - country
+                  properties:
+                    email:
+                      type: string
+                      description: Freight Forwarder's email address
+                    companyName:
+                      type: string
+                      description: Freight Forwarder's company name
+                    lastName:
+                      type: string
+                      description: Freight Forwarder's last name
+                    firstName:
+                      type: string
+                      description: Freight Forwarder's first name
+                    iata:
+                      type: string
+                      description: Freight Forwarder's IATA code
+                    cass:
+                      type: string
+                      description: Freight Forwarder's Cass code
+                    country:
+                      type: string
+                      description: Freight Forwarder's country code
+                flightUUID:
+                  type: string
+                  description: Flight UUID selected from search (required for Classic Booking)
+                rateId:
+                  type: string
+                  description: Rate ID selected from search (required for Classic Booking)
+                itinerary:
+                  type: object
+                  description: Flight information to perform search/flight selection before booking (required for Direct Booking)
+                  required:
+                  - origin
+                  - destination
+                  - departureDates
+                  properties:
+                    origin:
+                      type: string
+                      description: Origin airport code
+                    destination:
+                      type: string
+                      description: Destination airport code
+                    airlineCode:
+                      type: string
+                      description: AirlineCode for results filtering
+                    departureDates:
+                      type: array
+                      description: List of wanted departure dates
+                      items:
+                        type: string
+                    flightNumbers:
+                      type: string
+                      description: List of wanted flight numbers
+                    allotmentCode:
+                      type: string
+                      description: Identifier of your allotment in the airline's system (can be used in Direct booking) (to be deprecated — put "allotmentCode" at the root level)
+                shipment:
+                  type: object
+                  description: Shipment details (required for Direct Booking)
+                  required:
+                  - pieces
+                  - weight
+                  - volume
+                  properties:
+                    pieces:
+                      type: integer
+                      description: Total number of pieces of your shipment
+                      format: int32
+                    weight:
+                      type: number
+                      description: Total gross weight of your shipment (kg)
+                      format: float
+                    volume:
+                      type: number
+                      description: Total volume of your shipment (cbm)
+                      format: float
+                    dimensions:
+                      type: array
+                      description: Detailed description of the piece groups of your shipment (fake dimensions are calculated if not provided)
+                      items:
+                        properties:
+                          pieces:
+                            type: integer
+                            description: number of piece of the piece group
+                            default: 1
+                            format: int32
+                          length:
+                            type: number
+                            description: indicates length of piece group (cm)
+                            default: 100
+                            format: float
+                          width:
+                            type: number
+                            description: indicates width of piece group (cm)
+                            default: 100
+                            format: float
+                          height:
+                            type: number
+                            description: indicates height of piece group (cm)
+                            default: 100
+                            format: float
+                          weight:
+                            type: number
+                            description: indicates piece group weight (per piece or total, based on weightType field value) (kg)
+                            default: 200
+                            format: float
+                          loadType:
+                            type: string
+                            description: indicates if the shipment information are totals only or with dimensions breakdown
+                            default: DIMENSIONS
+                            enum:
+                            - DIMENSIONS
+                            - TOTAL
+                            - BUP
+                          weightType:
+                            type: string
+                            description: indicates if piece group weight is total or per piece
+                            default: PER_ITEM
+                            enum:
+                            - PER_ITEM
+                            - TOTAL
+                          stackable:
+                            type: boolean
+                            description: indicates if shipment can be stack during loading in aircraft. when no dimensions are provided, will be set true to maximize search results
+                            default: true
+                          tiltable:
+                            type: boolean
+                            description: indicates if shipment is turnable during loading in aircraft
+                            default: false
+                          toploadable:
+                            type: boolean
+                            description: indicates if shipment can be loaded on top during loading in aircraft
+                            default: false
+                          volume:
+                            type: number
+                            description: volume of the piece group
+                            format: float
+                          uldType:
+                            type: string
+                            description: ULD type of the piece group (can be used in Direct booking) (required if the SHC/the LoadType is "BUP")
+                            enum:
+                            - '"AKE"'
+                            - '"LDP"'
+                            - '"MDP"'
+                        required:
+                        - pieces
+                        - length
+                        - width
+                        - height
+                        - weight
+                        - loadType
+                        - weightType
+                        type: object
+                    chargeableWeight:
+                      type: number
+                      description: Total chargeable weight of your shipment (calculated if not provided) (kg)
+                      default: 200
+                      format: float
+                    measurementUnit:
+                      type: string
+                      description: Measurement Unit ("METRIC" or "IMPERIAL")
+                      default: METRIC
+                    product:
+                      type: string
+                      description: Product name
+                      default: GCR
+                    globalHS:
+                      type: array
+                      description: Global Harmonized System Codes
+                      items:
+                        type: string
+                    europeanHS:
+                      type: array
+                      description: European Harmonized System Codes
+                      items:
+                        type: string
+                    scrs:
+                      type: array
+                      description: Special Commodity Rate Codes
+                      items:
+                        type: string
+                    specialHandlingCodes:
+                      type: array
+                      description: Special handling codes three letter codes to provide additionnal details about shipment handling
+                      items:
+                        type: string
+                awb:
+                  type: string
+                  description: Air waybill prefix and number (required if "awbOptional" of associated flight is false)
+                comment:
+                  type: string
+                  description: Remark about your booking or additional details about handling
+                handlingCodes:
+                  type: array
+                  description: List of special handling codes for your booking
+                  items:
+                    type: string
+                id:
+                  type: string
+                  description: Direct Booking Request Id to add to params before repeating request to get updated results
+                allotmentCode:
+                  type: string
+                  description: Identifier of your allotment in the airline's system (can be used in Direct booking)
+            examples:
+              Classic Booking Request:
+                value:
+                  flightUUID: cea884fc-a000-11ee-9471-a61fc42e35dd
+                  rateId: cea8847d-a000-11ee-9471-a61fc42e35dd
+                  awb: ''
+                  comment: ''
+                  handlingCodes:
+                  - GCR
+                  user:
+                    email: test@test.com
+                    companyName: Test Forwarding
+                    lastName: test
+                    firstName: tests
+                    iata: '0000000'
+                    cass: '0000'
+                    country: FR
+              Direct Booking Request:
+                value:
+                  awb: ''
+                  comment: This a test
+                  itinerary:
+                    allotmentCode: test123
+                    origin: SIN
+                    destination: CRK
+                    airlineCode: '00'
+                    departureDates:
+                    - '2024-07-22'
+                    - '2024-07-22'
+                    flightNumbers:
+                    - 00379
+                    - '00737'
+                  shipment:
+                    pieces: 1
+                    weight: 100
+                    dimensions:
+                    - loadType: DIMENSIONS
+                      pieces: 1
+                      length: 100
+                      toploadable: true
+                      weightType: PER_ITEM
+                      height: 100
+                      width: 100
+                      weight: 100
+                      stackable: true
+                      tiltable: false
+                    chargeableWeight: 167
+                    volume: 1
+                    product: GCR
+                  user:
+                    email: tests@test.com
+                    companyName: Test S.A.R.L
+                    lastName: test
+                    firstName: test
+                    iata: '0000000'
+                    cass: '0000'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Booking Confirmed:
+                  value: "{\n    \"flightUUID\": \"cea884fc-a000-11ee-9471-a61fc42e35dd\",\n    \"bookingStatus\": \"PENDING_DELIVERY\",\n    \"awb\": \"000-00042652\",\n    \"handlingCodes\": [\n        \"GCR\"\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  flightUUID:
+                    type: string
+                    example: cea884fc-a000-11ee-9471-a61fc42e35dd
+                  bookingStatus:
+                    type: string
+                    example: PENDING_DELIVERY
+                  awb:
+                    type: string
+                    example: 000-00042652
+                  handlingCodes:
+                    type: array
+                    items:
+                      type: string
+                      example: GCR
+        '202':
+          description: '202'
+          content:
+            application/json:
+              examples:
+                Booking Requested:
+                  value: "{\n    \"flightUUID\": \"4ce820fa-377b-11ef-a31f-c65344bbd18e\",\n    \"bookingStatus\": \"PENDING_AIRLINE_INFORMATION\",\n    \"description\": \"Booking has been processed\",\n    \"trackingURL\": \"https://api.dev.cargoai.co/solutions/track?flight-uuid=4ce820fa-377b-11ef-a31f-c65344bbd18e\"\n}"
+                Direct Booking Accepted:
+                  value: "{  \n    \"id\": \"98de060a-cab1-48bc-9ce9-368edd528421\",  \n    \"bookingStatus\": \"DIRECT_BOOKING_PROCESSING\",  \n    \"description\": \"Booking has been processed\"  \n}"
+              schema:
+                oneOf:
+                - title: Booking Requested
+                  type: object
+                  properties:
+                    flightUUID:
+                      type: string
+                      example: 4ce820fa-377b-11ef-a31f-c65344bbd18e
+                    bookingStatus:
+                      type: string
+                      example: PENDING_AIRLINE_INFORMATION
+                    description:
+                      type: string
+                      example: Booking has been processed
+                    trackingURL:
+                      type: string
+                      example: https://api.dev.cargoai.co/solutions/track?flight-uuid=4ce820fa-377b-11ef-a31f-c65344bbd18e
+                - title: Direct Booking Accepted
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: 98de060a-cab1-48bc-9ce9-368edd528421
+                    bookingStatus:
+                      type: string
+                      example: DIRECT_BOOKING_PROCESSING
+                    description:
+                      type: string
+                      example: Booking has been processed
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Not Bookable Option:
+                  value: "{\n\t\"flightUIID\": \"cea884fc-a000-11ee-9471-a61fc42e35dd\",\n\t\"bookingStatus\": \"FAILED\",\n\t\"error\": \"This flight cannot be booked\",\n\t\"description\": \"Failure due to validation request\"\n}"
+                Empty AWB Stock:
+                  value: "{\n\t\"flightUIID\": \"cea884fc-a000-11ee-9471-a61fc42e35dd\",\n\t\"awb\": \"\",\n\t\"bookingStatus\": \"FAILED\",\n\t\"error\": \"GetAWBFailed\",\n\t\"description\": \"GetAWBFailed\"\n}"
+                AWB Not Found in Agent Stock:
+                  value: "{\n\t\"flightUIID\": \"cea884fc-a000-11ee-9471-a61fc42e35dd\",\n\t\"awb\": \"000-00042652\",\n\t\"bookingStatus\": \"FAILED\",\n\t\"error\": \"AgentStockFailed\",\n\t\"description\": \"AgentStockFailed\"\n}"
+                AWB Already Used:
+                  value: "{\n\t\"flightUIID\": \"cea884fc-a000-11ee-9471-a61fc42e35dd\",\n\t\"awb\": \"000-00042652\",\n\t\"bookingStatus\": \"FAILED\",\n\t\"error\": \"CheckAWBFailed\",\n\t\"description\": \"CheckAWBFailed\"\n}"
+                Booking Rejected:
+                  value: "{\n\t\"bookingStatus\": \"BOOKING_REJECTED\",\n\t\"awb\": \"000\",\n\t\"error\": \"Selected flight is closed for booking. Please select later flight or contact local GSA for further assistance.\",\n\t\"rejectedReason\": \"Selected flight is closed for booking. Please select later flight or contact local GSA for further assistance.\"\n}"
+                Direct Booking - Cannot match flight information:
+                  value: "{\n\t\"bookingStatus\": \"FAILED\",\n\t\"flights\": [\n\t\t{\n\t\t\t\"flightUUID\": \"21766f49-7d16-11ee-a951-da24e936af38\",\n\t\t\t\"airlineCode\": \"00\",\n\t\t\t\"flightNumber\": \"00373-00737\",\n\t\t\t\"arrivalTime\": \"2023-11-09T09:00:00+01:00\",\n\t\t\t\"arrivalAirport\": \"CDG\",\n\t\t\t\"departureTime\": \"2023-11-08T07:00:00+08:00\",\n\t\t\t\"departureAirport\": \"SIN\",\n\t\t\t\"latestAcceptanceTime\": \"2023-11-08T02:00:00+08:00\",\n\t\t\t\"timeOfAvailability\": \"2023-11-09T14:00:00+01:00\",\n\t\t\t\"stops\": 1,\n\t\t\t\"legs\": [\n\t\t\t\t{\n\t\t\t\t\t\"flightNumber\": \"00373\",\n\t\t\t\t\t\"arrivalTime\": \"2023-11-08T14:00:00+03:00\",\n\t\t\t\t\t\"arrivalAirport\": \"DOH\",\n\t\t\t\t\t\"departureTime\": \"2023-11-08T07:00:00+08:00\",\n\t\t\t\t\t\"departureAirport\": \"SIN\",\n\t\t\t\t\t\"bodyType\": \"Widebody\",\n\t\t\t\t\t\"aircraftCode\": \"D11\",\n\t\t\t\t\t\"co2\": {\n\t\t\t\t\t\t\"value\": 513.7416322454818,\n\t\t\t\t\t\t\"estimation\": false\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"flightNumber\": \"00737\",\n\t\t\t\t\t\"arrivalTime\": \"2023-11-09T09:00:00+01:00\",\n\t\t\t\t\t\"arrivalAirport\": \"CDG\",\n\t\t\t\t\t\"departureTime\": \"2023-11-08T21:00:00+03:00\",\n\t\t\t\t\t\"departureAirport\": \"DOH\",\n\t\t\t\t\t\"bodyType\": \"Widebody\",\n\t\t\t\t\t\"aircraftCode\": \"343\",\n\t\t\t\t\t\"co2\": {\n\t\t\t\t\t\t\"value\": 111.9198060357004,\n\t\t\t\t\t\t\"estimation\": false\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"features\": {\n\t\t\t\t\"bookable\": true,\n\t\t\t\t\"awbOptional\": true\n\t\t\t},\n\t\t\t\"rates\": [\n\t\t\t\t{\n\t\t\t\t\t\"id\": \"21766f0e-7d16-11ee-a951-da24e936af38\",\n\t\t\t\t\t\"name\": \"\",\n\t\t\t\t\t\"type\": \"live\",\n\t\t\t\t\t\"currency\": \"SGD\",\n\t\t\t\t\t\"netRate\": 8.8,\n\t\t\t\t\t\"allInRate\": 9.08,\n\t\t\t\t\t\"total\": 1506.31,\n\t\t\t\t\t\"minimumRate\": false,\n\t\t\t\t\t\"lastUpdatedDate\": \"\",\n\t\t\t\t\t\"charges\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"label\": \"Fuel surcharge\",\n\t\t\t\t\t\t\t\"rate\": 0.13,\n\t\t\t\t\t\t\t\"type\": \"CHARGEABLE_WEIGHT\",\n\t\t\t\t\t\t\t\"code\": \"fsc\",\n\t\t\t\t\t\t\t\"minAmount\": 0,\n\t\t\t\t\t\t\t\"maxAmount\": 0\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"label\": \"Security surcharge\",\n\t\t\t\t\t\t\t\"rate\": 0.15,\n\t\t\t\t\t\t\t\"type\": \"GROSS_WEIGHT\",\n\t\t\t\t\t\t\t\"code\": \"ssc\",\n\t\t\t\t\t\t\t\"minAmount\": 0,\n\t\t\t\t\t\t\t\"maxAmount\": 0\n\t\t\t\t\t\t}\n\t\t\t\t\t],\n\t\t\t\t\t\"ocdc\": [],\n\t\t\t\t\t\"handlingCodes\": [\n\t\t\t\t\t\t\"GCR\"\n\t\t\t\t\t]\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"id\": \"21766f2b-7d16-11ee-a951-da24e936af38\",\n\t\t\t\t\t\"name\": \"\",\n\t\t\t\t\t\"type\": \"express\",\n\t\t\t\t\t\"currency\": \"SGD\",\n\t\t\t\t\t\"netRate\": 9.24,\n\t\t\t\t\t\"allInRate\": 9.55,\n\t\t\t\t\t\"total\": 1583.46,\n\t\t\t\t\t\"minimumRate\": false,\n\t\t\t\t\t\"lastUpdatedDate\": \"\",\n\t\t\t\t\t\"charges\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"label\": \"Fuel surcharge\",\n\t\t\t\t\t\t\t\"rate\": 0.14,\n\t\t\t\t\t\t\t\"type\": \"CHARGEABLE_WEIGHT\",\n\t\t\t\t\t\t\t\"code\": \"fsc\",\n\t\t\t\t\t\t\t\"minAmount\": 0,\n\t\t\t\t\t\t\t\"maxAmount\": 0\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"label\": \"Security surcharge\",\n\t\t\t\t\t\t\t\"rate\": 0.17,\n\t\t\t\t\t\t\t\"type\": \"GROSS_WEIGHT\",\n\t\t\t\t\t\t\t\"code\": \"ssc\",\n\t\t\t\t\t\t\t\"minAmount\": 0,\n\t\t\t\t\t\t\t\"maxAmount\": 0\n\t\t\t\t\t\t}\n\t\t\t\t\t],\n\t\t\t\t\t\"ocdc\": [],\n\t\t\t\t\t\"handlingCodes\": [\n\t\t\t\t\t\t\"GCR\"\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"available\": true,\n\t\t\t\"awbPrefix\": \"000\",\n\t\t\t\"awbPrefixes\": [\n\t\t\t\t\"000\"\n\t\t\t],\n\t\t\t\"airlineConditions\": \"\\n\\t1- Offer subject to capacity when booking.\\n\\t2- Quotation reference to be imperatively \",\n\t\t\t\"handlingInfoLink\": \"https://www.cargoai.co/terms\",\n\t\t\t\"ghaName\": \"Mocked GHA\",\n\t\t\t\"ghaAddress\": \"Airport road, Cargo Terminal, Mocked Cargo building\"\n\t\t}\n\t],\n\t\"error\": \"Cannot match flight details\",\n\t\"description\": \"Select flight to perform booking\",\n\t\"resultsURL\": \"https://app.dev.cargoai.co/forwarder/search/search-result?uuid=d61c264f-sd3-503-930a-25997a465b8b&auth=eyJlbWFpZWQwbWRmeGkifQ==\"\n}"
+                Booking already exists:
+                  value: "{\n    \"bookingStatus\": \"FAILED\",\n    \"error\": \"FlightUUID and Rateld are already used\",\n    \"description\": \"Booking already exists\"\n}"
+                AWB mandatory:
+                  value: "{\n   \"flightUUID\": \"\",\n   \"bookingStatus\": \"FAILED\",\n   \"awb\": \"000\",\n   \"error\": \"Invalid AWB\",\n   \"rejectedReason\": \"Invalid AWB\"\n}\n\n"
+              schema:
+                oneOf:
+                - title: Not Bookable Option
+                  type: object
+                  properties:
+                    flightUIID:
+                      type: string
+                      example: cea884fc-a000-11ee-9471-a61fc42e35dd
+                    bookingStatus:
+                      type: string
+                      example: FAILED
+                    error:
+                      type: string
+                      example: This flight cannot be booked
+                    description:
+                      type: string
+                      example: Failure due to validation request
+                - title: Empty AWB Stock
+                  type: object
+                  properties:
+                    flightUIID:
+                      type: string
+                      example: cea884fc-a000-11ee-9471-a61fc42e35dd
+                    awb:
+                      type: string
+                      example: ''
+                    bookingStatus:
+                      type: string
+                      example: FAILED
+                    error:
+                      type: string
+                      example: GetAWBFailed
+                    description:
+                      type: string
+                      example: GetAWBFailed
+                - title: AWB Not Found in Agent Stock
+                  type: object
+                  properties:
+                    flightUIID:
+                      type: string
+                      example: cea884fc-a000-11ee-9471-a61fc42e35dd
+                    awb:
+                      type: string
+                      example: 000-00042652
+                    bookingStatus:
+                      type: string
+                      example: FAILED
+                    error:
+                      type: string
+                      example: AgentStockFailed
+                    description:
+                      type: string
+                      example: AgentStockFailed
+                - title: AWB Already Used
+                  type: object
+                  properties:
+                    flightUIID:
+                      type: string
+                      example: cea884fc-a000-11ee-9471-a61fc42e35dd
+                    awb:
+                      type: string
+                      example: 000-00042652
+                    bookingStatus:
+                      type: string
+                      example: FAILED
+                    error:
+                      type: string
+                      example: CheckAWBFailed
+                    description:
+                      type: string
+                      example: CheckAWBFailed
+                - title: Booking Rejected
+                  type: object
+                  properties:
+                    bookingStatus:
+                      type: string
+                      example: BOOKING_REJECTED
+                    awb:
+                      type: string
+                      example: '000'
+                    error:
+                      type: string
+                      example: Selected flight is closed for booking. Please select later flight or contact local GSA for further assistance.
+                    rejectedReason:
+                      type: string
+                      example: Selected flight is closed for booking. Please select later flight or contact local GSA for further assistance.
+                - title: Direct Booking - Cannot match flight information
+                  type: object
+                  properties:
+                    bookingStatus:
+                      type: string
+                      example: FAILED
+                    flights:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          flightUUID:
+                            type: string
+                            example: 21766f49-7d16-11ee-a951-da24e936af38
+                          airlineCode:
+                            type: string
+                            example: '00'
+                          flightNumber:
+                            type: string
+                            example: 00373-00737
+                          arrivalTime:
+                            type: string
+                            example: '2023-11-09T09:00:00+01:00'
+                          arrivalAirport:
+                            type: string
+                            example: CDG
+                          departureTime:
+                            type: string
+                            example: '2023-11-08T07:00:00+08:00'
+                          departureAirport:
+                            type: string
+                            example: SIN
+                          latestAcceptanceTime:
+                            type: string
+                            example: '2023-11-08T02:00:00+08:00'
+                          timeOfAvailability:
+                            type: string
+                            example: '2023-11-09T14:00:00+01:00'
+                          stops:
+                            type: integer
+                            example: 1
+                            default: 0
+                          legs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                flightNumber:
+                                  type: string
+                                  example: '00373'
+                                arrivalTime:
+                                  type: string
+                                  example: '2023-11-08T14:00:00+03:00'
+                                arrivalAirport:
+                                  type: string
+                                  example: DOH
+                                departureTime:
+                                  type: string
+                                  example: '2023-11-08T07:00:00+08:00'
+                                departureAirport:
+                                  type: string
+                                  example: SIN
+                                bodyType:
+                                  type: string
+                                  example: Widebody
+                                aircraftCode:
+                                  type: string
+                                  example: D11
+                                co2:
+                                  type: object
+                                  properties:
+                                    value:
+                                      type: number
+                                      example: 513.7416322454818
+                                      default: 0
+                                    estimation:
+                                      type: boolean
+                                      example: false
+                                      default: true
+                          features:
+                            type: object
+                            properties:
+                              bookable:
+                                type: boolean
+                                example: true
+                                default: true
+                              awbOptional:
+                                type: boolean
+                                example: true
+                                default: true
+                          rates:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  example: 21766f0e-7d16-11ee-a951-da24e936af38
+                                name:
+                                  type: string
+                                  example: ''
+                                type:
+                                  type: string
+                                  example: live
+                                currency:
+                                  type: string
+                                  example: SGD
+                                netRate:
+                                  type: number
+                                  example: 8.8
+                                  default: 0
+                                allInRate:
+                                  type: number
+                                  example: 9.08
+                                  default: 0
+                                total:
+                                  type: number
+                                  example: 1506.31
+                                  default: 0
+                                minimumRate:
+                                  type: boolean
+                                  example: false
+                                  default: true
+                                lastUpdatedDate:
+                                  type: string
+                                  example: ''
+                                charges:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      label:
+                                        type: string
+                                        example: Fuel surcharge
+                                      rate:
+                                        type: number
+                                        example: 0.13
+                                        default: 0
+                                      type:
+                                        type: string
+                                        example: CHARGEABLE_WEIGHT
+                                      code:
+                                        type: string
+                                        example: fsc
+                                      minAmount:
+                                        type: integer
+                                        example: 0
+                                        default: 0
+                                      maxAmount:
+                                        type: integer
+                                        example: 0
+                                        default: 0
+                                ocdc:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties: {}
+                                handlingCodes:
+                                  type: array
+                                  items:
+                                    type: string
+                                    example: GCR
+                          available:
+                            type: boolean
+                            example: true
+                            default: true
+                          awbPrefix:
+                            type: string
+                            example: '000'
+                          awbPrefixes:
+                            type: array
+                            items:
+                              type: string
+                              example: '000'
+                          airlineConditions:
+                            type: string
+                            example: "\n\t1- Offer subject to capacity when booking.\n\t2- Quotation reference to be imperatively "
+                          handlingInfoLink:
+                            type: string
+                            example: https://www.cargoai.co/terms
+                          ghaName:
+                            type: string
+                            example: Mocked GHA
+                          ghaAddress:
+                            type: string
+                            example: Airport road, Cargo Terminal, Mocked Cargo building
+                    error:
+                      type: string
+                      example: Cannot match flight details
+                    description:
+                      type: string
+                      example: Select flight to perform booking
+                    resultsURL:
+                      type: string
+                      example: https://app.dev.cargoai.co/forwarder/search/search-result?uuid=d61c264f-sd3-503-930a-25997a465b8b&auth=eyJlbWFpZWQwbWRmeGkifQ==
+                - title: Booking already exists
+                  type: object
+                  properties:
+                    bookingStatus:
+                      type: string
+                      example: FAILED
+                    error:
+                      type: string
+                      example: FlightUUID and Rateld are already used
+                    description:
+                      type: string
+                      example: Booking already exists
+        '403':
+          description: '403'
+          content:
+            application/json:
+              examples:
+                Forbidden:
+                  value: "{\n    \"field\": \"global\",\n    \"error\": \"Cannot match user information\"\n}"
+              schema:
+                type: object
+                properties:
+                  field:
+                    type: string
+                    example: global
+                  error:
+                    type: string
+                    example: Cannot match user information
+        '502':
+          description: '502'
+          content:
+            application/json:
+              examples:
+                Internal Server Error:
+                  value: "{\n    \"message\": \"Internal server error\"\n}"
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error
+        5XX:
+          description: 5XX
+          content:
+            application/json:
+              examples:
+                Airline Generic booking error:
+                  value: "{\n    \"flightUUID\": \"ca64b09f-0fe5-11f0-84dd-cececbcfb5eb\",\n    \"bookingStatus\": \"FAILED\",\n    \"awb\": \"000\",\n    \"error\": \"Booking not allowed for this user\",\n    \"rejectedReason\": \"Booking not allowed for this user\"\n}"
+              schema:
+                type: object
+                properties:
+                  flightUUID:
+                    type: string
+                    example: ca64b09f-0fe5-11f0-84dd-cececbcfb5eb
+                  bookingStatus:
+                    type: string
+                    example: FAILED
+                  awb:
+                    type: string
+                    example: '000'
+                  error:
+                    type: string
+                    example: Booking not allowed for this user
+                  rejectedReason:
+                    type: string
+                    example: Booking not allowed for this user
+      deprecated: false
+      tags:
+      - Book
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: x-api-key
+      in: header
+x-cargoai-api-family: Quote & Book — Booking
+x-provenance:
+  harvestedFrom: CargoAi CargoCONNECT developer portal (ReadMe) — per-operation oasDefinition embedded in each reference page
+  fetchDate: '2026-07-30'
+  httpStatus: 200
+  sourceInfoTitle: Solutions
+  sourceInfoVersion: '1.0'
+  note: Operations reproduced verbatim from the provider-published OpenAPI 3.1 definition. No operation, path, parameter, schema or server was authored by API Evangelist.
+  operations:
+  - sourceURL: https://cargoai.readme.io/reference/booking-endpoint-post
+    httpStatus: 200
+    operation: POST /book
+  - sourceURL: https://cargoai.readme.io/reference/track-by-flight-uuid-endpoint-get
+    httpStatus: 200
+    operation: GET /track
+  - sourceURL: https://cargoai.readme.io/reference/booking-cancellation-endpoint-put
+    httpStatus: 200
+    operation: PUT /bookings/{flightUUID}

@@ -1,0 +1,480 @@
+openapi: 3.2.0
+info:
+  title: Solutions Users API
+  version: '1.0'
+servers:
+- url: https://api.cargoai.co/solutions
+security:
+- sec0: []
+tags:
+- name: Users
+paths:
+  /users:
+    post:
+      summary: Create User
+      description: This document outlines the process for self-user provisioning using the CargoCONNECT API. This endpoint facilitates the addition of users to your existing authorized API key.
+      operationId: create-user
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - firstName
+              - lastName
+              - email
+              - companyName
+              - countryCode
+              properties:
+                firstName:
+                  type: string
+                  description: first name of the user
+                lastName:
+                  type: string
+                  description: last name of the user
+                email:
+                  type: string
+                  description: user's email address
+                companyName:
+                  type: string
+                  description: user's company name
+                iataCode:
+                  type: string
+                  description: user's IATA code
+                cassCode:
+                  type: string
+                  description: user's Cass code
+                countryCode:
+                  type: string
+                  description: user's country code
+                officeAirportCode:
+                  type: string
+                  description: user's office airport code (or closest airport)
+                partnerId:
+                  type: string
+                  description: user's custom identifier in partner system
+                offices:
+                  type: object
+                  description: list of user's offices
+                  required:
+                  - countryCode
+                  properties:
+                    iataCode:
+                      type: string
+                      description: office's IATA code
+                    cassCode:
+                      type: string
+                      description: office's CASS code
+                    countryCode:
+                      type: string
+                      description: office's country code
+                    officeAirportCode:
+                      type: string
+                      description: office's airport code (or closest airport)
+            examples:
+              createUser request:
+                value:
+                  firstName: Test
+                  lastName: Test name
+                  companyName: test
+                  email: test@test.com
+                  offices:
+                  - iataCode: '0000000'
+                    cassCode: '0000'
+                    countryCode: US
+                    officeAirportCode: JFK
+                  - iataCode: '0000000'
+                    cassCode: '0000'
+                    countryCode: NL
+                    officeAirportCode: AMS
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\"status\": \"Activated\",\n\t\"message\": \"Successful request: User created and account already activated\",\n\t\"token\": \"{{auth_token}}\",\n\t\"link\": \"https://app.dev.cargoai.co/forwarder/search/forwarder-search?auth={{auth_token}}\"\n}"
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Activated
+                  message:
+                    type: string
+                    example: 'Successful request: User created and account already activated'
+                  token:
+                    type: string
+                    example: '{{auth_token}}'
+                  link:
+                    type: string
+                    example: https://app.dev.cargoai.co/forwarder/search/forwarder-search?auth={{auth_token}}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"message\": \"Invalid request: validation errors: [email cannot be empty]\"\n}"
+                User Already exist:
+                  value: "{\n    \"message\": \"Invalid request: User [email@cargoaitest.co] already exist\"\n}"
+                Validation Failed:
+                  value: "{\n  \"message\": \"Invalid request: firstName: cannot be blank; iataCode: must contain digits only.\"\n}"
+              schema:
+                oneOf:
+                - type: object
+                  properties:
+                    message:
+                      type: string
+                      example: 'Invalid request: validation errors: [email cannot be empty]'
+                - title: User Already exist
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: 'Invalid request: User [email@cargoaitest.co] already exist'
+                - title: Validation Failed
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: 'Invalid request: firstName: cannot be blank; iataCode: must contain digits only.'
+        '502':
+          description: '502'
+          content:
+            application/json:
+              examples:
+                internal server error:
+                  value: "{\n    \"message\": \"Internal server error\"\n}"
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error
+      deprecated: false
+      tags:
+      - Users
+    get:
+      summary: Get Token
+      description: This endpoint enables the retrieval of an authentication token and a redirection link for accessing the CargoMART portal.
+      operationId: get-token
+      parameters:
+      - name: email
+        in: query
+        description: user's registered email
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Activated:
+                  value: "{\n  \"status\": \"Activated\",\n  \"message\": \"Successful request: please follow the link\",\n  \"token\": \"{{auth_token}}\",\n  \"link\": \"https://app.dev.cargoai.co/forwarder/search/forwarder-search?auth={{auth_token}}\"\n}"
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Activated
+                  message:
+                    type: string
+                    example: 'Successful request: please follow the link'
+                  token:
+                    type: string
+                    example: '{{auth_token}}'
+                  link:
+                    type: string
+                    example: https://app.dev.cargoai.co/forwarder/search/forwarder-search?auth={{auth_token}}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Bad Request:
+                  value: "{\n    \"message\": \"Invalid request: user not verified\"\n}"
+                User not found:
+                  value: "{\n    \"message\": \"Invalid request: user not found: email@cargoaitest.co\"\n}"
+                User not attached to API Key:
+                  value: "{\n  \"message\": \"Invalid request: User is not attached to your key, please use create user endpoint to link user with your key: email@cargoaitest.co\"\n}"
+                Invalid user status:
+                  value: "{\n  \"message\": \"Invalid request: user doesn’t have any account to access CargoMART portal, please contact support for additionnal details\"\n}"
+                User Disabled:
+                  value: "{\n  \"message\": \"Invalid request: user account actually disabled, please contact support for additionnal details\"\n}"
+                User deleted:
+                  value: "{\n  \"message\": \"Invalid request: user not found, please use create user endpoint or contact support if user should have account\"\n}"
+              schema:
+                oneOf:
+                - title: Bad Request
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: 'Invalid request: user not verified'
+                - title: User not found
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: 'Invalid request: user not found: email@cargoaitest.co'
+                - title: User not attached to API Key
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: 'Invalid request: User is not attached to your key, please use create user endpoint to link user with your key: email@cargoaitest.co'
+                - title: Invalid user status
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: 'Invalid request: user doesn’t have any account to access CargoMART portal, please contact support for additionnal details'
+                - title: User Disabled
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: 'Invalid request: user account actually disabled, please contact support for additionnal details'
+                - title: User deleted
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: 'Invalid request: user not found, please use create user endpoint or contact support if user should have account'
+        '502':
+          description: '502'
+          content:
+            application/json:
+              examples:
+                internal server error:
+                  value: "{\n    \"message\": \"Internal server error\"\n}"
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error
+      deprecated: false
+      tags:
+      - Users
+    put:
+      summary: Update User
+      description: This endpoint allows you to add offices to any user already created and associated with your API key.
+      operationId: update-user
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: firstName
+        in: query
+        description: first name of the user
+        required: true
+        schema:
+          type: string
+      - name: lastName
+        in: query
+        description: last name of the user
+        required: true
+        schema:
+          type: string
+      - name: email
+        in: query
+        description: user's email address
+        required: true
+        schema:
+          type: string
+      - name: companyName
+        in: query
+        description: user's company name
+        required: true
+        schema:
+          type: string
+      - name: offices
+        in: query
+        description: list of offices to add
+        required: true
+        schema:
+          items:
+            properties:
+              iataCode:
+                type: string
+                description: office's IATA code
+              cassCode:
+                type: string
+                description: office's CASS code
+              countryCode:
+                type: string
+                description: office's country code
+              officeAirportCode:
+                type: string
+                description: office's airport code (or closest airport)
+            required:
+            - countryCode
+            type: object
+          type: array
+        style: deepObject
+        explode: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"status\": \"Activated\",\n    \"message\": \"Successful request: User updated successfully\",\n    \"token\": \"{{token}}\",\n    \"link\": \"https://app.dev.cargoai.co/forwarder/search/forwarder-search?auth={{token}}\"\n}"
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: Activated
+                  message:
+                    type: string
+                    example: 'Successful request: User updated successfully'
+                  token:
+                    type: string
+                    example: '{{token}}'
+                  link:
+                    type: string
+                    example: https://app.dev.cargoai.co/forwarder/search/forwarder-search?auth={{token}}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                User not attached to API Key:
+                  value: "{\n    \"error\": \"Invalid request: User is not attached to your key, please use create user endpoint to link user with your key: test+update_user@cargoaitest.co\"\n}"
+                User not found:
+                  value: "{\n    \"error\": \"Invalid request: user not found: test+update_user@cargoaitest.co\"\n}"
+              schema:
+                oneOf:
+                - title: User not attached to API Key
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                      example: 'Invalid request: User is not attached to your key, please use create user endpoint to link user with your key: test+update_user@cargoaitest.co'
+                - title: User not found
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                      example: 'Invalid request: user not found: test+update_user@cargoaitest.co'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl --location --request PUT 'https://api.dev.cargoai.co/solutions/users' \\\n--header 'x-api-key: {{api_key}}' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n    \"firstName\": \"Test\",\n    \"lastName\": \"Test\",\n    \"email\": \"test+update_user@cargoaitest.co\",\n    \"companyName\": \"Test Company\",\n    \"offices\": [\n         {\n            \"iataCode\": \"0000003\",\n            \"cassCode\": \"0003\",\n            \"countryCode\": \"FR\",\n            \"officeAirportCode\": \"CDG\"\n        },\n        {\n            \"iataCode\": \"0000004\",\n            \"cassCode\": \"0004\",\n            \"countryCode\": \"SG\",\n            \"officeAirportCode\": \"SIN\"\n        },\n        {\n            \"iataCode\": \"0000009\",\n            \"cassCode\": \"0009\",\n            \"countryCode\": \"PH\",\n            \"officeAirportCode\": \"CEB\"\n        }\n    ]\n}'"
+        samples-languages:
+        - curl
+      tags:
+      - Users
+    delete:
+      summary: Delete User Token
+      description: This endpoint allows you to delete a user associated with the API key by providing their email address as a query parameter. Once deleted, the user will no longer be able to access the APIs tied to the provided API key.
+      operationId: delete-user-token
+      parameters:
+      - name: email
+        in: query
+        description: user's email address
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                success:
+                  value: "{\n    \"message\": \"Successful request: User has been successfully deleted from your API key: user_test@cargoaitest.co\"\n}"
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'Successful request: User has been successfully deleted from your API key: user_test@cargoaitest.co'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                invalid email:
+                  value: "{\n    \"message\": \"Invalid request: user not found: email@cargoaitest.co\"\n}"
+                already deleted/not tied to api key:
+                  value: "{\n    \"message\": \"Invalid request: user does not belong to your provider: user_test@cargoaitest.co\"\n}"
+              schema:
+                oneOf:
+                - title: invalid email
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: 'Invalid request: user not found: email@cargoaitest.co'
+                - title: already deleted/not tied to api key
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: 'Invalid request: user does not belong to your provider: user_test@cargoaitest.co'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: 'curl --location --request DELETE ''https://api.dev.cargoai.co/solutions/users?email=leo%2Brelease_test_02%40cargoaitest.co'' \--header ''x-api-key: {{apiKey}}''
+
+
+            '
+        samples-languages:
+        - curl
+      tags:
+      - Users
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: x-api-key
+      in: header
+x-cargoai-api-family: User Provisioning
+x-provenance:
+  harvestedFrom: CargoAi CargoCONNECT developer portal (ReadMe) — per-operation oasDefinition embedded in each reference page
+  fetchDate: '2026-07-30'
+  httpStatus: 200
+  sourceInfoTitle: Solutions
+  sourceInfoVersion: '1.0'
+  note: Operations reproduced verbatim from the provider-published OpenAPI 3.1 definition. No operation, path, parameter, schema or server was authored by API Evangelist.
+  operations:
+  - sourceURL: https://cargoai.readme.io/reference/create-user
+    httpStatus: 200
+    operation: POST /users
+  - sourceURL: https://cargoai.readme.io/reference/get-token
+    httpStatus: 200
+    operation: GET /users
+  - sourceURL: https://cargoai.readme.io/reference/update-user
+    httpStatus: 200
+    operation: PUT /users
+  - sourceURL: https://cargoai.readme.io/reference/delete-user-token
+    httpStatus: 200
+    operation: DELETE /users
