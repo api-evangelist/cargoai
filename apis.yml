@@ -71,6 +71,8 @@ apis:
   humanURL: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
   baseURL: https://api.cargoai.co/solutions
   tags:
+  - Artificial Intelligence
+  tags_raw:
   - Ai
   properties:
   - type: OpenAPI
@@ -407,6 +409,8 @@ apis:
   humanURL: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
   baseURL: https://api.cargoai.co/solutions
   tags:
+  - e-AWB
+  tags_raw:
   - Eawb
   properties:
   - type: OpenAPI
@@ -659,6 +663,8 @@ apis:
   humanURL: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
   baseURL: https://api.cargoai.co/solutions
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
