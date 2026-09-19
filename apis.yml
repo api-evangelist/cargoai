@@ -241,6 +241,8 @@ apis:
   humanURL: https://cargoai.readme.io/reference/routes-schedules-and-rates-endpoint-post
   baseURL: https://api.cargoai.co/solutions
   tags:
+  - Booking
+  tags_raw:
   - Bookings
   properties:
   - type: OpenAPI
