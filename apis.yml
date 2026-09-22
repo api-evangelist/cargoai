@@ -24,6 +24,9 @@ imageNote: >-
   rather than a broken image, which is why it went unreported (roadmap#153).
   No correct icon has been sourced yet. Shipping the wrong company's mark is worse
   than shipping none; re-run the icon backfill once a real asset exists.
+x-docs-platform: readme
+x-docs-platform-confidence: high
+x-docs-platform-checked: 2026-09-21
 tags:
 - Logistics
 - Supply Chain
