@@ -7,7 +7,7 @@ servers:
 security:
 - sec0: []
 tags:
-- name: Ai
+- name: AI
 paths:
   /ai/awb:
     post:
@@ -453,7 +453,7 @@ paths:
                           example: 'type: must be a valid value.'
       deprecated: false
       tags:
-      - Ai
+      - AI
   /ai/shipment:
     post:
       summary: Shipment Data Extraction (Text, Image)
@@ -587,7 +587,7 @@ paths:
       deprecated: false
       security: []
       tags:
-      - Ai
+      - AI
 components:
   securitySchemes:
     sec0:
